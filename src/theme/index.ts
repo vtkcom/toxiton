@@ -23,7 +23,8 @@ theme.bg_color_70 = opacify(-0.3, theme.bg_color);
 theme.bg_color_50 = opacify(-0.5, theme.bg_color);
 theme.bg_color_20 = opacify(-0.8, theme.bg_color);
 theme.bg_color_10 = opacify(-0.9, theme.bg_color);
-theme.box_shadow = `0 0 1rem -0.1rem ${theme.bg_color_50}`;
+// theme.box_shadow = `0 0 1rem -0.1rem ${theme.bg_color_50}`;
+theme.box_shadow = `0 8px 20px rgba(117,115,111,.2);`;
 
 const scale = keyframes`
     0% {
@@ -85,9 +86,8 @@ const Global = createGlobalStyle`
 
     .leaflet-control-attribution {
         padding: 0.4rem 1rem;
-        background-color: ${(p) => p.theme.bg_color_70} !important;
+        background-color: ${(p) => p.theme.secondary_bg_color} !important;
         color: ${(p) => p.theme.hint_color} !important;
-        backdrop-filter: blur(3px);
         box-shadow: none !important;
         left: 0;
         right: 0;

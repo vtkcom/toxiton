@@ -7,7 +7,7 @@ const ControllDiv = styled.div`
   right: 0;
   width: 100vw;
   height: 100vh;
-  background-color: ${(p) => p.theme.bg_color_20};
+  background-color: hsla(0, 0%, 0%, 0.2);
   z-index: 999;
   display: grid;
   grid-auto-rows: max-content;
@@ -17,13 +17,13 @@ const ControllDiv = styled.div`
 `;
 
 const Button = styled.div`
-  width: 2.3rem;
-  height: 2.3rem;
+  width: 2.7rem;
+  height: 2.7rem;
   border-radius: 50%;
   border: 1px solid ${p => p.theme.bg_color_10};
   box-shadow: ${(p) => p.theme.box_shadow};
-  background-color: ${(p) => p.theme.button_color};
-  color: ${(p) => p.theme.button_text_color};
+  background-color: ${(p) => p.theme.bg_color};
+  color: ${(p) => p.theme.hint_color};
   display: grid;
   place-content: center;
   font-size: 2rem;
