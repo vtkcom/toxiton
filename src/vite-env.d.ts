@@ -8,13 +8,9 @@ declare global {
   }
 }
 
-interface Nullable<T> {
-  [key: keyof T]: typeof T | null;
-}
-
-// and extend them!
 declare module "styled-components" {
-  export interface DefaultTheme extends Nullable<ThemeParams> {
-    borderRadius: string;
+  export interface DefaultTheme extends ThemeParams {
+    borderRadius: `${number}px`;
+    bg_color_50?: string;
   }
 }

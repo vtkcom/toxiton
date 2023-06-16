@@ -1,10 +1,15 @@
 import { DefaultTheme } from "styled-components";
-import { Nullable } from "../vite-env";
 import { ThemeParams } from "@twa-dev/types";
+import { opacify } from "polished";
 
-const notTheme: Nullable<ThemeParams> = {
-  bg_color: "#282828",
-  text_color: "#fff",
+const notTheme: ThemeParams = {
+  bg_color: "#212121",
+  button_color: "#8774e1",
+  button_text_color: "#ffffff",
+  hint_color: "#aaaaaa",
+  link_color: "#8774e1",
+  secondary_bg_color: "#0f0f0f",
+  text_color: "#ffffff",
 };
 
 const theme: DefaultTheme = {
@@ -12,5 +17,7 @@ const theme: DefaultTheme = {
   ...notTheme,
   ...window.Telegram.WebApp.themeParams,
 };
+
+theme.bg_color_50 = opacify(-0.5, theme.bg_color);
 
 export { theme };

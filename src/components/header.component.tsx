@@ -5,14 +5,15 @@ const HeaderDiv = styled.div`
   top: 0;
   z-index: 1001;
   width: 100vw;
-  height: 4rem;
+  height: 8rem;
   display: grid;
   justify-content: center;
   align-items: center;
   background-image: linear-gradient(
     to bottom,
     ${(p) => p.theme.bg_color} 0%,
-    hsla(0, 0%, 0%, 0) 85%
+    ${(p) => p.theme.bg_color_50} 40%,
+    hsla(0, 0%, 0%, 0) 100%
   );
   color: ${(p) => p.theme.text_color};
 `;
