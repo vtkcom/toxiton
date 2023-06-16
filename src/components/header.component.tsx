@@ -9,13 +9,12 @@ const HeaderDiv = styled.div`
   display: grid;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(
-    to bottm,
-    ${(p) => p.theme.bg_color} 75%,
-    hsla(0, 0%, 20%, 0) 75%
+  background-image: linear-gradient(
+    to bottom,
+    ${(p) => p.theme.bg_color} 0%,
+    hsla(0, 0%, 0%, 0) 85%
   );
-  /* backdrop-filter: blur(5px); */
-  /* box-shadow: 0 0 20px -12px hsla(0, 0%, 0%, 0.4); */
+  color: ${(p) => p.theme.text_color};
 `;
 
 interface Props {
