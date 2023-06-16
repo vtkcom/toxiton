@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
-import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
+import { useEffect, useState } from "react";
+import { MapContainer, TileLayer } from "react-leaflet";
 import "./App.css";
 import "leaflet/dist/leaflet.css";
-import { DivIcon, Icon, LatLng, Point } from "leaflet";
+import { LatLng } from "leaflet";
 import { ThemeProvider } from "styled-components";
 import { Global, theme } from "./theme";
 import { Header } from "./components/header.component";
@@ -39,7 +39,6 @@ export interface Address {
   country: string;
   country_code: string;
 }
-
 
 function App() {
   // const [input, setInput] = useState("");
