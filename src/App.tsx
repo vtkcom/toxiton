@@ -7,6 +7,7 @@ import { Global, theme } from "./theme";
 import { Header } from "./components/header.component";
 import { LocationMarker } from "./components/marker.component";
 import { Controll } from "./components/controls.component";
+import { Sprites } from "./sprites";
 
 export interface Place {
   place_id: number;
@@ -110,6 +111,8 @@ function App() {
         />
         <LocationMarker position={position} setPosition={setPosition} />
       </MapContainer>
+
+      <Sprites />
     </ThemeProvider>
   );
 }

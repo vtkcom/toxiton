@@ -23,7 +23,7 @@ theme.bg_color_70 = opacify(-0.3, theme.bg_color);
 theme.bg_color_50 = opacify(-0.5, theme.bg_color);
 theme.bg_color_20 = opacify(-0.8, theme.bg_color);
 theme.bg_color_10 = opacify(-0.9, theme.bg_color);
-theme.box_shadow = `0 0 1rem -0.3rem ${theme.bg_color_50}`;
+theme.box_shadow = `0 0 1rem -0.1rem ${theme.bg_color_50}`;
 
 const scale = keyframes`
     0% {
@@ -112,7 +112,7 @@ const Global = createGlobalStyle`
     .avatar {
         box-shadow: ${(p) => p.theme.box_shadow};
         border-radius: 50%;
-        border: 0.4rem solid ${(p) => p.theme.bg_color_20};
+        border: 0.4rem solid ${(p) => p.theme.bg_color_50};
         img {
             position: relative;
             border-radius: 50%;
@@ -122,6 +122,14 @@ const Global = createGlobalStyle`
 
     .avatar.animate {
         animation: 0.5s ease-in infinite ${scale};
+    }
+
+    symbol {
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+        fill: none;
     }
 `;
 

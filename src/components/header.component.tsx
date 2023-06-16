@@ -9,16 +9,17 @@ const HeaderDiv = styled.div`
   display: grid;
   justify-content: center;
   align-items: center;
+  filter: drop-shadow(0.1rem 0.1rem 0.3rem hsla(0, 0%, 0%, 0.4));
   background: linear-gradient(
       to bottom,
-      ${(p) => p.theme.bg_color} 0%,
-      ${(p) => p.theme.bg_color_50} 20%,
+      ${(p) => p.theme.bg_color_20} 0%,
+      ${(p) => p.theme.bg_color_10} 20%,
       hsla(0, 0%, 0%, 0) 90%
     ),
     linear-gradient(
       to bottom,
-      ${(p) => p.theme.bg_color} 0%,
-      ${(p) => p.theme.bg_color_50} 35%,
+      ${(p) => p.theme.bg_color_20} 0%,
+      ${(p) => p.theme.bg_color_10} 35%,
       hsla(0, 0%, 0%, 0) 80%
     );
   color: ${(p) => p.theme.text_color};
