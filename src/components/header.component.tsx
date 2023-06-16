@@ -5,7 +5,7 @@ const HeaderDiv = styled.div`
   top: 0;
   z-index: 1001;
   width: 100vw;
-  height: 8rem;
+  height: 7rem;
   display: grid;
   justify-content: center;
   align-items: center;
@@ -23,6 +23,7 @@ const HeaderDiv = styled.div`
     );
   color: ${(p) => p.theme.text_color};
   padding: 0 0 3rem;
+  pointer-events: none;
 `;
 
 interface Props {

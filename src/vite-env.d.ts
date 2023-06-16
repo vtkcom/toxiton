@@ -12,6 +12,8 @@ declare module "styled-components" {
   export interface DefaultTheme extends ThemeParams {
     border_radius: `${number}px`;
     box_shadow?: string;
+    bg_color_90?: string;
+    bg_color_70?: string;
     bg_color_50?: string;
     bg_color_20?: string;
     bg_color_10?: string;

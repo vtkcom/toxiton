@@ -18,6 +18,8 @@ const theme: DefaultTheme = {
   ...window.Telegram.WebApp.themeParams,
 };
 
+theme.bg_color_90 = opacify(-0.1, theme.bg_color);
+theme.bg_color_70 = opacify(-0.3, theme.bg_color);
 theme.bg_color_50 = opacify(-0.5, theme.bg_color);
 theme.bg_color_20 = opacify(-0.8, theme.bg_color);
 theme.bg_color_10 = opacify(-0.9, theme.bg_color);
@@ -45,8 +47,9 @@ const Global = createGlobalStyle`
         font-size: 16px;
 
         color-scheme: light dark;
-        color: hsl(0deg 0% 30% / 87%);
+        color: ${(p) => p.theme.text_color};
         background-color: #242424;
+        box-sizing: border-box;
 
         font-synthesis: none;
         text-rendering: optimizeLegibility;
@@ -57,11 +60,11 @@ const Global = createGlobalStyle`
 
     a {
         font-weight: 500;
-        color: #646cff;
+        color: ${(p) => p.theme.link_color};
         text-decoration: inherit;
     }
     a:hover {
-        color: #535bf2;
+        color: ${(p) => p.theme.link_color};
     }
 
     body {
@@ -70,19 +73,20 @@ const Global = createGlobalStyle`
         place-items: center;
         width: 100vw;
         height: 100vh;
+        overscroll-behavior: contain;
     }
 
     app {
         position: relative;
         width: 100vw;
         height: 100vh;
+        overscroll-behavior: contain;
     }
 
     .leaflet-control-attribution {
-        text-align: center;
-        padding: 5px 0;
-        background-color: ${(p) => p.theme.bg_color_50} !important;
-        color: ${(p) => p.theme.text_color} !important;
+        padding: 0.4rem 1rem;
+        background-color: ${(p) => p.theme.bg_color_70} !important;
+        color: ${(p) => p.theme.hint_color} !important;
         backdrop-filter: blur(5px);
         box-shadow: ${(p) => p.theme.box_shadow} !important;
         left: 0;
@@ -91,7 +95,7 @@ const Global = createGlobalStyle`
         position: fixed;
         z-index: 1001;
         a {
-            color: ${(p) => p.theme.text_color} !important;
+            color: ${(p) => p.theme.link_color} !important;
         }
     }
 
@@ -102,16 +106,13 @@ const Global = createGlobalStyle`
     .leaflet-container {
         width: 100vw;
         height: 100vh;
+        overscroll-behavior: contain;
     }
 
-    
     .avatar {
-        /* filter: drop-shadow(0 0 5px hsla(0, 0%, 0%, 0.2)); */
-        box-shadow: 0 0 20px -12px hsla(0, 0%, 0%, 0.4);
-        width: 70px;
-        height: 70px;
+        box-shadow: ${(p) => p.theme.box_shadow};
         border-radius: 50%;
-        border: 4px solid hsl(0, 0%, 100%);
+        border: 0.4rem solid ${(p) => p.theme.bg_color_20};
         img {
             position: relative;
             border-radius: 50%;
@@ -122,8 +123,6 @@ const Global = createGlobalStyle`
     .avatar.animate {
         animation: 0.5s ease-in infinite ${scale};
     }
-
-    
 `;
 
 export { theme, Global };
