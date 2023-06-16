@@ -92,7 +92,7 @@ function LocationMarker(props: {
       <p>Touch to navigate</p>
     </div>
   ) : (
-    <Marker position={props.position} icon={markerImage} attribution="Test" />
+    <Marker position={props.position} icon={markerImage} />
   );
 }
 
