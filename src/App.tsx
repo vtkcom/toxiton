@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
 import avatar from "./assets/m1000x1000.jpg";
 import "./App.css";
@@ -71,12 +71,12 @@ function LocationMarker(props: {
     [animate]
   );
 
-  function navigate(e: MouseEvent<HTMLDivElement>) {
-    e.preventDefault();
-    e.stopPropagation();
-    map.locate();
-    window.Telegram.WebApp.HapticFeedback.impactOccurred("light");
-  }
+  // function navigate(e: MouseEvent<HTMLDivElement>) {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   map.locate();
+  //   window.Telegram.WebApp.HapticFeedback.impactOccurred("light");
+  // }
 
   return props.position === null ? null : (
     <Marker position={props.position} icon={markerImage} />
