@@ -64,7 +64,7 @@ function App() {
 
   function getFull() {
     window.Telegram.WebApp.expand();
-    window.Telegram.WebApp.switchInlineQuery("Test", ["users", "groups"]);
+    window.Telegram.WebApp.disableClosingConfirmation();
   }
 
   // async function navigate(e: KeyboardEvent<HTMLInputElement>) {
