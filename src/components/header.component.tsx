@@ -9,13 +9,17 @@ const HeaderDiv = styled.div`
   display: grid;
   justify-content: center;
   align-items: center;
-  background: ${(p) => p.theme.bg_color};
-  backdrop-filter: blur(5px);
-  box-shadow: 0 0 20px -12px hsla(0, 0%, 0%, 0.4);
+  background: linear-gradient(
+    to bottm,
+    ${(p) => p.theme.bg_color} 75%,
+    hsla(0, 0%, 20%, 0) 75%
+  );
+  /* backdrop-filter: blur(5px); */
+  /* box-shadow: 0 0 20px -12px hsla(0, 0%, 0%, 0.4); */
 `;
 
 interface Props {
-  adress: string;
+  adress?: string;
 }
 
 export const Header: React.FC<Props> = ({ adress }) => {

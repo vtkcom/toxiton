@@ -137,7 +137,11 @@ function App() {
       </MapContainer>
 
       <Header
-        adress={`${currentAdress?.address.road}, ${currentAdress?.address.house_number}`}
+        adress={
+          currentAdress
+            ? `${currentAdress?.address.road}, ${currentAdress?.address.house_number}`
+            : undefined
+        }
       />
     </ThemeProvider>
   );
