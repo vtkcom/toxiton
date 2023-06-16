@@ -1,11 +1,5 @@
-import { KeyboardEvent, MouseEvent, useEffect, useMemo, useState } from "react";
-import {
-  ImageOverlay,
-  MapContainer,
-  Marker,
-  TileLayer,
-  useMapEvents,
-} from "react-leaflet";
+import { MouseEvent, useEffect, useMemo, useState } from "react";
+import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
 import avatar from "./assets/m1000x1000.jpg";
 import "./App.css";
 import "leaflet/dist/leaflet.css";
@@ -98,16 +92,16 @@ function LocationMarker(props: {
       <p>Touch to navigate</p>
     </div>
   ) : (
-    <Marker position={props.position} icon={markerImage} attribution="Test"/>
+    <Marker position={props.position} icon={markerImage} attribution="Test" />
   );
 }
 
 function App() {
-  const [input, setInput] = useState("");
-  const [result, setResult] = useState<{ isLoading: boolean; data: Place[] }>({
-    isLoading: false,
-    data: [],
-  });
+  // const [input, setInput] = useState("");
+  // const [result, setResult] = useState<{ isLoading: boolean; data: Place[] }>({
+  //   isLoading: false,
+  //   data: [],
+  // });
   const [position, setPosition] = useState<LatLng | null>(null);
   const [currentAdress, setCurrentAdress] = useState<Place | null>(null);
 
@@ -124,21 +118,21 @@ function App() {
     if (position) asyncGetAdress();
   }
 
-  async function navigate(e: KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Enter") {
-      setResult({
-        isLoading: true,
-        data: [],
-      });
-      const result = await fetch(
-        `https://nominatim.openstreetmap.org/search?q=${input}&format=json&addressdetails=1`
-      ).then((r) => r.json());
-      setResult({
-        isLoading: false,
-        data: result,
-      });
-    }
-  }
+  // async function navigate(e: KeyboardEvent<HTMLInputElement>) {
+  //   if (e.key === "Enter") {
+  //     setResult({
+  //       isLoading: true,
+  //       data: [],
+  //     });
+  //     const result = await fetch(
+  //       `https://nominatim.openstreetmap.org/search?q=${input}&format=json&addressdetails=1`
+  //     ).then((r) => r.json());
+  //     setResult({
+  //       isLoading: false,
+  //       data: result,
+  //     });
+  //   }
+  // }
 
   return (
     <>
