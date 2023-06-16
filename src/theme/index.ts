@@ -73,14 +73,14 @@ const Global = createGlobalStyle`
         place-items: center;
         width: 100vw;
         height: ${() => window.Telegram.WebApp.viewportStableHeight};
-        overscroll-behavior: contain;
+        overscroll-behavior: none;
     }
 
     app {
         position: relative;
         width: 100vw;
         height: 100vh;
-        overscroll-behavior: contain;
+        overscroll-behavior: none;
     }
 
     .leaflet-control-attribution {
