@@ -10,12 +10,19 @@ const HeaderDiv = styled.div`
   justify-content: center;
   align-items: center;
   background-image: linear-gradient(
-    to bottom,
-    ${(p) => p.theme.bg_color} 0%,
-    ${(p) => p.theme.bg_color_50} 40%,
-    hsla(0, 0%, 0%, 0) 100%
-  );
+      to bottom,
+      ${(p) => p.theme.bg_color} 0%,
+      ${(p) => p.theme.bg_color_50} 20%,
+      hsla(0, 0%, 0%, 0) 90%
+    ),
+    linear-gradient(
+      to bottom,
+      ${(p) => p.theme.bg_color} 0%,
+      ${(p) => p.theme.bg_color_50} 35%,
+      hsla(0, 0%, 0%, 0) 80%
+    );
   color: ${(p) => p.theme.text_color};
+  padding: 0 0 3rem;
 `;
 
 interface Props {
