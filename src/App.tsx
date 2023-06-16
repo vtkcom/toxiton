@@ -4,6 +4,9 @@ import avatar from "./assets/m1000x1000.jpg";
 import "./App.css";
 import "leaflet/dist/leaflet.css";
 import { Icon, LatLng, Point } from "leaflet";
+import { ThemeProvider } from "styled-components";
+import { theme } from "./theme";
+import { Header } from "./components/header.component";
 
 export interface Place {
   place_id: number;
@@ -43,17 +46,13 @@ function LocationMarker(props: {
   const [animate, setAnimate] = useState(false);
   const map = useMapEvents({
     async click(e) {
-      if (props.position) {
-        setAnimate(true);
-        const result: Place = await fetch(
-          `https://nominatim.openstreetmap.org/reverse?lat=${e.latlng.lat}&lon=${e.latlng.lng}&format=json`
-        ).then((r) => r.json());
+      setAnimate(true);
+      const result: Place = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?lat=${e.latlng.lat}&lon=${e.latlng.lng}&format=json`
+      ).then((r) => r.json());
 
-        console.log(result);
-
-        setAnimate(false);
-        props.setPosition(new LatLng(Number(result.lat), Number(result.lon)));
-      }
+      setAnimate(false);
+      props.setPosition(new LatLng(Number(result.lat), Number(result.lon)));
     },
     locationfound(e) {
       props.setPosition(e.latlng);
@@ -76,22 +75,10 @@ function LocationMarker(props: {
     e.preventDefault();
     e.stopPropagation();
     map.locate();
+    window.Telegram.WebApp.HapticFeedback.impactOccurred("light");
   }
 
-  return props.position === null ? (
-    <div className="navigate" onClick={navigate}>
-      <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path
-          d="M3 11l19-9-9 19-2-8-8-2z"
-          stroke="currentcolor"
-          strokeWidth={2}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-      <p>Touch to navigate</p>
-    </div>
-  ) : (
+  return props.position === null ? null : (
     <Marker position={props.position} icon={markerImage} />
   );
 }
@@ -135,7 +122,7 @@ function App() {
   // }
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <MapContainer
         center={[52.261802, 104.300412]}
         zoom={10}
@@ -148,12 +135,11 @@ function App() {
         />
         <LocationMarker position={position} setPosition={setPosition} />
       </MapContainer>
-      {currentAdress !== null && (
-        <div className="header">
-          {currentAdress?.address.road}, {currentAdress?.address.house_number}
-        </div>
-      )}
-    </>
+
+      <Header
+        adress={`${currentAdress?.address.road}, ${currentAdress?.address.house_number}`}
+      />
+    </ThemeProvider>
   );
 }
 

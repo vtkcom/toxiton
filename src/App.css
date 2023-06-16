@@ -82,17 +82,3 @@
     box-shadow: 0 0 20px -12px hsla(0, 0%, 0%, 0.4);
   }
 }
-
-.header {
-  position: fixed;
-  top: 0;
-  z-index: 1001;
-  width: 100vw;
-  height: 4rem;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  background: hsla(0, 0%, 100%, 0.1);
-  backdrop-filter: blur(5px);
-  box-shadow: 0 0 20px -12px hsla(0, 0%, 0%, 0.4);
-}
