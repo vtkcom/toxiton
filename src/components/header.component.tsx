@@ -25,11 +25,11 @@ const HeaderDiv = styled.div`
   color: ${(p) => p.theme.text_color};
   padding: 0 0 3rem;
   pointer-events: none;
-  transition: background 0.3s ease, color 0.4s ease;
+  /* transition: background 0.3s ease, color 0.4s ease;
   &:empty {
     background: transparent;
     color: transparent;
-  }
+  } */
 `;
 
 interface Props {

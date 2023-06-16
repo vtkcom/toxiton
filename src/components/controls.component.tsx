@@ -17,10 +17,10 @@ const ControllDiv = styled.div`
 `;
 
 const Button = styled.div`
-  width: 3rem;
-  height: 3rem;
+  width: 2.3rem;
+  height: 2.3rem;
   border-radius: 50%;
-  border: 1px solid ${p => p.theme.bg_color_20};
+  border: 1px solid ${p => p.theme.bg_color_10};
   box-shadow: ${(p) => p.theme.box_shadow};
   background-color: ${(p) => p.theme.button_color};
   color: ${(p) => p.theme.button_text_color};
@@ -37,13 +37,13 @@ export const Controll: React.FC = () => {
   return (
     <ControllDiv>
       <Button>
-        <Icon name="plus" size={1.3} />
+        <Icon name="plus" size={1.1} />
       </Button>
       <Button>
-        <Icon name="minus" size={1.3} />
+        <Icon name="minus" size={1.1} />
       </Button>
       <Button>
-        <Icon name="navigate" size={1.3} />
+        <Icon name="navigate" size={1.1} />
       </Button>
     </ControllDiv>
   );
