@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
-import "./App.css";
 import "leaflet/dist/leaflet.css";
 import { LatLng } from "leaflet";
 import { ThemeProvider } from "styled-components";
@@ -50,6 +49,7 @@ function App() {
   const [currentAdress, setCurrentAdress] = useState<Place | null>(null);
 
   useEffect(getAdress, [position]);
+  useEffect(getFull, []);
 
   function getAdress() {
     async function asyncGetAdress() {
@@ -60,6 +60,10 @@ function App() {
       setCurrentAdress(result);
     }
     if (position) asyncGetAdress();
+  }
+
+  function getFull() {
+    window.Telegram.WebApp.expand()
   }
 
   // async function navigate(e: KeyboardEvent<HTMLInputElement>) {
@@ -94,6 +98,7 @@ function App() {
         center={[52.261802, 104.300412]}
         zoom={10}
         scrollWheelZoom={true}
+        touchZoom={true}
         zoomControl={false}
       >
         <Controll />

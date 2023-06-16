@@ -5,7 +5,7 @@ const HeaderDiv = styled.div`
   top: 0;
   z-index: 1001;
   width: 100vw;
-  height: 7rem;
+  height: 5rem;
   display: grid;
   justify-content: center;
   align-items: center;

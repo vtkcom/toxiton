@@ -11,7 +11,7 @@ const ControllDiv = styled.div`
   display: grid;
   grid-auto-rows: max-content;
   gap: 0.5rem;
-  padding: 9rem 0.5rem 0 0;
+  padding: 7rem 0.5rem 0 0;
   justify-content: end;
 `;
 
@@ -20,8 +20,8 @@ const Button = styled.div`
   height: 3rem;
   border-radius: 50%;
   box-shadow: ${(p) => p.theme.box_shadow};
-  background-color: ${(p) => p.theme.bg_color};
-  color: ${(p) => p.theme.hint_color};
+  background-color: ${(p) => p.theme.button_color};
+  color: ${(p) => p.theme.button_text_color};
   display: grid;
   place-items: center;
   font-size: 2rem;

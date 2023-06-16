@@ -87,13 +87,13 @@ const Global = createGlobalStyle`
         padding: 0.4rem 1rem;
         background-color: ${(p) => p.theme.bg_color_70} !important;
         color: ${(p) => p.theme.hint_color} !important;
-        backdrop-filter: blur(5px);
-        box-shadow: ${(p) => p.theme.box_shadow} !important;
+        backdrop-filter: blur(3px);
+        box-shadow: none !important;
         left: 0;
         right: 0;
         bottom: -1px;
         position: fixed;
-        z-index: 1001;
+        z-index: 10000;
         a {
             color: ${(p) => p.theme.link_color} !important;
         }
