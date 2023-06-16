@@ -64,7 +64,7 @@ function App() {
 
   function getFull() {
     window.Telegram.WebApp.expand();
-    window.Telegram.WebApp.disableClosingConfirmation();
+    window.Telegram.WebApp.enableClosingConfirmation();
   }
 
   // async function navigate(e: KeyboardEvent<HTMLInputElement>) {
