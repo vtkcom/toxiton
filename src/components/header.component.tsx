@@ -9,7 +9,7 @@ const HeaderDiv = styled.div`
   display: grid;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(
+  background: linear-gradient(
       to bottom,
       ${(p) => p.theme.bg_color} 0%,
       ${(p) => p.theme.bg_color_50} 20%,
@@ -24,6 +24,11 @@ const HeaderDiv = styled.div`
   color: ${(p) => p.theme.text_color};
   padding: 0 0 3rem;
   pointer-events: none;
+  transition: background 0.3s ease, color 0.4s ease;
+  &:empty {
+    background: transparent;
+    color: transparent;
+  }
 `;
 
 interface Props {

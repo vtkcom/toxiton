@@ -58,6 +58,7 @@ function App() {
       ).then((r) => r.json());
 
       setCurrentAdress(result);
+      window.Telegram.WebApp.HapticFeedback.impactOccurred("light");
     }
     if (position) asyncGetAdress();
   }
