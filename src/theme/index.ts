@@ -120,6 +120,7 @@ const Global = createGlobalStyle`
         box-shadow: ${(p) => p.theme.box_shadow};
         border-radius: 50%;
         border: 0.4rem solid ${(p) => p.theme.bg_color_50};
+        pointer-events: visiblePainted;
         img {
             position: relative;
             border-radius: 50%;

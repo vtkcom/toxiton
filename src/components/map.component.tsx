@@ -14,6 +14,7 @@ export const Map: React.FC = () => {
 
   function getAdress() {
     async function asyncGetAdress() {
+      dispatch("map/adress/set", { place: null });
       const result: Place = await fetch(
         `https://nominatim.openstreetmap.org/reverse?lat=${map.position?.lat}&lon=${map.position?.lng}&format=json`
       ).then((r) => r.json());
@@ -21,6 +22,7 @@ export const Map: React.FC = () => {
       dispatch("map/adress/set", { place: result });
       window.Telegram.WebApp.HapticFeedback.impactOccurred("light");
     }
+
     if (map.position) asyncGetAdress();
   }
 
@@ -31,6 +33,9 @@ export const Map: React.FC = () => {
       scrollWheelZoom={true}
       touchZoom={true}
       zoomControl={false}
+      // boundsOptions={{
+      //   paddingBottomRight: [250, 0],
+      // }}
     >
       <Header />
       <Controll />

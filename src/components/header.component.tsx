@@ -43,12 +43,16 @@ export const Header: React.FC = () => {
 
   return (
     <HeaderDiv>
-      {map.place?.address.road}
-      {map.place?.address.house_number &&
-        ", " + map.place?.address.house_number}
-      <span>
-        {map.place?.address.country}, {map.place?.address.city}
-      </span>
+      {map.place !== null && (
+        <>
+          {map.place?.address.road}
+          {map.place?.address.house_number &&
+            ", " + map.place?.address.house_number}
+          <span>
+            {map.place?.address.country}, {map.place?.address.city}
+          </span>
+        </>
+      )}
     </HeaderDiv>
   );
 };

@@ -20,6 +20,7 @@ const ControllDiv = styled.div`
   gap: 0.5rem;
   padding: 7rem 0.5rem 0 0;
   justify-content: end;
+  pointer-events: none;
 `;
 
 const Button = styled.div`
@@ -42,7 +43,7 @@ const Button = styled.div`
 
 export const Controll: React.FC = () => {
   const { dispatch, map } = useStoreon<State, Events>("map");
-  const mapev = useMapEvents({
+  const mapEv = useMapEvents({
     async locationfound(e) {
       const result: Place = await fetch(
         `https://nominatim.openstreetmap.org/reverse?lat=${e.latlng.lat}&lon=${e.latlng.lng}&format=json`
@@ -53,15 +54,15 @@ export const Controll: React.FC = () => {
         position,
       });
 
-      mapev.flyTo(position, 18, { duration: 0.3 });
+      mapEv.flyTo(position, 18, { duration: 0.3 });
 
       dispatch("map/zoom/set", { zoom: 18 });
     },
   });
 
   useEffect(() => {
-    mapev?.setZoom(map.zoom);
-  }, [map.zoom, mapev]);
+    mapEv?.setZoom(map.zoom);
+  }, [map.zoom, mapEv]);
 
   return (
     <ControllDiv>
@@ -71,7 +72,7 @@ export const Controll: React.FC = () => {
       <Button onClick={() => dispatch("map/zoom/minus")}>
         <Icon name="minus" size={1.1} />
       </Button>
-      <Button onClick={() => mapev.locate()}>
+      <Button onClick={() => mapEv.locate()}>
         <Icon name="navigate" size={1.1} />
       </Button>
     </ControllDiv>

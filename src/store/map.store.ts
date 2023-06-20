@@ -12,7 +12,7 @@ export interface MapState {
 
 export interface MapEvents {
   "map/position/set": { position: LatLng };
-  "map/adress/set": { place: Place };
+  "map/adress/set": { place: Place | null };
   "map/zoom/plus": undefined;
   "map/zoom/minus": undefined;
   "map/zoom/set": { zoom: number };
