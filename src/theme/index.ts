@@ -113,7 +113,7 @@ const Global = createGlobalStyle`
 
     .leaflet-container {
         width: 100vw;
-        height: 70vh;
+        height: 71vh;
         overscroll-behavior: contain;
     }
 

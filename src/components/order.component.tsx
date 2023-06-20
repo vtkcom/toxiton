@@ -57,13 +57,10 @@ export const Order: React.FC = () => {
     const max = 67;
     const min = 2;
     if (size.y !== 0) {
-      console.log(size.y);
-
       if (size.y <= min || size.y < 3) return min;
       if (size.y >= max || size.y > 3) return max;
-    } else {
-      return max;
     }
+    return max;
   }, [size]);
 
   function mouseHandler(mouseDownEvent: React.MouseEvent<HTMLDivElement>) {
