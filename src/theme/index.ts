@@ -69,6 +69,12 @@ const Global = createGlobalStyle`
         color: ${(p) => p.theme.link_color};
     }
 
+    html {
+        width: 100vw;
+        height: ${() => window.Telegram.WebApp.viewportStableHeight};
+        overscroll-behavior: none;
+    }
+
     body {
         margin: 0;
         display: flex;
