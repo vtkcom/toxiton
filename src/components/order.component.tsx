@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { styled } from "styled-components";
 import { Header } from "./header.component";
 
@@ -34,7 +34,7 @@ const BlockOrder = styled.div`
     border-radius: 1rem;
     background: hsla(0, 0%, 100%, 0.7);
     position: absolute;
-    top: -0.7rem;
+    top: -0.6rem;
     left: calc(50vw - 1.5rem);
   }
   &::after {
@@ -72,7 +72,10 @@ export const Order: React.FC = () => {
       setSize(() => ({
         y:
           (startSize.y - startPosition.y + mouseMoveEvent.pageY) /
-          (document.querySelector("app")!.getBoundingClientRect().height / 100),
+          ((
+            document.querySelector("app") as HTMLElement
+          ).getBoundingClientRect().height /
+            100),
       }));
     }
     function onMouseUp() {
@@ -95,7 +98,10 @@ export const Order: React.FC = () => {
           (startSize.y -
             startPosition.y +
             mouseMoveEvent.changedTouches[0].pageY) /
-          (document.querySelector("app")!.getBoundingClientRect().height / 100),
+          ((
+            document.querySelector("app") as HTMLElement
+          ).getBoundingClientRect().height /
+            100),
       }));
     }
     function onTouchEnd() {
