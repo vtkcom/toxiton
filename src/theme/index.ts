@@ -51,6 +51,7 @@ const Global = createGlobalStyle`
         color: ${(p) => p.theme.text_color};
         background-color: #242424;
         box-sizing: border-box;
+        user-select: none;
 
         font-synthesis: none;
         text-rendering: optimizeLegibility;
