@@ -9,10 +9,10 @@ const WrapOrder = styled.div`
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  background-color: hsla(0, 0%, 0%, 0.2);
   z-index: 999;
   overflow: hidden;
   overscroll-behavior: none;
+  transition: background 0.5s ease;
 `;
 
 const BlockOrder = styled.div`
@@ -114,7 +114,11 @@ export const Order: React.FC = () => {
   }
 
   return (
-    <WrapOrder>
+    <WrapOrder
+      style={{
+        background: `hsl(0deg 0% 0% / ${100 - vh}%)`,
+      }}
+    >
       <Header />
       <BlockOrder
         onMouseDown={mouseHandler}

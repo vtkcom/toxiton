@@ -11,12 +11,12 @@ const ControllDiv = styled.div`
   top: 0;
   right: 0;
   width: 100vw;
-  height: calc(70vh - 2.5rem);
+  height: 70vh;
   z-index: 999;
   display: grid;
   grid-auto-rows: max-content;
   gap: 0.5rem;
-  padding: 0 0.5rem 2.5rem 0;
+  padding: 0 0.5rem 2rem 0;
   justify-content: end;
   align-content: end;
   pointer-events: none;
@@ -35,6 +35,11 @@ const Button = styled.div`
   font-size: 2rem;
   font-weight: 400;
   pointer-events: visiblePainted;
+  transform: scale(1);
+  transition: all 0.3s ease;
+  &:active {
+    transform: scale(1.2);
+  }
   svg {
     filter: drop-shadow(0.1rem 0.1rem 0.3rem hsla(0, 0%, 0%, 0.4));
     position: relative;

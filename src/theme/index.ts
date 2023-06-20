@@ -50,7 +50,6 @@ const Global = createGlobalStyle`
         color-scheme: light dark;
         color: ${(p) => p.theme.text_color};
         background-color: #242424;
-        box-sizing: border-box;
         user-select: none;
 
         font-synthesis: none;
@@ -58,6 +57,10 @@ const Global = createGlobalStyle`
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         -webkit-text-size-adjust: 100%;
+    }
+
+    * {
+        box-sizing: border-box;
     }
 
     a {
@@ -108,7 +111,8 @@ const Global = createGlobalStyle`
     }
 
     .leaflet-tile-container {
-        filter: grayscale(1);
+        /* filter: grayscale(1); */
+        filter: saturate(120%) sepia(20%);
     }
 
     .leaflet-container {

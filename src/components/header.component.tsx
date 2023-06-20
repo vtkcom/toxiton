@@ -26,7 +26,6 @@ const HeaderDiv = styled.div`
       hsla(0, 0%, 0%, 0) 80%
     );
   color: ${(p) => p.theme.text_color};
-  padding: 0 0 3rem;
   pointer-events: none;
   font-weight: 800;
   font-size: 1.05rem;

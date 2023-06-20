@@ -45,8 +45,8 @@ export const LocationMarker: React.FC = () => {
     const size = 50;
 
     img.src = avatar;
-    img.width = size;
-    img.height = size;
+    img.style.width = "100%";
+    img.style.height = "100%";
 
     return new DivIcon({
       iconUrl: avatar,
