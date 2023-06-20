@@ -5,21 +5,20 @@ import { useStoreon } from "storeon/react";
 import { Events, State } from "../store";
 import { Place } from "../vite-env";
 import { LatLng } from "leaflet";
-import { useEffect } from "react";
 
 const ControllDiv = styled.div`
   position: absolute;
   top: 0;
   right: 0;
   width: 100vw;
-  height: 100vh;
-  background-color: hsla(0, 0%, 0%, 0.2);
+  height: calc(70vh - 2.5rem);
   z-index: 999;
   display: grid;
   grid-auto-rows: max-content;
   gap: 0.5rem;
-  padding: 7rem 0.5rem 0 0;
+  padding: 0 0.5rem 2.5rem 0;
   justify-content: end;
+  align-content: end;
   pointer-events: none;
 `;
 
@@ -38,11 +37,14 @@ const Button = styled.div`
   pointer-events: visiblePainted;
   svg {
     filter: drop-shadow(0.1rem 0.1rem 0.3rem hsla(0, 0%, 0%, 0.4));
+    position: relative;
+    left: -1px;
+    bottom: -1px;
   }
 `;
 
 export const Controll: React.FC = () => {
-  const { dispatch, map } = useStoreon<State, Events>("map");
+  const { dispatch } = useStoreon<State, Events>("map");
   const mapEv = useMapEvents({
     async locationfound(e) {
       const result: Place = await fetch(
@@ -55,23 +57,11 @@ export const Controll: React.FC = () => {
       });
 
       mapEv.flyTo(position, 18, { duration: 0.3 });
-
-      dispatch("map/zoom/set", { zoom: 18 });
     },
   });
 
-  useEffect(() => {
-    mapEv?.setZoom(map.zoom);
-  }, [map.zoom, mapEv]);
-
   return (
     <ControllDiv>
-      <Button onClick={() => dispatch("map/zoom/plus")}>
-        <Icon name="plus" size={1.1} />
-      </Button>
-      <Button onClick={() => dispatch("map/zoom/minus")}>
-        <Icon name="minus" size={1.1} />
-      </Button>
       <Button onClick={() => mapEv.locate()}>
         <Icon name="navigate" size={1.1} />
       </Button>

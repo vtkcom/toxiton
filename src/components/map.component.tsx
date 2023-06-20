@@ -1,5 +1,4 @@
 import { MapContainer, TileLayer } from "react-leaflet";
-import { Header } from "./header.component";
 import { Controll } from "./controls.component";
 import { LocationMarker } from "./marker.component";
 import { useStoreon } from "storeon/react";
@@ -33,11 +32,11 @@ export const Map: React.FC = () => {
       scrollWheelZoom={true}
       touchZoom={true}
       zoomControl={false}
-      // boundsOptions={{
-      //   paddingBottomRight: [250, 0],
-      // }}
+      boundsOptions={{
+        paddingBottomRight: [250, 0],
+        paddingTopLeft: [0, 0],
+      }}
     >
-      <Header />
       <Controll />
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

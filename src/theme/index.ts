@@ -13,7 +13,7 @@ const notTheme: ThemeParams = {
 };
 
 const theme: DefaultTheme = {
-  border_radius: "5px",
+  border_radius: "2rem",
   ...notTheme,
   ...window.Telegram.WebApp.themeParams,
 };
@@ -24,7 +24,7 @@ theme.bg_color_50 = opacify(-0.5, theme.bg_color);
 theme.bg_color_20 = opacify(-0.8, theme.bg_color);
 theme.bg_color_10 = opacify(-0.9, theme.bg_color);
 // theme.box_shadow = `0 0 1rem -0.1rem ${theme.bg_color_50}`;
-theme.box_shadow = `0 0.5rem 1.5rem rgba(117, 115, 111, 0.3);`;
+theme.box_shadow = `0 0.5rem 1.5rem rgba(0, 0, 0, 0.3);`;
 
 const scale = keyframes`
     0% {
@@ -101,18 +101,19 @@ const Global = createGlobalStyle`
         bottom: -1px;
         position: fixed;
         z-index: 10000;
+        display: none !important;
         a {
             color: ${(p) => p.theme.link_color} !important;
         }
     }
 
     .leaflet-tile-container {
-        filter: grayscale(1);
+        /* filter: grayscale(1); */
     }
 
     .leaflet-container {
         width: 100vw;
-        height: 100vh;
+        height: 70vh;
         overscroll-behavior: contain;
     }
 

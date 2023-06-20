@@ -65,6 +65,7 @@ export const LocationMarker: React.FC = () => {
       zIndexOffset={1005}
       position={map.position}
       icon={markerImage}
+      
     />
   );
 };
