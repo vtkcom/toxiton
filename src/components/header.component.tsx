@@ -1,4 +1,6 @@
 import { styled } from "styled-components";
+import { useStoreon } from "storeon/react";
+import { Events, State } from "../store";
 
 const HeaderDiv = styled.div`
   position: absolute;
@@ -7,8 +9,9 @@ const HeaderDiv = styled.div`
   width: 100vw;
   height: 5rem;
   display: grid;
-  justify-content: center;
-  align-items: center;
+  justify-items: center;
+  align-content: center;
+  grid-auto-rows: max-content;
   filter: drop-shadow(0.1rem 0.1rem 0.3rem hsla(0, 0%, 0%, 0.4));
   background: linear-gradient(
       to bottom,
@@ -25,18 +28,25 @@ const HeaderDiv = styled.div`
   color: ${(p) => p.theme.text_color};
   padding: 0 0 3rem;
   pointer-events: none;
-  font-weight: 600;
-  /* transition: background 0.3s ease, color 0.4s ease;
-  &:empty {
-    background: transparent;
-    color: transparent;
-  } */
+  font-weight: 800;
+  font-size: 1.05rem;
+  span {
+    font-weight: 200;
+    font-size: 0.9rem;
+  }
 `;
 
-interface Props {
-  adress?: string;
-}
+export const Header: React.FC = () => {
+  const { map } = useStoreon<State, Events>("map");
 
-export const Header: React.FC<Props> = ({ adress }) => {
-  return <HeaderDiv>{adress}</HeaderDiv>;
+  return (
+    <HeaderDiv>
+      {map.place?.address.road}
+      {map.place?.address.house_number &&
+        ", " + map.place?.address.house_number}
+      <span>
+        {map.place?.address.country}, {map.place?.address.city}
+      </span>
+    </HeaderDiv>
+  );
 };

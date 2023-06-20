@@ -24,7 +24,7 @@ theme.bg_color_50 = opacify(-0.5, theme.bg_color);
 theme.bg_color_20 = opacify(-0.8, theme.bg_color);
 theme.bg_color_10 = opacify(-0.9, theme.bg_color);
 // theme.box_shadow = `0 0 1rem -0.1rem ${theme.bg_color_50}`;
-theme.box_shadow = `0 8px 20px rgba(117,115,111,.2);`;
+theme.box_shadow = `0 0.5rem 1.5rem rgba(117, 115, 111, 0.3);`;
 
 const scale = keyframes`
     0% {

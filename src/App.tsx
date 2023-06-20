@@ -1,13 +1,9 @@
-import { useEffect, useState } from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import { LatLng } from "leaflet";
+import { useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import { Global, theme } from "./theme";
-import { Header } from "./components/header.component";
-import { LocationMarker } from "./components/marker.component";
-import { Controll } from "./components/controls.component";
+import { Map } from "./components/map.component";
 import { Sprites } from "./sprites";
+import "leaflet/dist/leaflet.css";
 
 export interface Place {
   place_id: number;
@@ -41,28 +37,7 @@ export interface Address {
 }
 
 function App() {
-  // const [input, setInput] = useState("");
-  // const [result, setResult] = useState<{ isLoading: boolean; data: Place[] }>({
-  //   isLoading: false,
-  //   data: [],
-  // });
-  const [position, setPosition] = useState<LatLng | null>(null);
-  const [currentAdress, setCurrentAdress] = useState<Place | null>(null);
-
-  useEffect(getAdress, [position]);
   useEffect(getFull, []);
-
-  function getAdress() {
-    async function asyncGetAdress() {
-      const result = await fetch(
-        `https://nominatim.openstreetmap.org/reverse?lat=${position?.lat}&lon=${position?.lng}&format=json`
-      ).then((r) => r.json());
-
-      setCurrentAdress(result);
-      window.Telegram.WebApp.HapticFeedback.impactOccurred("light");
-    }
-    if (position) asyncGetAdress();
-  }
 
   function getFull() {
     window.Telegram.WebApp.expand();
@@ -89,28 +64,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Global />
 
-      <Header
-        adress={
-          currentAdress
-            ? `${currentAdress?.address.road}, ${currentAdress?.address.house_number}`
-            : undefined
-        }
-      />
-
-      <MapContainer
-        center={[52.261802, 104.300412]}
-        zoom={10}
-        scrollWheelZoom={true}
-        touchZoom={true}
-        zoomControl={false}
-      >
-        <Controll />
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        />
-        <LocationMarker position={position} setPosition={setPosition} />
-      </MapContainer>
+      <Map />
 
       <Sprites />
     </ThemeProvider>
