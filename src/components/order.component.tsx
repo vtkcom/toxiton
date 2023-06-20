@@ -19,7 +19,7 @@ const BlockOrder = styled.div`
   background: ${(p) => p.theme.bg_color};
   /* transform: translate3d(0px, 67vh, 0px); */
   transition: transform 0.3s ease;
-  height: 100vh;
+  height: 98vh;
   border-radius: ${(p) => p.theme.border_radius} ${(p) => p.theme.border_radius}
     0 0;
   box-shadow: 0 -0.5rem 1.5rem rgba(0, 0, 0, 0.3);
