@@ -11,12 +11,12 @@ const ControllDiv = styled.div`
   top: 0;
   right: 0;
   width: 100vw;
-  height: 70vh;
+  height: 100vh;
   z-index: 999;
   display: grid;
   grid-auto-rows: max-content;
   gap: 0.5rem;
-  padding: 0 0.5rem 2rem 0;
+  padding: 0 0.5rem 34vh 0;
   justify-content: end;
   align-content: end;
   pointer-events: none;
