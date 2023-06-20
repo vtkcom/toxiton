@@ -30,6 +30,7 @@ const HeaderDiv = styled.div`
   pointer-events: none;
   font-weight: 800;
   font-size: 1.05rem;
+  user-select: none;
   span {
     font-weight: 200;
     font-size: 0.9rem;
