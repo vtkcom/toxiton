@@ -34,6 +34,7 @@ const HeaderDiv = styled.div`
   span {
     font-weight: 200;
     font-size: 0.9rem;
+    user-select: none;
   }
 `;
 
