@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { ThemeProvider } from "styled-components";
+import { StyleSheetManager, ThemeProvider } from "styled-components";
 import { Global, theme } from "./theme";
 import { Map } from "./components/map.component";
 import { Sprites } from "./sprites";
@@ -62,14 +62,16 @@ function App() {
   // }
 
   return (
-    <ThemeProvider theme={theme}>
-      <Global />
+    <StyleSheetManager enableVendorPrefixes>
+      <ThemeProvider theme={theme}>
+        <Global />
 
-      <Map />
-      <Order />
+        <Map />
+        <Order />
 
-      <Sprites />
-    </ThemeProvider>
+        <Sprites />
+      </ThemeProvider>
+    </StyleSheetManager>
   );
 }
 

@@ -12,8 +12,10 @@
   "dependencies": {
     "@twa-dev/sdk": "^6.4.2",
     "@twa-dev/types": "^6.7.0",
+    "autoprefixer": "^10.4.14",
     "leaflet": "^1.9.4",
     "polished": "^4.2.2",
+    "postcss": "^8.4.24",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.2.1",
