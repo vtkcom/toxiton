@@ -108,12 +108,12 @@ const Global = createGlobalStyle`
     }
 
     .leaflet-tile-container {
-        /* filter: grayscale(1); */
+        filter: grayscale(1);
     }
 
     .leaflet-container {
         width: 100vw;
-        height: 71vh;
+        height: 72vh;
         overscroll-behavior: contain;
     }
 
