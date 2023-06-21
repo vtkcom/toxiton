@@ -111,8 +111,8 @@ const Global = createGlobalStyle`
     }
 
     .leaflet-tile-container {
-        /* filter: grayscale(1); */
-        filter: saturate(120%) sepia(20%);
+        filter: grayscale(1);
+        /* filter: saturate(120%) sepia(20%); */
     }
 
     .leaflet-container {
@@ -122,14 +122,14 @@ const Global = createGlobalStyle`
     }
 
     .avatar {
-        box-shadow: ${(p) => p.theme.box_shadow};
+        box-shadow: inset ${(p) => p.theme.box_shadow};
         border-radius: 50%;
-        border: 0.4rem solid ${(p) => p.theme.bg_color_50};
+        /* border: 0.2rem solid ${(p) => p.theme.secondary_bg_color}; */
         pointer-events: visiblePainted;
         img {
-            position: relative;
+            /* position: relative; */
             border-radius: 50%;
-            z-index: 1001;
+            /* z-index: 1001; */
         }
     }
 

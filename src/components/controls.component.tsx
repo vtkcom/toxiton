@@ -28,8 +28,8 @@ const Button = styled.div`
   border-radius: 50%;
   border: 1px solid ${(p) => p.theme.bg_color_10};
   box-shadow: ${(p) => p.theme.box_shadow};
-  background-color: ${(p) => p.theme.bg_color};
-  color: ${(p) => p.theme.hint_color};
+  background-color: ${(p) => p.theme.button_color};
+  color: ${(p) => p.theme.button_text_color};
   display: grid;
   place-content: center;
   font-size: 2rem;

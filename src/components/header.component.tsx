@@ -24,6 +24,12 @@ const HeaderDiv = styled.div`
       ${(p) => p.theme.bg_color_20} 0%,
       ${(p) => p.theme.bg_color_10} 35%,
       hsla(0, 0%, 0%, 0) 80%
+    ),
+    linear-gradient(
+      to bottom,
+      ${(p) => p.theme.bg_color_20} 0%,
+      ${(p) => p.theme.bg_color_10} 35%,
+      hsla(0, 0%, 0%, 0) 80%
     );
   color: ${(p) => p.theme.text_color};
   pointer-events: none;

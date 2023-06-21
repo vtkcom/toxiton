@@ -5,6 +5,7 @@ import { Map } from "./components/map.component";
 import { Sprites } from "./sprites";
 import "leaflet/dist/leaflet.css";
 import { Order } from "./components/order.component";
+import { LocationMarker } from "./components/marker.component";
 
 export interface Place {
   place_id: number;
@@ -66,7 +67,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <Global />
 
-        <Map />
+        <Map>
+          <LocationMarker />
+        </Map>
         <Order />
 
         <Sprites />

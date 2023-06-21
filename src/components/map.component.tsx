@@ -1,12 +1,15 @@
 import { MapContainer, TileLayer } from "react-leaflet";
 import { Controll } from "./controls.component";
-import { LocationMarker } from "./marker.component";
 import { useStoreon } from "storeon/react";
 import { Events, State } from "../store";
 import { useEffect } from "react";
 import { Place } from "../vite-env";
 
-export const Map: React.FC = () => {
+interface Props {
+  children: React.ReactNode | React.ReactNode[];
+}
+
+export const Map: React.FC<Props> = ({ children }) => {
   const { dispatch, map } = useStoreon<State, Events>("map");
 
   useEffect(getAdress, [map.position, dispatch]);
@@ -42,7 +45,8 @@ export const Map: React.FC = () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      <LocationMarker />
+      {children}
+      {/* <LocationMarker /> */}
     </MapContainer>
   );
 };

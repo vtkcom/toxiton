@@ -1,6 +1,6 @@
 import { DivIcon, LatLng, Marker as M, Point } from "leaflet";
 import React, { useMemo, useRef, useState } from "react";
-import { Marker, useMap } from "react-leaflet";
+import { Marker, useMap, useMapEvent } from "react-leaflet";
 import { Place } from "../vite-env";
 import { useStoreon } from "storeon/react";
 import { Events, State } from "../store";
@@ -10,6 +10,9 @@ export const LocationMarker: React.FC = () => {
   const [animate, setAnimate] = useState(false);
   const { dispatch, map } = useStoreon<State, Events>("map");
   const mapEl = useMap();
+  useMapEvent("zoom", (e) => {
+    dispatch("map/zoom/set", { zoom: e.target._zoom });
+  });
   const markerRef = useRef<M | null>(null);
   const eventHandlers = useMemo(
     () => ({
@@ -42,7 +45,7 @@ export const LocationMarker: React.FC = () => {
   );
   const markerImage = useMemo(() => {
     const img = document.createElement("img");
-    const size = 50;
+    const size = (5 * map.zoom) / 2;
 
     img.src = avatar;
     img.style.width = "100%";
@@ -55,7 +58,7 @@ export const LocationMarker: React.FC = () => {
       className: `avatar ${animate ? "animate" : ""}`,
       html: img,
     });
-  }, [animate]);
+  }, [animate, map.zoom]);
 
   return map.position === null ? null : (
     <Marker
@@ -65,7 +68,6 @@ export const LocationMarker: React.FC = () => {
       zIndexOffset={1005}
       position={map.position}
       icon={markerImage}
-      
     />
   );
 };

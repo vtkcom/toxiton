@@ -44,11 +44,11 @@ const Pan = styled.div`
   &::before {
     display: block;
     width: 3rem;
-    height: 0.2rem;
+    height: 0.25rem;
     content: "";
     pointer-events: auto;
     border-radius: 1rem;
-    background: hsla(0, 0%, 100%, 0.7);
+    background: ${p => p.theme.secondary_bg_color};
   }
 `;
 
@@ -165,8 +165,7 @@ export const Order: React.FC = () => {
       style={{
         background: `hsl(0deg 0% 0% / ${90 - vh}%)`,
         backdropFilter: `blur(${67 - vh}px)`,
-        // @ts-ignore
-        "-webkit-backdrop-filter": `blur(${67 - vh}px)`,
+        WebkitBackdropFilter: `blur(${67 - vh}px)`,
       }}
     >
       <Header />
@@ -223,7 +222,7 @@ export const Order: React.FC = () => {
           <Button>Connect wallet</Button>
           <Footer>
             <div>
-              Основан на{" "}
+              Base on{" "}
               <a target="_blank" href="https://ton.org/">
                 <Icon name="ton" size={1.2} />
                 TON
