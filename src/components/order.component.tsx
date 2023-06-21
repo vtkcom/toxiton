@@ -13,7 +13,7 @@ const WrapOrder = styled.div`
   z-index: 999;
   overflow: hidden;
   overscroll-behavior: none;
-  transition: background 0.5s ease;
+  transition: background 0.5s ease, backdrop-filter 0.2s ease;
 `;
 
 const BlockOrder = styled.div`
@@ -95,7 +95,7 @@ const Button = styled.div`
   justify-content: center;
   align-items: center;
   position: sticky;
-  bottom: 1rem;
+  bottom: 0;
 `;
 
 export const Order: React.FC = () => {
@@ -164,6 +164,9 @@ export const Order: React.FC = () => {
     <WrapOrder
       style={{
         background: `hsl(0deg 0% 0% / ${90 - vh}%)`,
+        backdropFilter: `blur(${67 - vh}px)`,
+        // @ts-ignore
+        "-webkit-backdrop-filter": `blur(${67 - vh}px)`,
       }}
     >
       <Header />
