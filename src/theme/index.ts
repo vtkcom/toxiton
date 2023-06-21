@@ -126,11 +126,17 @@ const Global = createGlobalStyle`
         border-radius: 50%;
         /* border: 0.2rem solid ${(p) => p.theme.secondary_bg_color}; */
         pointer-events: visiblePainted;
+        user-select: none;
         img {
             /* position: relative; */
             border-radius: 50%;
             /* z-index: 1001; */
+            transition: transform 0.3s ease;
+            &:active {
+                transform: scale(1.5);
+            }
         }
+        
     }
 
     .avatar.animate {
