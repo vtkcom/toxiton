@@ -2,6 +2,8 @@ import { createPortal } from "react-dom";
 import { Minus } from "./minus.icon";
 import { Navigate } from "./navigate.icon";
 import { Plus } from "./plus.icon";
+import { Ton } from "./ton.icon";
+import { UA } from "./ua.icon";
 
 export const Sprites: React.FC = () => {
   return createPortal(
@@ -9,6 +11,8 @@ export const Sprites: React.FC = () => {
       <Navigate />
       <Plus />
       <Minus />
+      <Ton />
+      <UA />
     </svg>,
     document.body
   );

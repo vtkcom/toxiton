@@ -1,6 +1,6 @@
 interface Props {
   size?: number;
-  name: "navigate" | "plus" | "minus";
+  name: "navigate" | "plus" | "minus" | "ton" | "ua";
 }
 
 export const Icon: React.FC<Props> = ({ size = 2, name }) => {
