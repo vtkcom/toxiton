@@ -40,6 +40,7 @@ const Pan = styled.div`
   position: absolute;
   top: -2vh;
   left: 0;
+  overscroll-behavior: none;
   &::before {
     display: block;
     width: 3rem;
@@ -175,7 +176,6 @@ export const Order: React.FC = () => {
         <Content
           style={{
             overflow: vh === 2.5 ? "auto" : "hidden",
-            // height: 100 - vh + "vh"
           }}
         >
           <br />
