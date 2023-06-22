@@ -43,11 +43,6 @@ function App() {
   function getFull() {
     window.Telegram.WebApp.expand();
     window.Telegram.WebApp.enableClosingConfirmation();
-    window.Telegram.WebApp.switchInlineQuery("Toxiton", [
-      "users",
-      "bots",
-      "groups",
-    ]);
   }
 
   // async function navigate(e: KeyboardEvent<HTMLInputElement>) {
