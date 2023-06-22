@@ -48,7 +48,7 @@ const Pan = styled.div`
     content: "";
     pointer-events: auto;
     border-radius: 1rem;
-    background: ${p => p.theme.secondary_bg_color};
+    background: ${(p) => p.theme.secondary_bg_color};
   }
 `;
 
@@ -88,6 +88,7 @@ const Footer = styled.div`
 
 const Button = styled.div`
   border-radius: 1rem;
+  border: 1px solid ${(p) => p.theme.bg_color_10};
   background-color: ${(p) => p.theme.button_color};
   color: ${(p) => p.theme.button_text_color};
   height: 3rem;
@@ -105,8 +106,12 @@ export const Order: React.FC = () => {
     const min = 2.1;
 
     if (size.y !== 0) {
-      if (size.y <= min || size.y < 3) return min;
-      if (size.y >= max || size.y > 3) return max;
+      if (size.y <= min || size.y < 3) {
+        return min;
+      }
+      if (size.y >= max || size.y > 3) {
+        return max;
+      }
     }
     return max;
   }, [size]);

@@ -33,7 +33,7 @@ const HeaderDiv = styled.div`
     );
   color: ${(p) => p.theme.text_color};
   pointer-events: none;
-  font-weight: 800;
+  font-weight: 600;
   font-size: 1.05rem;
   user-select: none;
   span {

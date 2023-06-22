@@ -7,6 +7,7 @@ export interface MapState {
     position: LatLng | null;
     place: Place | null;
     zoom: number;
+    visible: boolean;
   };
 }
 
@@ -16,6 +17,9 @@ export interface MapEvents {
   "map/zoom/plus": undefined;
   "map/zoom/minus": undefined;
   "map/zoom/set": { zoom: number };
+  "map/visible/on": undefined;
+  "map/visible/off": undefined;
+  "map/visible/toggle": undefined;
 }
 
 const initState: MapState = {
@@ -23,6 +27,7 @@ const initState: MapState = {
     position: null,
     place: null,
     zoom: 10,
+    visible: true,
   },
 };
 
@@ -66,6 +71,30 @@ export const mapStore: StoreonModule<MapState, MapEvents> = (store) => {
     map: {
       ...s.map,
       zoom,
+    },
+  }));
+
+  store.on("map/visible/on", (s) => ({
+    ...s,
+    map: {
+      ...s.map,
+      visible: true,
+    },
+  }));
+
+  store.on("map/visible/off", (s) => ({
+    ...s,
+    map: {
+      ...s.map,
+      visible: false,
+    },
+  }));
+
+  store.on("map/visible/toggle", (s) => ({
+    ...s,
+    map: {
+      ...s.map,
+      visible: !s.map.visible,
     },
   }));
 };
