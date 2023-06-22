@@ -3,9 +3,8 @@ import { StyleSheetManager, ThemeProvider } from "styled-components";
 import { Global, theme } from "./theme";
 import { Map } from "./components/map.component";
 import { Sprites } from "./sprites";
-import "leaflet/dist/leaflet.css";
 import { Order } from "./components/order.component";
-import { LocationMarker } from "./components/marker.component";
+import "leaflet/dist/leaflet.css";
 
 export interface Place {
   place_id: number;
@@ -67,9 +66,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <Global />
 
-        <Map>
-          <LocationMarker />
-        </Map>
+        <Map />
         <Order />
 
         <Sprites />

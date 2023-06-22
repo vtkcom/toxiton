@@ -102,7 +102,7 @@ export const Order: React.FC = () => {
   const [size, setSize] = useState({ y: 0 });
   const vh = useMemo(() => {
     const max = 67;
-    const min = 2.5;
+    const min = 2.1;
 
     if (size.y !== 0) {
       if (size.y <= min || size.y < 3) return min;
@@ -177,7 +177,7 @@ export const Order: React.FC = () => {
         <Pan onMouseDown={mouseHandler} onTouchStart={touchHandler} />
         <Content
           style={{
-            overflow: vh === 2.5 ? "auto" : "hidden",
+            overflow: vh === 2.1 ? "auto" : "hidden",
           }}
         >
           <br />

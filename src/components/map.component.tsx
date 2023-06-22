@@ -4,12 +4,13 @@ import { useStoreon } from "storeon/react";
 import { Events, State } from "../store";
 import { useEffect } from "react";
 import { Place } from "../vite-env";
+import { LocationMarker } from "./marker.component";
 
 interface Props {
-  children: React.ReactNode | React.ReactNode[];
+  children?: React.ReactNode | React.ReactNode[];
 }
 
-export const Map: React.FC<Props> = ({ children }) => {
+export const Map: React.FC<Props> = () => {
   const { dispatch, map } = useStoreon<State, Events>("map");
 
   useEffect(getAdress, [map.position, dispatch]);
@@ -35,18 +36,13 @@ export const Map: React.FC<Props> = ({ children }) => {
       scrollWheelZoom={true}
       touchZoom={true}
       zoomControl={false}
-      boundsOptions={{
-        paddingBottomRight: [250, 0],
-        paddingTopLeft: [0, 0],
-      }}
     >
       <Controll />
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      {children}
-      {/* <LocationMarker /> */}
+      <LocationMarker />
     </MapContainer>
   );
 };

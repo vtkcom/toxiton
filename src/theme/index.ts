@@ -2,7 +2,7 @@ import { DefaultTheme, createGlobalStyle, keyframes } from "styled-components";
 import { ThemeParams } from "@twa-dev/types";
 import { opacify } from "polished";
 
-const notTheme: ThemeParams = {
+const defaultTheme: ThemeParams = {
   bg_color: "#212121",
   button_color: "#8774e1",
   button_text_color: "#ffffff",
@@ -14,7 +14,7 @@ const notTheme: ThemeParams = {
 
 const theme: DefaultTheme = {
   border_radius: "2rem",
-  ...notTheme,
+  ...defaultTheme,
   ...window.Telegram.WebApp.themeParams,
 };
 
@@ -112,7 +112,6 @@ const Global = createGlobalStyle`
 
     .leaflet-tile-container {
         filter: grayscale(1);
-        /* filter: saturate(120%) sepia(20%); */
     }
 
     .leaflet-container {
@@ -124,16 +123,13 @@ const Global = createGlobalStyle`
     .avatar {
         box-shadow: inset ${(p) => p.theme.box_shadow};
         border-radius: 50%;
-        /* border: 0.2rem solid ${(p) => p.theme.secondary_bg_color}; */
         pointer-events: visiblePainted;
         user-select: none;
         img {
-            /* position: relative; */
             border-radius: 50%;
-            /* z-index: 1001; */
             transition: transform 0.3s ease;
             &:active {
-                transform: scale(1.5);
+                transform: scale(1.3);
             }
         }
         
