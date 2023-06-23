@@ -1,7 +1,11 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { styled } from "styled-components";
 import { Header } from "./header.component";
 import { Icon } from "./icon.component";
+import { useStoreon } from "storeon/react";
+import { Events, State } from "../store";
+import useDebounced from "../hooks/debounce.hook";
+import car from "../assets/car.png";
 
 const WrapOrder = styled.div`
   position: absolute;
@@ -35,12 +39,13 @@ const Pan = styled.div`
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: 2vh;
+  height: 2.5rem;
   pointer-events: auto;
   position: absolute;
   top: -2vh;
   left: 0;
   overscroll-behavior: none;
+  padding-bottom: 1.5rem;
   &::before {
     display: block;
     width: 3rem;
@@ -60,6 +65,33 @@ const Content = styled.div`
   padding: 1rem;
   position: relative;
   transition: all 0.1s ease;
+`;
+
+const FakeOrder = styled.div`
+  display: grid;
+  grid-template-rows: auto max-content;
+  padding-bottom: 1rem;
+  height: 27vh;
+  background-color: ${(p) => p.theme.bg_color};
+  transition: filter 0.5s ease, transform 0.2s ease;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  height: 3rem;
+  border-radius: 1rem;
+  border: 1px solid ${(p) => p.theme.bg_color_10};
+  background-color: ${(p) => p.theme.bg_color_30};
+  background-image: url(${car});
+  background-position: -15% center;
+  background-size: 35%;
+  background-repeat: no-repeat;
+  color: ${(p) => p.theme.button_text_color};
+  outline: none;
+  padding: 0 1rem 0 6rem;
+  &::placeholder {
+    color: ${(p) => p.theme.hint_color};
+  }
 `;
 
 const Footer = styled.div`
@@ -101,20 +133,24 @@ const Button = styled.div`
 
 export const Order: React.FC = () => {
   const [size, setSize] = useState({ y: 0 });
-  const vh = useMemo(() => {
+  const { dispatch, map } = useStoreon<State, Events>("map");
+  useDebounced(toggleVisible, [size], 100);
+
+  function toggleVisible() {
     const max = 67;
     const min = 2.1;
 
     if (size.y !== 0) {
       if (size.y <= min || size.y < 3) {
-        return min;
+        if (map.visible) dispatch("map/visible/off");
       }
       if (size.y >= max || size.y > 3) {
-        return max;
+        if (!map.visible) dispatch("map/visible/on");
       }
+    } else {
+      if (!map.visible) dispatch("map/visible/on");
     }
-    return max;
-  }, [size]);
+  }
 
   function mouseHandler(mouseDownEvent: React.MouseEvent<HTMLDivElement>) {
     const startSize = size;
@@ -168,23 +204,34 @@ export const Order: React.FC = () => {
   return (
     <WrapOrder
       style={{
-        background: `hsl(0deg 0% 0% / ${90 - vh}%)`,
-        backdropFilter: `blur(${67 - vh}px)`,
-        WebkitBackdropFilter: `blur(${67 - vh}px)`,
+        background: `hsl(0deg 0% 0% / ${map.visible ? 30 : 80}%)`,
+        backdropFilter: `blur(${map.visible ? 0 : 5}px)`,
+        WebkitBackdropFilter: `blur(${map.visible ? 0 : 5}px)`,
       }}
     >
       <Header />
       <BlockOrder
         style={{
-          transform: `translate3d(0px, ${vh}vh, 0px)`,
+          transform: `translate3d(0px, ${map.visible ? 67 : 2.1}vh, 0px)`,
         }}
       >
         <Pan onMouseDown={mouseHandler} onTouchStart={touchHandler} />
         <Content
           style={{
-            overflow: vh === 2.1 ? "auto" : "hidden",
+            overflow: map.visible ? "hidden" : "auto",
           }}
         >
+          <FakeOrder
+            style={{
+              opacity: map.visible ? 1 : 0,
+              transform: `scale(${map.visible ? 1 : 0.7})`,
+            }}
+          >
+            <div>
+              <Input placeholder="Where are you?" />
+            </div>
+            {map.visible && <Button>Connect wallet</Button>}
+          </FakeOrder>
           <br />
           <br />
           <br />
