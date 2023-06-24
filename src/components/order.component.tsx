@@ -254,7 +254,7 @@ export const Order: React.FC = () => {
                 <Input
                   onClick={() => {
                     dispatch("map/visible/off");
-                    realInput.current?.focus();
+                    setTimeout(() => realInput.current?.focus(), 300);
                   }}
                   stylebg="car"
                   placeholder="Where to get to?"
