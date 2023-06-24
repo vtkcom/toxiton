@@ -100,7 +100,7 @@ const Input = styled.input<{ styleBg: "car" | "egg" }>`
   ${(p) => p.styleBg === "car" && carCss}
   ${(p) => p.styleBg === "egg" && eggCss}
   background-repeat: no-repeat;
-  color: ${(p) => p.theme.button_text_color};
+  color: ${(p) => p.theme.text_color};
   outline: none;
   padding: 0 1rem 0 6rem;
   &::placeholder {
@@ -145,7 +145,7 @@ const Button = styled.div`
 
 const ButtonSticky = styled(Button)`
   position: sticky;
-  bottom: 1rem;
+  bottom: 0.5rem;
 `;
 
 export const Order: React.FC = () => {
