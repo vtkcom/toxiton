@@ -17,7 +17,7 @@ const WrapOrder = styled.div`
   pointer-events: none;
   z-index: 999;
   overflow: hidden;
-  overscroll-behavior: none;
+  /* overscroll-behavior: none; */
   transition: background 0.5s ease, backdrop-filter 0.2s ease;
 `;
 
@@ -32,7 +32,7 @@ const BlockOrder = styled.div`
   box-shadow: 0 -0.5rem 1.5rem rgba(0, 0, 0, 0.3);
   pointer-events: all;
   z-index: 999;
-  overscroll-behavior: none;
+  /* overscroll-behavior: none; */
 `;
 
 const Pan = styled.div`
@@ -60,11 +60,18 @@ const Pan = styled.div`
 
 const Content = styled.div`
   display: grid;
+  grid-template-rows: auto max-content max-content;
   gap: 1rem;
-  overscroll-behavior: none;
-  height: calc(98vh - 2rem);
+  /* overscroll-behavior: none; */
+  min-height: calc(98vh - 2rem);
   padding: 0 1rem 1rem;
   position: relative;
+`;
+
+const Main = styled.div`
+  display: grid;
+  grid-auto-rows: max-content;
+  gap: 1rem;
 `;
 
 const FakeOrder = styled.div`
@@ -92,13 +99,13 @@ const eggCss = css`
   background-size: 6rem;
 `;
 
-const Input = styled.input<{ styleBg: "car" | "egg" }>`
+const Input = styled.input<{ stylebg: "car" | "egg" }>`
   width: 100%;
   height: 3rem;
   border-radius: 1rem;
   border: 1px solid ${(p) => p.theme.bg_color_10};
-  ${(p) => p.styleBg === "car" && carCss}
-  ${(p) => p.styleBg === "egg" && eggCss}
+  ${(p) => p.stylebg === "car" && carCss}
+  ${(p) => p.stylebg === "egg" && eggCss}
   background-repeat: no-repeat;
   color: ${(p) => p.theme.text_color};
   outline: none;
@@ -248,55 +255,25 @@ export const Order: React.FC = () => {
                     dispatch("map/visible/off");
                     realInput.current?.focus();
                   }}
-                  styleBg="car"
+                  stylebg="car"
                   placeholder="Where to get to?"
                 />
               </div>
               <Button>Connect wallet</Button>
             </FakeOrder>
           )}
-          <Input placeholder="Where are you?" styleBg="egg" />
-          <Input ref={realInput} styleBg="car" placeholder="Where to get to?" />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
+
+          <Main>
+            <Input placeholder="Where are you?" stylebg="egg" />
+            <Input
+              ref={realInput}
+              stylebg="car"
+              placeholder="Where to get to?"
+            />
+          </Main>
+
           <ButtonSticky>Connect wallet</ButtonSticky>
+
           <Footer>
             <div>
               Base on{" "}

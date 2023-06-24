@@ -2,19 +2,29 @@ import { DefaultTheme, createGlobalStyle, keyframes } from "styled-components";
 import { ThemeParams } from "@twa-dev/types";
 import { opacify } from "polished";
 
-const defaultTheme: ThemeParams = {
-  bg_color: "#212121",
-  button_color: "#8774e1",
+// const defaultTheme: ThemeParams = {
+//   bg_color: "#212121",
+//   button_color: "#8774e1",
+//   button_text_color: "#ffffff",
+//   hint_color: "#aaaaaa",
+//   link_color: "#8774e1",
+//   secondary_bg_color: "#0f0f0f",
+//   text_color: "#ffffff",
+// };
+
+const lightTheme: ThemeParams = {
+  bg_color: "#ffffff",
+  button_color: "#3390ec",
   button_text_color: "#ffffff",
-  hint_color: "#aaaaaa",
-  link_color: "#8774e1",
-  secondary_bg_color: "#0f0f0f",
-  text_color: "#ffffff",
+  hint_color: "#707579",
+  link_color: "#3390ec",
+  secondary_bg_color: "#f4f4f5",
+  text_color: "#000000",
 };
 
 const theme: DefaultTheme = {
   border_radius: "2rem",
-  ...defaultTheme,
+  ...lightTheme,
   ...window.Telegram.WebApp.themeParams,
 };
 

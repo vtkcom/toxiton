@@ -61,7 +61,7 @@ export const Controll: React.FC = () => {
       });
 
       window.Telegram.WebApp.HapticFeedback.notificationOccurred("success");
-      mapEv.flyTo(position, 18, { duration: 0.3 });
+      mapEv.flyTo(position, 18, { duration: 0.7 });
     },
   });
 
