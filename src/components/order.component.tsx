@@ -175,7 +175,6 @@ export const Order: React.FC = () => {
       // @ts-ignore
       document.body.removeEventListener("mousemove", onMouseMove);
     }
-    console.log(1);
 
     // @ts-ignore
     document.body.addEventListener("mousemove", onMouseMove);
@@ -201,7 +200,6 @@ export const Order: React.FC = () => {
       // @ts-ignore
       document.removeEventListener("touchmove", onTouchMove);
     }
-    console.log(2);
 
     // @ts-ignore
     document.addEventListener("touchmove", onTouchMove);
