@@ -70,7 +70,6 @@ const Content = styled.div`
 const FakeOrder = styled.div`
   display: grid;
   grid-template-rows: auto max-content;
-  padding-bottom: 1rem;
   height: 27vh;
   background-color: ${(p) => p.theme.bg_color};
   transition: opacity 0.1s ease, transform 0.2s ease;
