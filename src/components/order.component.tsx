@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { styled } from "styled-components";
 import { Header } from "./header.component";
 import { Icon } from "./icon.component";
