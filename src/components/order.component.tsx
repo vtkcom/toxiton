@@ -104,6 +104,7 @@ const Input = styled.input<{ stylebg: "car" | "egg" }>`
   height: 3rem;
   border-radius: 1rem;
   border: 1px solid ${(p) => p.theme.bg_color_10};
+  box-shadow: inset 0 0 1rem hsl(0deg 0% 0% / 10%);
   ${(p) => p.stylebg === "car" && carCss}
   ${(p) => p.stylebg === "egg" && eggCss}
   background-repeat: no-repeat;
