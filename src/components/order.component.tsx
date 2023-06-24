@@ -72,7 +72,6 @@ const FakeOrder = styled.div`
   grid-template-rows: auto max-content;
   height: 27vh;
   background-color: ${(p) => p.theme.bg_color};
-  /* transition: opacity 0.2s ease, transform 0.3s ease; */
   position: absolute;
   left: 0.9rem;
   right: 0.9rem;
@@ -210,7 +209,7 @@ export const Order: React.FC = () => {
   return (
     <WrapOrder
       style={{
-        background: `hsl(0deg 0% 0% / ${map.visible ? 30 : 80}%)`,
+        background: `hsl(0deg 0% 0% / ${map.visible ? 30 : 50}%)`,
         backdropFilter: `blur(${map.visible ? 0 : 5}px)`,
         WebkitBackdropFilter: `blur(${map.visible ? 0 : 5}px)`,
       }}
@@ -228,13 +227,7 @@ export const Order: React.FC = () => {
           }}
         >
           {map.visible && (
-            <FakeOrder
-              style={{
-                opacity: map.visible ? 1 : 0,
-                transform: `translate3d(0px, ${map.visible ? 0 : 200}px, 0px)`,
-                // pointerEvents: map.visible ? "all" : "none",
-              }}
-            >
+            <FakeOrder>
               <div>
                 <Input
                   onClick={() =>
