@@ -128,8 +128,11 @@ const Button = styled.div`
   display: grid;
   justify-content: center;
   align-items: center;
+`;
+
+const ButtonSticky = styled(Button)`
   position: sticky;
-  bottom: 0;
+  bottom: 1rem;
 `;
 
 export const Order: React.FC = () => {
@@ -280,7 +283,7 @@ export const Order: React.FC = () => {
           <br />
           <br />
           <br />
-          <Button>Connect wallet</Button>
+          <ButtonSticky>Connect wallet</ButtonSticky>
           <Footer>
             <div>
               Base on{" "}
