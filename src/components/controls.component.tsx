@@ -38,6 +38,7 @@ const Button = styled.div`
   pointer-events: visiblePainted;
   transform: scale(1);
   transition: all 0.3s ease;
+  cursor: pointer;
   &:active {
     transform: scale(1.2);
   }
