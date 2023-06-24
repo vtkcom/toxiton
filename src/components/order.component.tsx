@@ -39,10 +39,10 @@ const Pan = styled.div`
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: 2.8rem;
+  height: 2.5rem;
   pointer-events: auto;
   position: absolute;
-  top: -1.3rem;
+  top: -1rem;
   left: 0;
   overscroll-behavior: none;
   padding-bottom: 1.3rem;

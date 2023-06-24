@@ -31,7 +31,7 @@ const HeaderDiv = styled.div`
       hsla(0, 0%, 0%, 0.1) 35%,
       hsla(0, 0%, 0%, 0) 80%
     );
-  color: ${(p) => p.theme.text_color};
+  color: hsl(0, 0%, 100%);
   pointer-events: none;
   font-weight: 600;
   font-size: 1.05rem;
