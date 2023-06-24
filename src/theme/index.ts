@@ -121,7 +121,7 @@ const Global = createGlobalStyle`
     }
 
     .leaflet-tile-container {
-        filter: grayscale(1);
+        /* filter: grayscale(1); */
     }
 
     .leaflet-container {
