@@ -1,6 +1,7 @@
 {
   "name": "TOXYTON",
-  "start_url": "https://vtkcom.github.io/toxiton/",
+  "description": "Search for a traveling companion",
+  "start_url": "/toxiton/",
   "display": "standalone",
   "icons": [
     {
