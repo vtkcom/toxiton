@@ -211,7 +211,7 @@ export const Order: React.FC = () => {
   return (
     <WrapOrder
       style={{
-        background: `hsl(0deg 0% 0% / ${map.visible ? 30 : 50}%)`,
+        background: `hsl(0deg 0% 0% / ${map.visible ? 10 : 50}%)`,
         backdropFilter: `blur(${map.visible ? 0 : 5}px)`,
         WebkitBackdropFilter: `blur(${map.visible ? 0 : 5}px)`,
       }}

@@ -20,7 +20,7 @@ const ControllDiv = styled.div`
   justify-content: end;
   align-content: end;
   pointer-events: none;
-  box-shadow: inset 0 0 5rem -0.5rem hsl(0deg 0% 0% / 70%);
+  box-shadow: inset 0 0 5rem -0.5rem hsl(0deg 0% 0% / 40%);
 `;
 
 const Button = styled.div`
