@@ -64,7 +64,6 @@ const Content = styled.div`
   height: calc(98vh - 2rem);
   padding: 0 1rem 1rem;
   position: relative;
-  transition: all 0.1s ease;
 `;
 
 const FakeOrder = styled.div`
