@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { styled } from "styled-components";
 import { Header } from "./header.component";
 import { Icon } from "./icon.component";
@@ -39,13 +39,13 @@ const Pan = styled.div`
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: 2.5rem;
+  height: 4vh;
   pointer-events: auto;
   position: absolute;
   top: -2vh;
   left: 0;
   overscroll-behavior: none;
-  padding-bottom: 1.5rem;
+  padding-bottom: 2vh;
   &::before {
     display: block;
     width: 3rem;
@@ -62,7 +62,7 @@ const Content = styled.div`
   gap: 1rem;
   overscroll-behavior: none;
   height: calc(98vh - 2rem);
-  padding: 1rem;
+  padding: 0 1rem 1rem;
   position: relative;
   transition: all 0.1s ease;
 `;
@@ -73,7 +73,10 @@ const FakeOrder = styled.div`
   padding-bottom: 1rem;
   height: 27vh;
   background-color: ${(p) => p.theme.bg_color};
-  transition: filter 0.5s ease, transform 0.2s ease;
+  transition: opacity 0.1s ease, transform 0.2s ease;
+  position: absolute;
+  left: 0.9rem;
+  right: 0.9rem;
 `;
 
 const Input = styled.input`
@@ -83,8 +86,8 @@ const Input = styled.input`
   border: 1px solid ${(p) => p.theme.bg_color_10};
   background-color: ${(p) => p.theme.bg_color_30};
   background-image: url(${car});
-  background-position: -15% center;
-  background-size: 35%;
+  background-position: -2rem center;
+  background-size: 7rem;
   background-repeat: no-repeat;
   color: ${(p) => p.theme.button_text_color};
   outline: none;
@@ -134,18 +137,21 @@ const Button = styled.div`
 export const Order: React.FC = () => {
   const [size, setSize] = useState({ y: 0 });
   const { dispatch, map } = useStoreon<State, Events>("map");
-  useDebounced(toggleVisible, [size], 100);
+  useDebounced(() => toggleVisible(), [size], 100);
 
   function toggleVisible() {
     const max = 67;
     const min = 2.1;
+    console.log(size);
 
     if (size.y !== 0) {
       if (size.y <= min || size.y < 3) {
         if (map.visible) dispatch("map/visible/off");
       }
       if (size.y >= max || size.y > 3) {
-        if (!map.visible) dispatch("map/visible/on");
+        if (!map.visible) {
+          dispatch("map/visible/on");
+        }
       }
     } else {
       if (!map.visible) dispatch("map/visible/on");
@@ -170,6 +176,7 @@ export const Order: React.FC = () => {
       // @ts-ignore
       document.body.removeEventListener("mousemove", onMouseMove);
     }
+    console.log(1);
 
     // @ts-ignore
     document.body.addEventListener("mousemove", onMouseMove);
@@ -195,6 +202,7 @@ export const Order: React.FC = () => {
       // @ts-ignore
       document.removeEventListener("touchmove", onTouchMove);
     }
+    console.log(2);
 
     // @ts-ignore
     document.addEventListener("touchmove", onTouchMove);
@@ -221,17 +229,28 @@ export const Order: React.FC = () => {
             overflow: map.visible ? "hidden" : "auto",
           }}
         >
-          <FakeOrder
-            style={{
-              opacity: map.visible ? 1 : 0,
-              transform: `scale(${map.visible ? 1 : 0.7})`,
-            }}
-          >
-            <div>
-              <Input placeholder="Where are you?" />
-            </div>
-            {map.visible && <Button>Connect wallet</Button>}
-          </FakeOrder>
+          {map.visible && (
+            <FakeOrder
+              style={{
+                opacity: map.visible ? 1 : 0,
+                transform: `scale(${map.visible ? 1 : 0.7})`,
+                // pointerEvents: map.visible ? "all" : "none",
+              }}
+            >
+              <div>
+                <Input
+                  onClick={() =>
+                    setTimeout(() => dispatch("map/visible/off"), 100)
+                  }
+                  placeholder="Where are you?"
+                />
+              </div>
+              <Button>Connect wallet</Button>
+            </FakeOrder>
+          )}
+
+          <Input placeholder="Where are you?" />
+          <Input placeholder="Where are you?" />
           <br />
           <br />
           <br />

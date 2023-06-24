@@ -6,11 +6,9 @@ export default function useDebounced(
   delay: number
 ) {
   useEffect(() => {
-    const timeoutHandler = setTimeout(() => {
-      handler();
-    }, delay);
+    const timeoutHandler = setTimeout(handler, delay);
     return () => {
       clearTimeout(timeoutHandler);
     };
-  }, [watchedValue, delay, handler]);
+  }, [watchedValue]);
 }
