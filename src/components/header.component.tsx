@@ -23,13 +23,13 @@ const HeaderDiv = styled.div`
       to bottom,
       hsla(0, 0%, 0%, 0.2) 0%,
       hsla(0, 0%, 0%, 0.1) 35%,
-      hsla(0, 0%, 0%, 0) 80%
+      hsla(0, 0%, 0%, 0) 100%
     ),
     linear-gradient(
       to bottom,
       hsla(0, 0%, 0%, 0.2) 0%,
       hsla(0, 0%, 0%, 0.1) 35%,
-      hsla(0, 0%, 0%, 0) 80%
+      hsla(0, 0%, 0%, 0) 100%
     );
   color: hsl(0, 0%, 100%);
   pointer-events: none;

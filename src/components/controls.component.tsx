@@ -39,9 +39,6 @@ const Button = styled.div`
   transform: scale(1);
   transition: all 0.3s ease;
   cursor: pointer;
-  &:active {
-    transform: scale(1.2);
-  }
   svg {
     filter: drop-shadow(0.1rem 0.1rem 0.3rem hsla(0, 0%, 0%, 0.4));
     position: relative;
@@ -51,7 +48,7 @@ const Button = styled.div`
 `;
 
 export const Controll: React.FC = () => {
-  const { dispatch } = useStoreon<State, Events>("map");
+  const { dispatch, map } = useStoreon<State, Events>("map");
   const mapEv = useMapEvents({
     async locationfound(e) {
       const result: Place = await fetch(
@@ -70,7 +67,12 @@ export const Controll: React.FC = () => {
 
   return (
     <ControllDiv>
-      <Button onClick={() => mapEv.locate()}>
+      <Button
+        style={{
+          transform: `translate3d(0px, ${map.visible ? 0 : -20}rem, 0px)`,
+        }}
+        onClick={() => mapEv.locate()}
+      >
         <Icon name="navigate" size={1.1} />
       </Button>
     </ControllDiv>

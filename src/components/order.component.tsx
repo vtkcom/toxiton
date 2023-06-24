@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { styled } from "styled-components";
+import { useRef, useState } from "react";
+import { css, styled } from "styled-components";
 import { Header } from "./header.component";
 import { Icon } from "./icon.component";
 import { useStoreon } from "storeon/react";
 import { Events, State } from "../store";
 import useDebounce from "../hooks/debounce.hook";
-import car from "../assets/car.png";
+import car from "../assets/blackcar.png";
+import egg from "../assets/egg.png";
 
 const WrapOrder = styled.div`
   position: absolute;
@@ -77,15 +78,27 @@ const FakeOrder = styled.div`
   padding-bottom: 0.3rem;
 `;
 
-const Input = styled.input`
+const carCss = css`
+  background-color: ${(p) => p.theme.secondary_bg_color};
+  background-image: url(${car});
+  background-position: -1rem center;
+  background-size: 6rem;
+`;
+
+const eggCss = css`
+  background-color: ${(p) => p.theme.secondary_bg_color};
+  background-image: url(${egg});
+  background-position: -1rem center;
+  background-size: 6rem;
+`;
+
+const Input = styled.input<{ styleBg: "car" | "egg" }>`
   width: 100%;
   height: 3rem;
   border-radius: 1rem;
   border: 1px solid ${(p) => p.theme.bg_color_10};
-  background-color: ${(p) => p.theme.secondary_bg_color};
-  background-image: url(${car});
-  background-position: -2rem center;
-  background-size: 7rem;
+  ${(p) => p.styleBg === "car" && carCss}
+  ${(p) => p.styleBg === "egg" && eggCss}
   background-repeat: no-repeat;
   color: ${(p) => p.theme.button_text_color};
   outline: none;
@@ -136,6 +149,7 @@ const ButtonSticky = styled(Button)`
 `;
 
 export const Order: React.FC = () => {
+  const realInput = useRef<HTMLInputElement>(null);
   const [size, setSize] = useState({ y: 0 });
   const { dispatch, map } = useStoreon<State, Events>("map");
 
@@ -230,18 +244,19 @@ export const Order: React.FC = () => {
             <FakeOrder>
               <div>
                 <Input
-                  onClick={() =>
-                    setTimeout(() => dispatch("map/visible/off"), 100)
-                  }
-                  placeholder="Where are you?"
+                  onClick={() => {
+                    dispatch("map/visible/off");
+                    realInput.current?.focus();
+                  }}
+                  styleBg="car"
+                  placeholder="Where to get to?"
                 />
               </div>
               <Button>Connect wallet</Button>
             </FakeOrder>
           )}
-
-          <Input placeholder="Me to?" />
-          <Input placeholder="Where are you?" />
+          <Input placeholder="Where are you?" styleBg="egg" />
+          <Input ref={realInput} styleBg="car" placeholder="Where to get to?" />
           <br />
           <br />
           <br />
