@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function useDebounced(
+export default function useDebounce(
   handler: () => void,
   watchedValue: unknown,
   delay: number
@@ -10,5 +10,5 @@ export default function useDebounced(
     return () => {
       clearTimeout(timeoutHandler);
     };
-  }, [watchedValue]);
+  }, [watchedValue, delay]);
 }

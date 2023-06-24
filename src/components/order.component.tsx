@@ -4,7 +4,7 @@ import { Header } from "./header.component";
 import { Icon } from "./icon.component";
 import { useStoreon } from "storeon/react";
 import { Events, State } from "../store";
-import useDebounced from "../hooks/debounce.hook";
+import useDebounce from "../hooks/debounce.hook";
 import car from "../assets/car.png";
 
 const WrapOrder = styled.div`
@@ -39,13 +39,13 @@ const Pan = styled.div`
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: 4vh;
+  height: 2.8rem;
   pointer-events: auto;
   position: absolute;
-  top: -2vh;
+  top: -1.3rem;
   left: 0;
   overscroll-behavior: none;
-  padding-bottom: 2vh;
+  padding-bottom: 1.3rem;
   &::before {
     display: block;
     width: 3rem;
@@ -136,12 +136,12 @@ const Button = styled.div`
 export const Order: React.FC = () => {
   const [size, setSize] = useState({ y: 0 });
   const { dispatch, map } = useStoreon<State, Events>("map");
-  useDebounced(() => toggleVisible(), [size], 100);
+
+  useDebounce(() => toggleVisible(), size, 100);
 
   function toggleVisible() {
     const max = 67;
     const min = 2.1;
-    console.log(size);
 
     if (size.y !== 0) {
       if (size.y <= min || size.y < 3) {
