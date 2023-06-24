@@ -84,7 +84,7 @@ const Input = styled.input`
   height: 3rem;
   border-radius: 1rem;
   border: 1px solid ${(p) => p.theme.bg_color_10};
-  background-color: ${(p) => p.theme.bg_color_30};
+  background-color: ${(p) => p.theme.secondary_bg_color};
   background-image: url(${car});
   background-position: -2rem center;
   background-size: 7rem;
