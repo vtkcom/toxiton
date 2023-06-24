@@ -72,10 +72,11 @@ const FakeOrder = styled.div`
   grid-template-rows: auto max-content;
   height: 27vh;
   background-color: ${(p) => p.theme.bg_color};
-  transition: opacity 0.1s ease, transform 0.2s ease;
+  /* transition: opacity 0.2s ease, transform 0.3s ease; */
   position: absolute;
   left: 0.9rem;
   right: 0.9rem;
+  padding-bottom: 0.3rem;
 `;
 
 const Input = styled.input`
@@ -144,16 +145,14 @@ export const Order: React.FC = () => {
     const min = 2.1;
 
     if (size.y !== 0) {
-      if (size.y <= min || size.y < 3) {
-        if (map.visible) dispatch("map/visible/off");
+      if ((size.y <= min || size.y < 3) && map.visible) {
+        dispatch("map/visible/off");
       }
-      if (size.y >= max || size.y > 3) {
-        if (!map.visible) {
-          dispatch("map/visible/on");
-        }
+      if ((size.y >= max || size.y > 3) && !map.visible) {
+        dispatch("map/visible/on");
       }
-    } else {
-      if (!map.visible) dispatch("map/visible/on");
+    } else if (!map.visible) {
+      dispatch("map/visible/on");
     }
   }
 
@@ -232,7 +231,7 @@ export const Order: React.FC = () => {
             <FakeOrder
               style={{
                 opacity: map.visible ? 1 : 0,
-                transform: `scale(${map.visible ? 1 : 0.7})`,
+                transform: `translate3d(0px, ${map.visible ? 0 : 200}px, 0px)`,
                 // pointerEvents: map.visible ? "all" : "none",
               }}
             >
@@ -248,7 +247,7 @@ export const Order: React.FC = () => {
             </FakeOrder>
           )}
 
-          <Input placeholder="Where are you?" />
+          <Input placeholder="Me to?" />
           <Input placeholder="Where are you?" />
           <br />
           <br />
