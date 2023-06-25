@@ -255,6 +255,7 @@ export const Order: React.FC = () => {
                   onClick={() => {
                     realInput.current?.click();
                     realInput.current?.focus();
+                    document.body.scrollTo({ top: 0 });
                     dispatch("map/visible/off");
                   }}
                   stylebg="car"
