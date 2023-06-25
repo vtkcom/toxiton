@@ -96,7 +96,7 @@ const eggCss = css`
   background-color: ${(p) => p.theme.secondary_bg_color};
   background-image: url(${egg});
   background-position: -1rem center;
-  background-size: 6rem;
+  background-size: 5.7rem;
 `;
 
 const Input = styled.input<{ stylebg: "car" | "egg" }>`
@@ -104,7 +104,7 @@ const Input = styled.input<{ stylebg: "car" | "egg" }>`
   height: 3rem;
   border-radius: 1rem;
   border: 1px solid ${(p) => p.theme.bg_color_10};
-  box-shadow: inset 0 0 1rem hsl(0deg 0% 0% / 10%);
+  box-shadow: inset 0 0 1rem -0.3rem hsl(0deg 0% 0% / 40%);
   ${(p) => p.stylebg === "car" && carCss}
   ${(p) => p.stylebg === "egg" && eggCss}
   background-repeat: no-repeat;
@@ -253,11 +253,12 @@ export const Order: React.FC = () => {
               <div>
                 <Input
                   onClick={() => {
-                    setTimeout(() => realInput.current?.focus(), 300);
+                    realInput.current?.click();
+                    realInput.current?.focus();
                     dispatch("map/visible/off");
                   }}
                   stylebg="car"
-                  placeholder="Where to get to?"
+                  placeholder="Where?"
                 />
               </div>
               <Button>Connect wallet</Button>
@@ -266,11 +267,7 @@ export const Order: React.FC = () => {
 
           <Main>
             <Input placeholder="Where are you?" stylebg="egg" />
-            <Input
-              ref={realInput}
-              stylebg="car"
-              placeholder="Where to get to?"
-            />
+            <Input ref={realInput} stylebg="car" placeholder="Where?" />
           </Main>
 
           <ButtonSticky>Connect wallet</ButtonSticky>
