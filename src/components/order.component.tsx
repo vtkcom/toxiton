@@ -254,9 +254,11 @@ export const Order: React.FC = () => {
                 <Input
                   onClick={() => {
                     dispatch("map/visible/off");
-                    realInput.current?.click();
-                    realInput.current?.focus();
-                    document.body.scrollTo({ top: 0 });
+                    setTimeout(() => {
+                      realInput.current?.click();
+                      realInput.current?.focus();
+                      document.body.scrollTo({ top: 0 });
+                    }, 100);
                   }}
                   stylebg="car"
                   placeholder="Where?"
