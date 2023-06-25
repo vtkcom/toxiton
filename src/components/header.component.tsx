@@ -50,7 +50,7 @@ export const Header: React.FC = () => {
     <HeaderDiv>
       {map.place !== null && (
         <>
-          {map.place?.address.road}
+          {map.place?.address.road ?? map.place?.address.quarter}
           {map.place?.address.house_number &&
             ", " + map.place?.address.house_number}
           <span>

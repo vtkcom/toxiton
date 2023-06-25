@@ -38,6 +38,7 @@ declare interface Place {
 declare interface Address {
   house_number: string;
   road: string;
+  quarter: string;
   neighbourhood?: string;
   suburb: string;
   city_district?: string;
