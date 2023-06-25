@@ -85,7 +85,7 @@ const Global = createGlobalStyle`
     html {
         width: 100vw;
         height: ${() => window.Telegram.WebApp.viewportStableHeight};
-        overscroll-behavior: none;
+        /* overscroll-behavior: none; */
     }
 
     body {
@@ -94,14 +94,14 @@ const Global = createGlobalStyle`
         place-items: center;
         width: 100vw;
         height: ${() => window.Telegram.WebApp.viewportStableHeight};
-        overscroll-behavior: none;
+        /* overscroll-behavior: none; */
     }
 
     app {
         position: relative;
         width: 100vw;
         height: 100vh;
-        overscroll-behavior: none;
+        /* overscroll-behavior: none; */
     }
 
     .leaflet-control-attribution {
@@ -127,7 +127,7 @@ const Global = createGlobalStyle`
     .leaflet-container {
         width: 100vw;
         height: 72vh;
-        overscroll-behavior: contain;
+        /* overscroll-behavior: contain; */
     }
 
     .avatar {

@@ -45,7 +45,7 @@ const Pan = styled.div`
   position: absolute;
   top: -1rem;
   left: 0;
-  overscroll-behavior: none;
+  /* overscroll-behavior: none; */
   padding-bottom: 1.3rem;
   &::before {
     display: block;
