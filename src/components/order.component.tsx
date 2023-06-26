@@ -8,7 +8,7 @@ import useDebounce from "../hooks/debounce.hook";
 import car from "../assets/blackcar.png";
 import egg from "../assets/egg.png";
 
-const WrapOrder = styled.div`
+const WrapOrder = styled.div<{ visible: number }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -17,11 +17,12 @@ const WrapOrder = styled.div`
   pointer-events: none;
   z-index: 999;
   overflow: hidden;
-  /* overscroll-behavior: none; */
   transition: background 0.5s ease, backdrop-filter 0.2s ease;
+  background: hsl(0deg 0% 0% / ${(p) => (p.visible ? 10 : 50)}%);
+  backdrop-filter: blur(${(p) => (p.visible ? 0 : 5)}px);
 `;
 
-const BlockOrder = styled.div`
+const BlockOrder = styled.div<{ visible: number }>`
   position: relative;
   background: ${(p) => p.theme.bg_color};
   transition: transform 0.3s ease;
@@ -33,7 +34,7 @@ const BlockOrder = styled.div`
   pointer-events: all;
   z-index: 999;
   will-change: transform;
-  /* overscroll-behavior: none; */
+  transform: translate3d(0px, ${(p) => (p.visible ? 67 : 2.1)}vh, 0px);
 `;
 
 const top = css`
@@ -71,14 +72,14 @@ const Pan = styled.div<{ visible: number }>`
   }
 `;
 
-const Content = styled.div`
+const Content = styled.div<{ visible: number }>`
   display: grid;
   grid-template-rows: auto max-content max-content;
   gap: 1rem;
-  /* overscroll-behavior: none; */
   min-height: calc(98vh - 2rem);
   padding: 0 1rem 1rem;
   position: relative;
+  overflow: ${(p) => (p.visible ? "hidden" : "auto")};
 `;
 
 const Main = styled.div`
@@ -244,29 +245,15 @@ export const Order: React.FC = () => {
   }
 
   return (
-    <WrapOrder
-      style={{
-        background: `hsl(0deg 0% 0% / ${map.visible ? 10 : 50}%)`,
-        backdropFilter: `blur(${map.visible ? 0 : 5}px)`,
-        WebkitBackdropFilter: `blur(${map.visible ? 0 : 5}px)`,
-      }}
-    >
+    <WrapOrder visible={map.visible ? 1 : 0}>
       <Header />
-      <BlockOrder
-        style={{
-          transform: `translate3d(0px, ${map.visible ? 67 : 2.1}vh, 0px)`,
-        }}
-      >
+      <BlockOrder visible={map.visible ? 1 : 0}>
         <Pan
           onMouseDown={mouseHandler}
           onTouchStart={touchHandler}
           visible={map.visible ? 1 : 0}
         />
-        <Content
-          style={{
-            overflow: map.visible ? "hidden" : "auto",
-          }}
-        >
+        <Content visible={map.visible ? 1 : 0}>
           {map.visible && (
             <FakeOrder>
               <div>
