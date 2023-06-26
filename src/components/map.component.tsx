@@ -15,11 +15,16 @@ export const Map: React.FC<Props> = () => {
   const mapRef = useRef<M | null>(null);
 
   useEffect(getAdress, [place.from?.position, dispatch]);
+  useEffect(vibro, [map.visible]);
 
   function getAdress() {
     if (place.from !== null && place.from.position !== null) {
       mapRef.current?.flyTo(place.from.position, 18, { duration: 0.4 });
     }
+  }
+
+  function vibro() {
+    window.Telegram.WebApp.HapticFeedback.impactOccurred("light");
   }
 
   return (
