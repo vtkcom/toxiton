@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { css, styled } from "styled-components";
 import { Header } from "./header.component";
 import { Icon } from "./icon.component";
@@ -159,7 +159,9 @@ const ButtonSticky = styled(Button)`
 export const Order: React.FC = () => {
   const realInput = useRef<HTMLInputElement>(null);
   const [size, setSize] = useState({ y: 0 });
-  const { dispatch, map } = useStoreon<State, Events>("map");
+  const { dispatch, map } = useStoreon<State, Events>("map", "connect");
+
+  useEffect(() => dispatch("connect/wallets"), []);
 
   useDebounce(() => toggleVisible(), size, 100);
 
