@@ -13,7 +13,7 @@ export const LocationMarker: React.FC = () => {
   const eventHandlers = useMemo(() => ({ dragend }), [markerRef]);
   const markerImage = useMemo(() => {
     const img = document.createElement("img");
-    const size = (5 * map.zoom) / 2;
+    const size = (5 * map.zoom) / 1.7;
 
     img.src = avatar;
     img.style.width = "100%";
