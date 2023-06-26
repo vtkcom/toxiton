@@ -4,11 +4,10 @@ import TonConnect, {
   WalletInfoRemote,
   WalletInfoInjectable,
 } from "@tonconnect/sdk";
-import WebApp from "@twa-dev/sdk";
 import { StoreonModule } from "storeon";
 
 const connector = new TonConnect({
-  manifestUrl: "https://vtkcom.github.io/passgen/tonconnect-manifest.json",
+  manifestUrl: "https://vtkcom.github.io/toxiton/tonconnect-manifest.json",
 });
 
 connector.restoreConnection();
@@ -56,7 +55,7 @@ export const connectStore: StoreonModule<ConnectState, ConnectEvents> = (
     async (wallet) => {
       if (wallet === null) {
         store.dispatch("#connect/data/set", { wallet: null, url: null });
-        WebApp.HapticFeedback.notificationOccurred("success");
+        window.Telegram.WebApp.HapticFeedback.notificationOccurred("success");
       } else {
         store.dispatch("#connect/data/set", {
           wallet: toUserFriendlyAddress(wallet.account.address),
@@ -88,7 +87,7 @@ export const connectStore: StoreonModule<ConnectState, ConnectEvents> = (
 
       if (url) {
         if (isOpen) {
-          WebApp.openLink(url);
+          window.Telegram.WebApp.openLink(url);
         } else {
           store.dispatch("#connect/data/set", {
             wallet: state.connect.wallet,
