@@ -36,7 +36,17 @@ const BlockOrder = styled.div`
   /* overscroll-behavior: none; */
 `;
 
-const Pan = styled.div`
+const top = css`
+  padding-bottom: 1.3rem;
+  padding-top: 0;
+`;
+
+const bot = css`
+  padding-bottom: 0;
+  padding-top: 1.3rem;
+`;
+
+const Pan = styled.div<{ visible: number }>`
   display: grid;
   align-items: center;
   justify-content: center;
@@ -46,8 +56,8 @@ const Pan = styled.div`
   position: absolute;
   top: -1rem;
   left: 0;
-  /* overscroll-behavior: none; */
-  padding-bottom: 1.3rem;
+  ${(p) => (p.visible ? top : bot)}
+  transition: all 0.2s ease;
   &::before {
     display: block;
     width: 3rem;
@@ -56,6 +66,8 @@ const Pan = styled.div`
     pointer-events: auto;
     border-radius: 1rem;
     background: ${(p) => p.theme.secondary_bg_color};
+    filter: ${(p) => (p.visible ? "none" : "invert(1)")};
+    transition: all 0.2s ease;
   }
 `;
 
@@ -245,7 +257,11 @@ export const Order: React.FC = () => {
           transform: `translate3d(0px, ${map.visible ? 67 : 2.1}vh, 0px)`,
         }}
       >
-        <Pan onMouseDown={mouseHandler} onTouchStart={touchHandler} />
+        <Pan
+          onMouseDown={mouseHandler}
+          onTouchStart={touchHandler}
+          visible={map.visible ? 1 : 0}
+        />
         <Content
           style={{
             overflow: map.visible ? "hidden" : "auto",

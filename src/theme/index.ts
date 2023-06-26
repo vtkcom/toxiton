@@ -1,4 +1,4 @@
-import { DefaultTheme, createGlobalStyle, keyframes } from "styled-components";
+import { DefaultTheme, createGlobalStyle } from "styled-components";
 import { ThemeParams } from "@twa-dev/types";
 import { opacify } from "polished";
 
@@ -33,22 +33,7 @@ theme.bg_color_70 = opacify(-0.3, theme.bg_color);
 theme.bg_color_50 = opacify(-0.5, theme.bg_color);
 theme.bg_color_20 = opacify(-0.8, theme.bg_color);
 theme.bg_color_10 = opacify(-0.9, theme.bg_color);
-// theme.box_shadow = `0 0 1rem -0.1rem ${theme.bg_color_50}`;
-theme.box_shadow = `0 0.5rem 1.5rem rgba(0, 0, 0, 0.3);`;
-
-const scale = keyframes`
-    0% {
-        box-shadow: 0 0 20px -12px hsla(0, 0%, 0%, 0.4);
-    }
-    50% {
-        box-shadow: 0 0 30px -12px hsla(0, 0%, 0%, 0.4),
-        0 0 40px -12px hsla(0, 0%, 0%, 0.4), 0 0 60px -12px hsla(0, 0%, 0%, 0.4),
-        0 0 80px -12px hsla(0, 0%, 0%, 0.4);
-    }
-    100% {
-        box-shadow: 0 0 20px -12px hsla(0, 0%, 0%, 0.4);
-    }
-`;
+theme.box_shadow = `0 0.5rem 1.5rem rgba(0, 0, 0, 0.5);`;
 
 const Global = createGlobalStyle`
     :root {
@@ -101,7 +86,7 @@ const Global = createGlobalStyle`
         position: relative;
         width: 100vw;
         height: 100%;
-        /* overscroll-behavior: none; */
+        overscroll-behavior: none;
     }
 
     .leaflet-control-attribution {
@@ -120,18 +105,13 @@ const Global = createGlobalStyle`
         }
     }
 
-    .leaflet-tile-container {
-        /* filter: grayscale(1); */
-    }
-
     .leaflet-container {
         width: 100vw;
         height: 72vh;
-        /* overscroll-behavior: contain; */
     }
 
     .avatar {
-        box-shadow: inset ${(p) => p.theme.box_shadow};
+        box-shadow: ${(p) => p.theme.box_shadow};
         border-radius: 50%;
         pointer-events: visiblePainted;
         user-select: none;
@@ -143,10 +123,6 @@ const Global = createGlobalStyle`
             }
         }
         
-    }
-
-    .avatar.animate {
-        animation: 0.5s ease-in infinite ${scale};
     }
 
     symbol {
