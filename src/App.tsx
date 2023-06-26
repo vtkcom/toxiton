@@ -67,8 +67,8 @@ function App() {
     <StyleSheetManager enableVendorPrefixes>
       <ThemeProvider theme={theme}>
         <SkeletonTheme
-          baseColor={theme.bg_color_20}
-          highlightColor={theme.bg_color_10}
+          // baseColor={theme.bg_color_20}
+          // highlightColor={theme.bg_color_10}
           borderRadius="0.3rem"
           // duration={4}
         >

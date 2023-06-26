@@ -56,11 +56,7 @@ export const Header: React.FC = () => {
       {place.from !== null && (
         <>
           {place.from.isLoading ? (
-            <Skeleton
-              width={200}
-              baseColor="hsla(0 , 0%, 100%, 0.2)"
-              highlightColor="hsla(0 , 0%, 100%, 0.1)"
-            />
+            <Skeleton width={250} height={"1.05rem"} style={{ opacity: 0.6 }} />
           ) : (
             <Address>
               {place.from?.place?.address.road ??
@@ -71,12 +67,7 @@ export const Header: React.FC = () => {
           )}
 
           {place.from.isLoading ? (
-            <Skeleton
-              width={150}
-              height={15}
-              baseColor="hsla(0 , 0%, 100%, 0.2)"
-              highlightColor="hsla(0 , 0%, 100%, 0.1)"
-            />
+            <Skeleton width={150} height={"0.9rem"} style={{ opacity: 0.6 }} />
           ) : (
             <City>
               {place?.from?.place?.address.country},{" "}

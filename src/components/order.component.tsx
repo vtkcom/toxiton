@@ -33,8 +33,8 @@ const BlockOrder = styled.div<{ visible: number }>`
   box-shadow: 0 -0.5rem 1.5rem rgba(0, 0, 0, 0.3);
   pointer-events: all;
   z-index: 999;
-  will-change: transform;
   transform: translate3d(0px, ${(p) => (p.visible ? 67 : 2.1)}vh, 0px);
+  will-change: transform;
 `;
 
 const top = css`
