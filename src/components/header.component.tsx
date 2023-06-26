@@ -13,7 +13,6 @@ const HeaderDiv = styled.div`
   justify-items: center;
   align-content: center;
   grid-auto-rows: max-content;
-  filter: drop-shadow(0.1rem 0.1rem 0.3rem hsla(0, 0%, 0%, 0.4));
   background: linear-gradient(
       to bottom,
       hsla(0, 0%, 0%, 0.2) 0%,
@@ -38,14 +37,16 @@ const HeaderDiv = styled.div`
 `;
 
 const Address = styled.div`
-  font-weight: 600;
+  font-weight: 300;
   font-size: 1.05rem;
+  filter: drop-shadow(0.1rem 0.1rem 0.5rem hsla(0, 0%, 0%, 0.8));
 `;
 
 const City = styled.div`
   font-weight: 200;
   font-size: 0.9rem;
   user-select: none;
+  filter: drop-shadow(0.1rem 0.1rem 0.5rem hsla(0, 0%, 0%, 0.8));
 `;
 
 export const Header: React.FC = () => {

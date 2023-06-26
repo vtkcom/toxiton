@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { css, styled } from "styled-components";
 import { Header } from "./header.component";
-import { Icon } from "./icon.component";
 import { useStoreon } from "storeon/react";
 import { Events, State } from "../store";
 import useDebounce from "../hooks/debounce.hook";
 import car from "../assets/blackcar.png";
 import egg from "../assets/egg.png";
+import { Footer } from "./footer.component";
 
 const WrapOrder = styled.div<{ visible: number }>`
   position: absolute;
@@ -75,7 +75,7 @@ const Pan = styled.div<{ visible: number }>`
 const Content = styled.div<{ visible: number }>`
   display: grid;
   grid-template-rows: auto max-content max-content;
-  gap: 1rem;
+  gap: 0.5rem;
   min-height: calc(98vh - 2rem);
   padding: 0 1rem 1rem;
   position: relative;
@@ -85,7 +85,7 @@ const Content = styled.div<{ visible: number }>`
 const Main = styled.div`
   display: grid;
   grid-auto-rows: max-content;
-  gap: 1rem;
+  gap: 0.5rem;
 `;
 
 const FakeOrder = styled.div`
@@ -127,30 +127,6 @@ const Input = styled.input<{ stylebg: "car" | "egg" }>`
   padding: 0 1rem 0 6rem;
   &::placeholder {
     color: ${(p) => p.theme.hint_color};
-  }
-`;
-
-const Footer = styled.div`
-  display: grid;
-  align-items: center;
-  grid-auto-flow: column;
-  grid-auto-columns: max-content;
-  justify-content: space-between;
-  font-size: 0.7rem;
-  color: ${(p) => p.theme.hint_color};
-  & > div {
-    display: grid;
-    align-items: center;
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
-    gap: 0.2rem;
-  }
-  & > div a {
-    display: grid;
-    align-items: center;
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
-    gap: 0.2rem;
   }
 `;
 
@@ -273,38 +249,18 @@ export const Order: React.FC = () => {
               <Button>Connect wallet</Button>
             </FakeOrder>
           )}
+          {!map.visible && (
+            <>
+              <Main>
+                <Input placeholder="Where are you?" stylebg="egg" />
+                <Input ref={realInput} stylebg="car" placeholder="Where?" />
+              </Main>
 
-          <Main>
-            <Input placeholder="Where are you?" stylebg="egg" />
-            <Input ref={realInput} stylebg="car" placeholder="Where?" />
-          </Main>
+              <ButtonSticky>Connect wallet</ButtonSticky>
 
-          <ButtonSticky>Connect wallet</ButtonSticky>
-
-          <Footer>
-            <div>
-              Base on{" "}
-              <a target="_blank" href="https://ton.org/">
-                <Icon name="ton" size={1.2} />
-                TON
-              </a>
-            </div>
-            <div>
-              <a
-                target="_blank"
-                href="https://leafletjs.com"
-                title="A JavaScript library for interactive maps"
-              >
-                <Icon name="ua" size={1} />
-                Leaflet
-              </a>
-              &copy;
-              <a target="_blank" href="https://www.openstreetmap.org/copyright">
-                OpenStreetMap
-              </a>
-              contributors
-            </div>
-          </Footer>
+              <Footer />
+            </>
+          )}
         </Content>
       </BlockOrder>
     </WrapOrder>

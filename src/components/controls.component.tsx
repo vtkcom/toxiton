@@ -54,7 +54,7 @@ export const Controll: React.FC = () => {
         position: e.latlng,
       });
 
-      window.Telegram.WebApp.HapticFeedback.notificationOccurred("success");
+      window.Telegram.WebApp.HapticFeedback.impactOccurred("light");
     },
   });
 
