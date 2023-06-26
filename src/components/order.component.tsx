@@ -32,6 +32,7 @@ const BlockOrder = styled.div`
   box-shadow: 0 -0.5rem 1.5rem rgba(0, 0, 0, 0.3);
   pointer-events: all;
   z-index: 999;
+  will-change: transform;
   /* overscroll-behavior: none; */
 `;
 

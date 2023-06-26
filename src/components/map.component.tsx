@@ -1,9 +1,9 @@
 import { MapContainer, TileLayer } from "react-leaflet";
+import { Map as M } from "leaflet";
 import { Controll } from "./controls.component";
 import { useStoreon } from "storeon/react";
 import { Events, State } from "../store";
-import { useEffect } from "react";
-import { Place } from "../vite-env";
+import { useEffect, useRef } from "react";
 import { LocationMarker } from "./marker.component";
 
 interface Props {
@@ -11,22 +11,16 @@ interface Props {
 }
 
 export const Map: React.FC<Props> = () => {
-  const { dispatch, map } = useStoreon<State, Events>("map");
+  const { dispatch, map, place } = useStoreon<State, Events>("map", "place");
+  const mapRef = useRef<M | null>(null);
 
-  useEffect(getAdress, [map.position, dispatch]);
+  useEffect(getAdress, [place.from?.position, dispatch]);
 
   function getAdress() {
-    async function asyncGetAdress() {
-      dispatch("map/adress/set", { place: null });
-      const result: Place = await fetch(
-        `https://nominatim.openstreetmap.org/reverse?lat=${map.position?.lat}&lon=${map.position?.lng}&format=json`
-      ).then((r) => r.json());
-
-      dispatch("map/adress/set", { place: result });
+    if (place.from !== null && place.from.position !== null) {
+      mapRef.current?.flyTo(place.from.position, 18, { duration: 0.4 });
       window.Telegram.WebApp.HapticFeedback.impactOccurred("light");
     }
-
-    if (map.position) asyncGetAdress();
   }
 
   return (
@@ -36,6 +30,7 @@ export const Map: React.FC<Props> = () => {
       scrollWheelZoom={true}
       touchZoom={true}
       zoomControl={false}
+      ref={mapRef}
     >
       <Controll />
       <TileLayer

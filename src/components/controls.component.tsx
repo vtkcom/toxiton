@@ -3,8 +3,6 @@ import { Icon } from "./icon.component";
 import { useMapEvents } from "react-leaflet";
 import { useStoreon } from "storeon/react";
 import { Events, State } from "../store";
-import { Place } from "../vite-env";
-import { LatLng } from "leaflet";
 
 const ControllDiv = styled.div`
   position: absolute;
@@ -48,20 +46,15 @@ const Button = styled.div`
 `;
 
 export const Controll: React.FC = () => {
-  const { dispatch, map } = useStoreon<State, Events>("map");
+  const { dispatch, map } = useStoreon<State, Events>("map", "place");
   const mapEv = useMapEvents({
     async locationfound(e) {
-      const result: Place = await fetch(
-        `https://nominatim.openstreetmap.org/reverse?lat=${e.latlng.lat}&lon=${e.latlng.lng}&format=json`
-      ).then((r) => r.json());
-      const position = new LatLng(Number(result.lat), Number(result.lon));
-
-      dispatch("map/position/set", {
-        position,
+      dispatch("place/get", {
+        key: "from",
+        position: e.latlng,
       });
 
       window.Telegram.WebApp.HapticFeedback.notificationOccurred("success");
-      mapEv.flyTo(position, 18, { duration: 0.7 });
     },
   });
 

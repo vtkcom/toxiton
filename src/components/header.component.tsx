@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import { useStoreon } from "storeon/react";
 import { Events, State } from "../store";
+import Skeleton from "react-loading-skeleton";
 
 const HeaderDiv = styled.div`
   position: absolute;
@@ -33,29 +34,55 @@ const HeaderDiv = styled.div`
     );
   color: hsl(0, 0%, 100%);
   pointer-events: none;
+  user-select: none;
+`;
+
+const Address = styled.div`
   font-weight: 600;
   font-size: 1.05rem;
+`;
+
+const City = styled.div`
+  font-weight: 200;
+  font-size: 0.9rem;
   user-select: none;
-  span {
-    font-weight: 200;
-    font-size: 0.9rem;
-    user-select: none;
-  }
 `;
 
 export const Header: React.FC = () => {
-  const { map } = useStoreon<State, Events>("map");
+  const { place } = useStoreon<State, Events>("map", "place");
 
   return (
     <HeaderDiv>
-      {map.place !== null && (
+      {place.from !== null && (
         <>
-          {map.place?.address.road ?? map.place?.address.quarter}
-          {map.place?.address.house_number &&
-            ", " + map.place?.address.house_number}
-          <span>
-            {map.place?.address.country}, {map.place?.address.city}
-          </span>
+          {place.from.isLoading ? (
+            <Skeleton
+              width={200}
+              baseColor="hsla(0 , 0%, 100%, 0.2)"
+              highlightColor="hsla(0 , 0%, 100%, 0.1)"
+            />
+          ) : (
+            <Address>
+              {place.from?.place?.address.road ??
+                place.from?.place?.address.quarter}
+              {place.from?.place?.address.house_number &&
+                ", " + place?.from?.place.address.house_number}
+            </Address>
+          )}
+
+          {place.from.isLoading ? (
+            <Skeleton
+              width={150}
+              height={15}
+              baseColor="hsla(0 , 0%, 100%, 0.2)"
+              highlightColor="hsla(0 , 0%, 100%, 0.1)"
+            />
+          ) : (
+            <City>
+              {place?.from?.place?.address.country},{" "}
+              {place?.from?.place?.address.city}
+            </City>
+          )}
         </>
       )}
     </HeaderDiv>

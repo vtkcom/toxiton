@@ -4,7 +4,9 @@ import { Global, theme } from "./theme";
 import { Map } from "./components/map.component";
 import { Sprites } from "./sprites";
 import { Order } from "./components/order.component";
+import { SkeletonTheme } from "react-loading-skeleton";
 import "leaflet/dist/leaflet.css";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export interface Place {
   place_id: number;
@@ -64,12 +66,18 @@ function App() {
   return (
     <StyleSheetManager enableVendorPrefixes>
       <ThemeProvider theme={theme}>
+        <SkeletonTheme
+          baseColor={theme.bg_color_20}
+          highlightColor={theme.bg_color_10}
+          borderRadius="0.3rem"
+          // duration={4}
+        >
+          <Map />
+          <Order />
+
+          <Sprites />
+        </SkeletonTheme>
         <Global />
-
-        <Map />
-        <Order />
-
-        <Sprites />
       </ThemeProvider>
     </StyleSheetManager>
   );

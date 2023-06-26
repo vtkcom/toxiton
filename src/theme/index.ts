@@ -84,7 +84,7 @@ const Global = createGlobalStyle`
 
     html {
         width: 100vw;
-        height: ${() => window.Telegram.WebApp.viewportStableHeight};
+        height: ${() => window.Telegram.WebApp.viewportStableHeight}px;
         overscroll-behavior: none;
     }
 
@@ -93,7 +93,7 @@ const Global = createGlobalStyle`
         display: flex;
         place-items: center;
         width: 100vw;
-        height: ${() => window.Telegram.WebApp.viewportStableHeight};
+        height: ${() => window.Telegram.WebApp.viewportStableHeight}px;
         overscroll-behavior: none;
     }
 
