@@ -81,6 +81,8 @@ export const placeStore: StoreonModule<PlaceState, PlaceEvents> = (store) => {
         position: new LatLng(Number(result.lat), Number(result.lon)),
         error: null,
       });
+
+      window.Telegram.WebApp.HapticFeedback.impactOccurred("light");
     } catch (error) {
       store.dispatch("#place/get/res", {
         key,

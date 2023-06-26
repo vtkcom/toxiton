@@ -66,12 +66,7 @@ function App() {
   return (
     <StyleSheetManager enableVendorPrefixes>
       <ThemeProvider theme={theme}>
-        <SkeletonTheme
-          // baseColor={theme.bg_color_20}
-          // highlightColor={theme.bg_color_10}
-          borderRadius="0.3rem"
-          // duration={4}
-        >
+        <SkeletonTheme borderRadius="0.3rem">
           <Map />
           <Order />
 

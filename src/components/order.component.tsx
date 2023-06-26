@@ -169,6 +169,8 @@ export const Order: React.FC = () => {
     } else if (!map.visible) {
       dispatch("map/visible/on");
     }
+
+    window.Telegram.WebApp.HapticFeedback.impactOccurred("light");
   }
 
   function mouseHandler(mouseDownEvent: React.MouseEvent<HTMLDivElement>) {

@@ -19,7 +19,6 @@ export const Map: React.FC<Props> = () => {
   function getAdress() {
     if (place.from !== null && place.from.position !== null) {
       mapRef.current?.flyTo(place.from.position, 18, { duration: 0.4 });
-      window.Telegram.WebApp.HapticFeedback.impactOccurred("light");
     }
   }
 
