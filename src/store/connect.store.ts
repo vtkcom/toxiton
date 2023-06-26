@@ -6,6 +6,9 @@ import TonConnect, {
 } from "@tonconnect/sdk";
 import { StoreonModule } from "storeon";
 
+/**
+ * Connecting Ton Connect
+ */
 const connector = new TonConnect({
   manifestUrl: "https://vtkcom.github.io/toxiton/tonconnect-manifest.json",
 });
@@ -24,7 +27,7 @@ export interface ConnectState {
 }
 
 export interface ConnectEvents {
-  "connect/on/see": { wallet: WalletInfo; isOpen?: boolean };
+  "connect/on/link": { wallet: WalletInfo; isOpen?: boolean };
   "connect/on/js": { wallet: WalletInfo };
 
   "connect/off": undefined;
@@ -78,7 +81,7 @@ export const connectStore: StoreonModule<ConnectState, ConnectEvents> = (
     },
   }));
 
-  store.on("connect/on/see", async (state, { wallet, isOpen }) => {
+  store.on("connect/on/link", async (state, { wallet, isOpen }) => {
     try {
       const url = connector.connect({
         universalLink: (wallet as WalletInfoRemote).universalLink,

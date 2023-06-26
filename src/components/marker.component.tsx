@@ -5,14 +5,17 @@ import { Place } from "../vite-env";
 import { useStoreon } from "storeon/react";
 import { Events, State } from "../store";
 import avatar from "../assets/m1000x1000.jpg";
+import useDebounce from "../hooks/debounce.hook";
 
 export const LocationMarker: React.FC = () => {
   const [animate, setAnimate] = useState(false);
+  const [zoom, setZoom] = useState(10);
   const { dispatch, map } = useStoreon<State, Events>("map");
   const mapEl = useMap();
   useMapEvent("zoom", (e) => {
-    dispatch("map/zoom/set", { zoom: e.target._zoom });
+    setZoom(e.target._zoom);
   });
+  useDebounce(handleZoom, zoom, 300);
   const markerRef = useRef<M | null>(null);
   const eventHandlers = useMemo(
     () => ({
@@ -59,6 +62,10 @@ export const LocationMarker: React.FC = () => {
       html: img,
     });
   }, [animate, map.zoom]);
+
+  function handleZoom() {
+    if (map.zoom !== zoom) dispatch("map/zoom/set", { zoom });
+  }
 
   return map.position === null ? null : (
     <Marker
