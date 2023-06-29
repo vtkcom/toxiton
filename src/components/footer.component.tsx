@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { Icon } from "./icon.component";
+import { useTranslator } from "../hooks/translator.hook";
 
 const WrapFooter = styled.footer`
   display: grid;
@@ -26,10 +27,11 @@ const WrapFooter = styled.footer`
 `;
 
 export const Footer: React.FC = () => {
+  const t = useTranslator();
   return (
     <WrapFooter>
       <div>
-        Base on{" "}
+        {t("footer.base")}
         <a target="_blank" href="https://ton.org/">
           <Icon name="ton" size={1.2} />
           TON
@@ -48,7 +50,7 @@ export const Footer: React.FC = () => {
         <a target="_blank" href="https://www.openstreetmap.org/copyright">
           OpenStreetMap
         </a>
-        contributors
+        {t("footer.contributors")}
       </div>
     </WrapFooter>
   );

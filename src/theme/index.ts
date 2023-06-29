@@ -60,7 +60,7 @@ const Global = createGlobalStyle`
         box-sizing: border-box;
     }
 
-    a {
+    a, .leaflet-container a {
         font-weight: 500;
         color: ${(p) => p.theme.link_color};
         text-decoration: inherit;
@@ -117,9 +117,13 @@ const Global = createGlobalStyle`
         border-radius: 50%;
         pointer-events: visiblePainted;
         user-select: none;
+        background: linear-gradient(#ffffff -125%, rgb(51 144 236));
+        display: grid;
+        place-items: center;
         img {
-            border-radius: 50%;
+            border-radius: 0 0 50% 50%;
             transition: transform 0.3s ease;
+            transform: scale(1);
             &:active {
                 transform: scale(1.3);
             }

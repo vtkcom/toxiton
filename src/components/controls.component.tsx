@@ -3,6 +3,8 @@ import { Icon } from "./icon.component";
 import { useMapEvents } from "react-leaflet";
 import { useStoreon } from "storeon/react";
 import { Events, State } from "../store";
+import { useEffect } from "react";
+import { MiniProfile } from "./miniprofile.component";
 
 const ControllDiv = styled.div`
   position: absolute;
@@ -13,30 +15,30 @@ const ControllDiv = styled.div`
   z-index: 999;
   display: grid;
   grid-auto-rows: max-content;
+  grid-auto-flow: column;
   gap: 0.5rem;
-  padding: 0 0.5rem 34vh 0;
-  justify-content: end;
+  padding: 0 0.5rem 34vh;
+  justify-content: space-between;
   align-content: end;
   pointer-events: none;
   box-shadow: inset 0 0 5rem -0.5rem hsl(0deg 0% 0% / 40%);
 `;
 
 const Button = styled.div`
-  width: 2.7rem;
-  height: 2.7rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
-  border: 1px solid ${(p) => p.theme.bg_color_10};
   box-shadow: ${(p) => p.theme.box_shadow};
-  background-color: ${(p) => p.theme.button_color};
+  background: linear-gradient(hsl(0, 0%, 100%) -325%, ${(p) => p.theme.button_color});
   color: ${(p) => p.theme.button_text_color};
   display: grid;
   place-content: center;
   font-size: 2rem;
   font-weight: 400;
   pointer-events: visiblePainted;
-  transform: scale(1);
   transition: all 0.3s ease;
   cursor: pointer;
+  align-self: end;
   svg {
     filter: drop-shadow(0.1rem 0.1rem 0.3rem hsla(0, 0%, 0%, 0.4));
     position: relative;
@@ -46,7 +48,11 @@ const Button = styled.div`
 `;
 
 export const Controll: React.FC = () => {
-  const { dispatch, map } = useStoreon<State, Events>("map", "place");
+  const { dispatch, map, connect } = useStoreon<State, Events>(
+    "map",
+    "place",
+    "connect"
+  );
   const mapEv = useMapEvents({
     async locationfound(e) {
       dispatch("place/get", {
@@ -58,8 +64,16 @@ export const Controll: React.FC = () => {
     },
   });
 
+  useEffect(checkData, [connect.wallet]);
+
+  function checkData() {
+    if (connect.wallet !== null)
+      dispatch("profile/update", { wallet: connect.wallet });
+  }
+
   return (
     <ControllDiv>
+      {connect.wallet !== null ? <MiniProfile /> : <div />}
       <Button
         style={{
           transform: `translate3d(0px, ${map.visible ? 0 : -20}rem, 0px)`,

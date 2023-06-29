@@ -4,6 +4,9 @@ import { Navigate } from "./navigate.icon";
 import { Plus } from "./plus.icon";
 import { Ton } from "./ton.icon";
 import { UA } from "./ua.icon";
+import { Back } from "./back.icon";
+import { GitHub } from "./github.icon";
+import { Power } from "./power.icon";
 
 export const Sprites: React.FC = () => {
   return createPortal(
@@ -13,6 +16,9 @@ export const Sprites: React.FC = () => {
       <Minus />
       <Ton />
       <UA />
+      <Back />
+      <GitHub />
+      <Power />
     </svg>,
     document.body
   );

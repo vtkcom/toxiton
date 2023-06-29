@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { StyleSheetManager, ThemeProvider } from "styled-components";
+import { SkeletonTheme } from "react-loading-skeleton";
 import { Global, theme } from "./theme";
 import { Map } from "./components/map.component";
 import { Sprites } from "./sprites";
-import { Order } from "./components/order.component";
-import { SkeletonTheme } from "react-loading-skeleton";
+import { Pages } from "./pages";
+import { Route, Routes } from "react-router-dom";
 import "leaflet/dist/leaflet.css";
 import "react-loading-skeleton/dist/skeleton.css";
+import { BrowserRouter } from "react-router-dom";
 
 export interface Place {
   place_id: number;
@@ -66,13 +68,18 @@ function App() {
   return (
     <StyleSheetManager enableVendorPrefixes>
       <ThemeProvider theme={theme}>
-        <SkeletonTheme borderRadius="0.3rem">
-          <Map />
-          <Order />
+        <BrowserRouter basename="/toxiton">
+          <SkeletonTheme borderRadius="0.3rem">
+            <Map />
 
-          <Sprites />
-        </SkeletonTheme>
-        <Global />
+            <Routes>
+              <Route path="*" element={<Pages />} />
+            </Routes>
+
+            <Sprites />
+          </SkeletonTheme>
+          <Global />
+        </BrowserRouter>
       </ThemeProvider>
     </StyleSheetManager>
   );

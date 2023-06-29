@@ -43,14 +43,14 @@ const Address = styled.div`
 `;
 
 const City = styled.div`
-  font-weight: 200;
+  font-weight: 300;
   font-size: 0.9rem;
   user-select: none;
   filter: drop-shadow(0.1rem 0.1rem 0.5rem hsla(0, 0%, 0%, 0.8));
 `;
 
 export const Header: React.FC = () => {
-  const { place } = useStoreon<State, Events>("map", "place");
+  const { place } = useStoreon<State, Events>("place");
 
   return (
     <HeaderDiv>

@@ -3,7 +3,7 @@ import React, { useMemo, useRef, useState } from "react";
 import { Marker, useMapEvent } from "react-leaflet";
 import { useStoreon } from "storeon/react";
 import { Events, State } from "../store";
-import avatar from "../assets/m1000x1000.jpg";
+import ninja from "../assets/ninja.png";
 import useDebounce from "../hooks/debounce.hook";
 
 export const LocationMarker: React.FC = () => {
@@ -15,16 +15,17 @@ export const LocationMarker: React.FC = () => {
     const img = document.createElement("img");
     const size = (5 * map.zoom) / 1.7;
 
-    img.src = avatar;
-    img.style.width = "100%";
-    img.style.height = "100%";
+    img.src = ninja;
+    img.style.width = "55%";
+    img.style.height = "55%";
 
     return new DivIcon({
-      iconUrl: avatar,
-      iconRetinaUrl: avatar,
+      iconUrl: ninja,
+      iconRetinaUrl: ninja,
       iconSize: new Point(size, size),
       className: `avatar`,
       html: img,
+      // iconAnchor: [25, 60],
     });
   }, [map.zoom]);
   useMapEvent("zoom", (e) => {

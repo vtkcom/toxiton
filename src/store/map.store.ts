@@ -17,7 +17,7 @@ export interface MapEvents {
 
 const initState: MapState = {
   map: {
-    zoom: 10,
+    zoom: 6,
     visible: true,
   },
 };

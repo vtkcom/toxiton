@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { useStoreon } from "storeon/react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { Events, State } from "../store";
 import useDebounce from "../hooks/debounce.hook";
-
-interface Props {
-  children?: React.ReactNode | React.ReactNode[];
-}
+import { Icon } from "./icon.component";
+import { useTranslator } from "../hooks/translator.hook";
 
 const top = css`
   padding-bottom: 1.3rem;
@@ -16,15 +15,6 @@ const top = css`
 const bot = css`
   padding-bottom: 0;
   padding-top: 1.3rem;
-`;
-
-const Content = styled.div`
-  display: grid;
-  grid-template-rows: auto max-content max-content;
-  gap: 0.5rem;
-  min-height: calc(98vh - 2rem);
-  padding: 0 1rem 1rem;
-  position: relative;
 `;
 
 const Pan = styled.div`
@@ -38,6 +28,7 @@ const Pan = styled.div`
   top: -1rem;
   left: 0;
   transition: all 0.2s ease;
+  z-index: 1006;
   &::before {
     display: block;
     width: 3rem;
@@ -47,10 +38,12 @@ const Pan = styled.div`
     border-radius: 1rem;
     background: ${(p) => p.theme.secondary_bg_color};
     transition: all 0.2s ease;
+    opacity: 0.6;
   }
 `;
 
 const WrapPage = styled.div<{ visible: number }>`
+  display: grid;
   position: relative;
   background: ${(p) => p.theme.bg_color};
   transition: transform 0.3s ease;
@@ -69,14 +62,41 @@ const WrapPage = styled.div<{ visible: number }>`
       filter: ${(p) => (p.visible ? "none" : "invert(1)")};
     }
   }
-  ${Content} {
-    overflow: ${(p) => (p.visible ? "hidden" : "auto")};
+`;
+
+const Back = styled.div`
+  position: absolute;
+  right: 0;
+  left: 0;
+  padding: 0.5rem 1.3rem;
+  font-size: 0.8rem;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  justify-content: space-between;
+  span {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    align-items: center;
+    gap: 0.3rem;
   }
 `;
 
-export const Page: React.FC<Props> = ({ children }) => {
+interface Props {
+  children?: React.ReactNode | React.ReactNode[];
+  pan?: boolean;
+}
+
+export const Page: React.FC<Props> = ({
+  children,
+  pan = false,
+}) => {
   const { dispatch, map } = useStoreon<State, Events>("map", "connect");
   const [size, setSize] = useState({ y: 0 });
+  const [search] = useSearchParams();
+  const navigate = useNavigate();
+  const t = useTranslator();
 
   useDebounce(() => toggleVisible(), size, 100);
 
@@ -91,7 +111,7 @@ export const Page: React.FC<Props> = ({ children }) => {
       if ((size.y >= max || size.y > 3) && !map.visible) {
         dispatch("map/visible/on");
       }
-    } else if (!map.visible) {
+    } else if (!map.visible && pan) {
       dispatch("map/visible/on");
     }
   }
@@ -145,10 +165,32 @@ export const Page: React.FC<Props> = ({ children }) => {
     document.addEventListener("touchend", onTouchEnd, { once: true });
   }
 
+  function close() {
+    dispatch("map/visible/on");
+    navigate("/");
+  }
+
+  function back() {
+    navigate(`?page=${search.get("prevPage")}`);
+  }
+
   return (
-    <WrapPage visible={map.visible ? 1 : 0}>
-      <Pan onMouseDown={mouseHandler} onTouchStart={touchHandler} />
-      <Content>{children}</Content>
+    <WrapPage visible={!pan ? 0 : map.visible ? 1 : 0}>
+      {pan && <Pan onMouseDown={mouseHandler} onTouchStart={touchHandler} />}
+      {!pan && (
+        <Back>
+          {search.get("prevPage") ? (
+            <span onClick={back}>
+              <Icon name="back" size={1.2} />
+              {t("button.back")}
+            </span>
+          ) : (
+            <div />
+          )}
+          <span onClick={close}>{t("button.close")}</span>
+        </Back>
+      )}
+      {children}
     </WrapPage>
   );
 };
