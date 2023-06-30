@@ -15,12 +15,9 @@ const Avatar = styled.img`
 `;
 
 const Information = styled.div`
-  display: grid;
-  gap: 0.2rem;
   line-height: 1;
   font-weight: 600;
   font-size: 0.8rem;
-  justify-items: center;
   pointer-events: all;
 `;
 
@@ -55,6 +52,7 @@ export const MiniProfile: React.FC = () => {
     "profile",
     "connect"
   );
+
   useEffect(checkData, [connect.wallet]);
 
   function checkData() {
@@ -76,12 +74,10 @@ export const MiniProfile: React.FC = () => {
         </>
       ) : (
         <>
-          {/* <Icon name="power" onClick={quit} /> */}
-          <Avatar src={profile.avatar?.url} />
+          {profile.avatar !== null && <Avatar src={profile.avatar.url} />}
           {connect.wallet && (
-            <Information>{maskifyAddress(connect.wallet, 4, 6)}</Information>
+            <Information>{maskifyAddress(connect.wallet, 3, 6)}</Information>
           )}
-          {/* <Link to={"?page=profile"}>{profile.dns}</Link> */}
         </>
       )}
     </Profile>
