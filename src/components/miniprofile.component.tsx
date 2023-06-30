@@ -15,7 +15,7 @@ const Avatar = styled.img`
 `;
 
 const Information = styled.div`
-  line-height: 1;
+  line-height: 0.8rem;
   font-weight: 600;
   font-size: 0.8rem;
   pointer-events: all;
@@ -38,7 +38,7 @@ const Profile = styled(Link)`
   background: hsla(0, 0%, 100%, 0.1);
   backdrop-filter: blur(4px);
   box-shadow: ${(p) => p.theme.box_shadow};
-  border-radius: 2rem;
+  border-radius: ${(p) => p.theme.border_radius};
   pointer-events: none;
   position: relative;
   color: hsl(0, 0%, 100%) !important;

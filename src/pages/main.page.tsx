@@ -45,7 +45,7 @@ const eggCss = css`
 const Input = styled.input<{ stylebg: "car" | "egg" }>`
   width: 100%;
   height: 3rem;
-  border-radius: 1rem;
+  border-radius: ${(p) => p.theme.border_radius};
   border: 2px solid ${(p) => opacify(-0.5, p.theme.button_color)};
   ${(p) => p.stylebg === "car" && carCss}
   ${(p) => p.stylebg === "egg" && eggCss}
@@ -59,10 +59,11 @@ const Input = styled.input<{ stylebg: "car" | "egg" }>`
 `;
 
 const Button = styled(Link)`
-  border-radius: 1rem;
+  border-radius: ${(p) => p.theme.border_radius};
   /* border: 1px solid ${(p) => p.theme.bg_color_10}; */
-  /* background-color: ${(p) => p.theme.button_color}; */
-  background: linear-gradient(#ffffff -325%, ${(p) => p.theme.button_color});
+  background-color: ${(p) => p.theme.button_color};
+  /* background: linear-gradient(#ffffff -325%, ${(p) =>
+    p.theme.button_color}); */
   color: ${(p) => p.theme.button_text_color};
   height: 3rem;
   display: grid;
@@ -86,7 +87,10 @@ const Content = styled.div<{ visible: number }>`
 `;
 
 export const Main: React.FC = () => {
-  const { dispatch, map } = useStoreon<State, Events>("map", "connect");
+  const { dispatch, map, connect } = useStoreon<State, Events>(
+    "map",
+    "connect"
+  );
   const realInput = useRef<HTMLInputElement>(null);
   const t = useTranslator();
 
@@ -108,14 +112,16 @@ export const Main: React.FC = () => {
               placeholder={t("input.car")}
             />
           </div>
-          <Button
-            to="?page=connect&prevPage=main"
-            onClick={() =>
-              window.Telegram.WebApp.HapticFeedback.impactOccurred("medium")
-            }
-          >
-            {t("button.connect")}
-          </Button>
+          {connect.wallet == null && (
+            <Button
+              to="?page=connect&prevPage=main"
+              onClick={() =>
+                window.Telegram.WebApp.HapticFeedback.impactOccurred("medium")
+              }
+            >
+              {t("button.connect")}
+            </Button>
+          )}
         </FakeOrder>
       ) : (
         <Content visible={map.visible ? 1 : 0}>
@@ -124,14 +130,16 @@ export const Main: React.FC = () => {
             <Input ref={realInput} stylebg="car" placeholder={t("input.car")} />
           </Order>
 
-          <ButtonSticky
-            to="?page=connect&prevPage=main"
-            onClick={() =>
-              window.Telegram.WebApp.HapticFeedback.impactOccurred("medium")
-            }
-          >
-            {t("button.connect")}
-          </ButtonSticky>
+          {connect.wallet == null && (
+            <ButtonSticky
+              to="?page=connect&prevPage=main"
+              onClick={() =>
+                window.Telegram.WebApp.HapticFeedback.impactOccurred("medium")
+              }
+            >
+              {t("button.connect")}
+            </ButtonSticky>
+          )}
 
           <Footer />
         </Content>
