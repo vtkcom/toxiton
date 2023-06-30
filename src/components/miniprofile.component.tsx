@@ -70,7 +70,7 @@ export const MiniProfile: React.FC = () => {
       {profile.isLoading ? (
         <>
           <Skeleton circle width={"2rem"} height={"2rem"} />
-          <Skeleton width={"6rem"} height={"1rem"} />
+          <Skeleton width={"5rem"} height={"1rem"} />
         </>
       ) : (
         <>
