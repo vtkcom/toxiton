@@ -3,7 +3,6 @@ import { Icon } from "./icon.component";
 import { useMapEvents } from "react-leaflet";
 import { useStoreon } from "storeon/react";
 import { Events, State } from "../store";
-import { useEffect } from "react";
 import { MiniProfile } from "./miniprofile.component";
 
 const ControllDiv = styled.div`
@@ -28,8 +27,9 @@ const Button = styled.div`
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
+  background: hsla(0, 0%, 100%, 0.1);
+  backdrop-filter: blur(4px);
   box-shadow: ${(p) => p.theme.box_shadow};
-  background: linear-gradient(hsl(0, 0%, 100%) -325%, ${(p) => p.theme.button_color});
   color: ${(p) => p.theme.button_text_color};
   display: grid;
   place-content: center;
@@ -39,12 +39,12 @@ const Button = styled.div`
   transition: all 0.3s ease;
   cursor: pointer;
   align-self: end;
-  svg {
-    filter: drop-shadow(0.1rem 0.1rem 0.3rem hsla(0, 0%, 0%, 0.4));
-    position: relative;
-    left: -1px;
-    bottom: -1px;
-  }
+  filter: drop-shadow(0.1rem 0.1rem 0.5rem hsla(0, 0%, 0%, 0.8));
+`;
+
+const Buttons = styled.div`
+  display: grid;
+  gap: 0.5rem;
 `;
 
 export const Controll: React.FC = () => {
@@ -64,24 +64,37 @@ export const Controll: React.FC = () => {
     },
   });
 
-  useEffect(checkData, [connect.wallet]);
-
-  function checkData() {
-    if (connect.wallet !== null)
-      dispatch("profile/update", { wallet: connect.wallet });
+  function quit() {
+    dispatch("connect/off");
   }
 
   return (
     <ControllDiv>
       {connect.wallet !== null ? <MiniProfile /> : <div />}
-      <Button
-        style={{
-          transform: `translate3d(0px, ${map.visible ? 0 : -20}rem, 0px)`,
-        }}
-        onClick={() => mapEv.locate()}
-      >
-        <Icon name="navigate" size={1.1} />
-      </Button>
+      <Buttons>
+        {connect.wallet !== null && (
+          <Button
+            style={{
+              transform: `translate3d(0px, ${map.visible ? 0 : -20}rem, 0px)`,
+            }}
+            onClick={quit}
+          >
+            <Icon name="power" size={1.2} />
+          </Button>
+        )}
+        <Button
+          style={{
+            transform: `translate3d(0px, ${map.visible ? 0 : -20}rem, 0px)`,
+          }}
+          onClick={() => mapEv.locate()}
+        >
+          <Icon
+            name="navigate"
+            size={1.1}
+            style={{ position: "relative", left: "-1px", bottom: "-1px" }}
+          />
+        </Button>
+      </Buttons>
     </ControllDiv>
   );
 };

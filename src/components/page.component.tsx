@@ -36,9 +36,9 @@ const Pan = styled.div`
     content: "";
     pointer-events: auto;
     border-radius: 1rem;
-    background: ${(p) => p.theme.secondary_bg_color};
+    background: ${(p) => p.theme.bg_color_70};
+    filter: drop-shadow(0.1rem 0.1rem 0.5rem hsla(0, 0%, 0%, 0.8));
     transition: all 0.2s ease;
-    opacity: 0.6;
   }
 `;
 
@@ -88,10 +88,7 @@ interface Props {
   pan?: boolean;
 }
 
-export const Page: React.FC<Props> = ({
-  children,
-  pan = false,
-}) => {
+export const Page: React.FC<Props> = ({ children, pan = false }) => {
   const { dispatch, map } = useStoreon<State, Events>("map", "connect");
   const [size, setSize] = useState({ y: 0 });
   const [search] = useSearchParams();
@@ -167,7 +164,7 @@ export const Page: React.FC<Props> = ({
 
   function close() {
     dispatch("map/visible/on");
-    navigate("/");
+    navigate("?page=main");
   }
 
   function back() {
