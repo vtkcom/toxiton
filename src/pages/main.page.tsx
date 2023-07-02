@@ -46,7 +46,7 @@ const Input = styled.input<{ stylebg: "car" | "egg" }>`
   width: 100%;
   height: 3rem;
   border-radius: ${(p) => p.theme.border_radius};
-  border: 2px solid ${(p) => opacify(-0.5, p.theme.button_color)};
+  border: 0.2rem solid ${(p) => opacify(-0.3, p.theme.button_color)};
   ${(p) => p.stylebg === "car" && carCss}
   ${(p) => p.stylebg === "egg" && eggCss}
   background-repeat: no-repeat;
@@ -60,10 +60,7 @@ const Input = styled.input<{ stylebg: "car" | "egg" }>`
 
 const Button = styled(Link)`
   border-radius: ${(p) => p.theme.border_radius};
-  /* border: 1px solid ${(p) => p.theme.bg_color_10}; */
   background-color: ${(p) => p.theme.button_color};
-  /* background: linear-gradient(#ffffff -325%, ${(p) =>
-    p.theme.button_color}); */
   color: ${(p) => p.theme.button_text_color};
   height: 3rem;
   display: grid;

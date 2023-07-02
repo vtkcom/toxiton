@@ -43,7 +43,7 @@ export interface ProfileEvents {
 
 const initState: ProfileState = {
   profile: {
-    isLoading: true,
+    isLoading: false,
     dns: null,
     avatar: null,
   },

@@ -31,7 +31,7 @@ const Pan = styled.div`
   z-index: 1006;
   &::before {
     display: block;
-    width: 3rem;
+    width: 2rem;
     height: 0.25rem;
     content: "";
     pointer-events: auto;

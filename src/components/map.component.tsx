@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer } from "react-leaflet";
 import { Map as M } from "leaflet";
-import { Controll } from "./controls.component";
+import { Controll } from "./controll.component";
 import { useStoreon } from "storeon/react";
 import { Events, State } from "../store";
 import { useEffect, useRef } from "react";

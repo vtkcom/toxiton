@@ -8,7 +8,7 @@ const WrapFooter = styled.footer`
   grid-auto-flow: column;
   grid-auto-columns: max-content;
   justify-content: space-between;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   color: ${(p) => p.theme.hint_color};
   & > div {
     display: grid;

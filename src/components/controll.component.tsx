@@ -50,7 +50,6 @@ const Buttons = styled.div`
 export const Controll: React.FC = () => {
   const { dispatch, map, connect } = useStoreon<State, Events>(
     "map",
-    "place",
     "connect"
   );
   const mapEv = useMapEvents({
@@ -66,6 +65,10 @@ export const Controll: React.FC = () => {
 
   function quit() {
     dispatch("connect/off");
+  }
+
+  function locate() {
+    mapEv.locate();
   }
 
   return (
@@ -86,7 +89,7 @@ export const Controll: React.FC = () => {
           style={{
             transform: `translate3d(0px, ${map.visible ? 0 : -20}rem, 0px)`,
           }}
-          onClick={() => mapEv.locate()}
+          onClick={locate}
         >
           <Icon
             name="navigate"

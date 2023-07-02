@@ -11,7 +11,13 @@ export const LocationMarker: React.FC = () => {
   const { dispatch, map, place } = useStoreon<State, Events>("map", "place");
   const markerRef = useRef<M | null>(null);
   const eventHandlers = useMemo(() => ({ dragend }), [markerRef]);
-  const markerImage = useMemo(() => {
+  const markerImage = useMemo(getIcon, [map.zoom]);
+  useMapEvent("zoom", (e) => {
+    setZoom(e.target._zoom);
+  });
+  useDebounce(handleZoom, zoom, 300);
+
+  function getIcon(): DivIcon {
     const img = document.createElement("img");
     const size = (5 * map.zoom) / 1.7;
 
@@ -25,13 +31,8 @@ export const LocationMarker: React.FC = () => {
       iconSize: new Point(size, size),
       className: `avatar`,
       html: img,
-      // iconAnchor: [25, 60],
     });
-  }, [map.zoom]);
-  useMapEvent("zoom", (e) => {
-    setZoom(e.target._zoom);
-  });
-  useDebounce(handleZoom, zoom, 300);
+  }
 
   function handleZoom() {
     if (map.zoom !== zoom) dispatch("map/zoom/set", { zoom });

@@ -41,7 +41,7 @@ const Global = createGlobalStyle`
         /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
         line-height: 1.5;
         font-weight: 400;
-        font-size: 16px;
+        font-size: 18px;
 
         color-scheme: light dark;
         color: ${(p) => p.theme.text_color};

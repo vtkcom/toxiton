@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Events, State } from "../store";
 import { maskifyAddress } from "../utils/maskifyaddress";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 
 const Avatar = styled.img`
   width: 2rem;
@@ -21,7 +21,7 @@ const Information = styled.div`
   pointer-events: all;
 `;
 
-const Profile = styled(Link)`
+const Profile = styled(Link)<{ visible: number }>`
   display: grid;
   filter: drop-shadow(0.1rem 0.1rem 0.5rem hsla(0, 0%, 0%, 0.8));
   grid-auto-flow: column;
@@ -44,9 +44,11 @@ const Profile = styled(Link)`
   color: hsl(0, 0%, 100%) !important;
   line-height: 1;
   align-self: end;
+  transform: translate3d(0px, ${(p) => (p.visible ? 0 : -20)}rem, 0px);
+  will-change: transform;
 `;
 
-export const MiniProfile: React.FC = () => {
+export const MiniProfile: React.FC = memo(() => {
   const { map, profile, connect, dispatch } = useStoreon<State, Events>(
     "map",
     "profile",
@@ -56,17 +58,12 @@ export const MiniProfile: React.FC = () => {
   useEffect(checkData, [connect.wallet]);
 
   function checkData() {
-    if (connect.wallet !== null)
+    if (connect.wallet !== null && !profile.isLoading)
       dispatch("profile/update", { wallet: connect.wallet });
   }
 
   return (
-    <Profile
-      to={"?page=profile"}
-      style={{
-        transform: `translate3d(0px, ${map.visible ? 0 : -20}rem, 0px)`,
-      }}
-    >
+    <Profile to={"?page=profile"} visible={map.visible ? 1 : 0}>
       {profile.isLoading ? (
         <>
           <Skeleton circle width={"2rem"} height={"2rem"} />
@@ -82,4 +79,4 @@ export const MiniProfile: React.FC = () => {
       )}
     </Profile>
   );
-};
+});

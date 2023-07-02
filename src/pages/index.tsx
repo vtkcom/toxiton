@@ -19,6 +19,7 @@ const WrapOrder = styled.div<{ visible: number }>`
   transition: background 0.5s ease, backdrop-filter 0.2s ease;
   background: hsl(0deg 0% 0% / ${(p) => (p.visible ? 10 : 50)}%);
   backdrop-filter: blur(${(p) => (p.visible ? 0 : 5)}px);
+  will-change: background, backdrop-filter;
 `;
 
 export const Pages: React.FC = () => {
