@@ -106,6 +106,7 @@ export const Main: React.FC = () => {
                 }, 100);
               }}
               stylebg="car"
+              inputMode="decimal"
               placeholder={t("input.car")}
             />
           </div>
@@ -124,7 +125,12 @@ export const Main: React.FC = () => {
         <Content visible={map.visible ? 1 : 0}>
           <Order>
             <Input placeholder={t("input.egg")} stylebg="egg" />
-            <Input ref={realInput} stylebg="car" placeholder={t("input.car")} />
+            <Input
+              ref={realInput}
+              stylebg="car"
+              placeholder={t("input.car")}
+              inputMode="decimal"
+            />
           </Order>
 
           {connect.wallet == null && (
