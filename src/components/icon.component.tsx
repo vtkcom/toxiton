@@ -1,14 +1,18 @@
+export type IconName =
+  | "navigate"
+  | "plus"
+  | "minus"
+  | "ton"
+  | "ua"
+  | "back"
+  | "github"
+  | "power"
+  | "bell"
+  | "toxyton";
+
 interface Props extends React.SVGProps<SVGSVGElement> {
   size?: number;
-  name:
-    | "navigate"
-    | "plus"
-    | "minus"
-    | "ton"
-    | "ua"
-    | "back"
-    | "github"
-    | "power";
+  name: IconName;
 }
 
 export const Icon: React.FC<Props> = ({ size = 2, name, ...rest }) => {

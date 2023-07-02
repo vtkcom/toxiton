@@ -129,7 +129,8 @@ export const Main: React.FC = () => {
               ref={realInput}
               stylebg="car"
               placeholder={t("input.car")}
-              inputMode="decimal"
+              inputMode="text"
+              type="text"
             />
           </Order>
 

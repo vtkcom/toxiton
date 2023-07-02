@@ -1,14 +1,17 @@
 import { useEffect } from "react";
-import { StyleSheetManager, ThemeProvider } from "styled-components";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { SkeletonTheme } from "react-loading-skeleton";
+import { StyleSheetManager, ThemeProvider } from "styled-components";
+import { StoreContext } from "storeon/react";
 import { Global, theme } from "./theme";
 import { Map } from "./components/map.component";
 import { Sprites } from "./sprites";
+import { store } from "./store";
 import { Pages } from "./pages";
-import { Route, Routes } from "react-router-dom";
+import logo from "/logo.png";
+import car from "./assets/blackcar.png";
 import "leaflet/dist/leaflet.css";
 import "react-loading-skeleton/dist/skeleton.css";
-import { BrowserRouter } from "react-router-dom";
 
 export interface Place {
   place_id: number;
@@ -47,7 +50,35 @@ function App() {
   function getFull() {
     window.Telegram.WebApp.expand();
     window.Telegram.WebApp.enableClosingConfirmation();
+    if (!("Notification" in window)) {
+      console.log("This browser does not support notifications.");
+    } else {
+      Notification.requestPermission((permission) => {
+        console.log(permission);
+      });
+    }
+
+    const n = new Notification("Title", {
+      icon: car,
+      body: "Body",
+      image: logo,
+      // actions: [{ action: "open", title: "Open" }],
+    });
+    n.onclick = () => window.focus();
   }
+
+  // useEffect(askNotificationPermission, []);
+
+  // function askNotificationPermission() {
+  //   // Let's check if the browser supports notifications
+  //   if (!("Notification" in window)) {
+  //     console.log("This browser does not support notifications.");
+  //   } else {
+  //     Notification.requestPermission((permission) => {
+  //       console.log(permission);
+  //     });
+  //   }
+  // }
 
   // async function navigate(e: KeyboardEvent<HTMLInputElement>) {
   //   if (e.key === "Enter") {
@@ -66,22 +97,24 @@ function App() {
   // }
 
   return (
-    <StyleSheetManager enableVendorPrefixes>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter basename="/toxiton">
-          <SkeletonTheme borderRadius="0.3rem">
-            <Map />
+    <BrowserRouter basename="/toxiton">
+      <StyleSheetManager enableVendorPrefixes>
+        <ThemeProvider theme={theme}>
+          <StoreContext.Provider value={store}>
+            <SkeletonTheme borderRadius="0.3rem">
+              <Map />
 
-            <Routes>
-              <Route path="*" element={<Pages />} />
-            </Routes>
+              <Routes>
+                <Route path="*" element={<Pages />} />
+              </Routes>
 
-            <Sprites />
-          </SkeletonTheme>
-          <Global />
-        </BrowserRouter>
-      </ThemeProvider>
-    </StyleSheetManager>
+              <Sprites />
+            </SkeletonTheme>
+            <Global />
+          </StoreContext.Provider>
+        </ThemeProvider>
+      </StyleSheetManager>
+    </BrowserRouter>
   );
 }
 

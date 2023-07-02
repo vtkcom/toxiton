@@ -1,13 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
-import { StoreContext } from "storeon/react";
-import { store } from "./store/index.ts";
+import App from "./app.tsx";
 
 ReactDOM.createRoot(document.querySelector("app") as HTMLElement).render(
   <React.StrictMode>
-    <StoreContext.Provider value={store}>
-      <App />
-    </StoreContext.Provider>
+    <App />
   </React.StrictMode>
 );

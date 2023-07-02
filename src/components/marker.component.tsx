@@ -1,59 +1,63 @@
-import { DivIcon, Marker as M, Point } from "leaflet";
-import React, { useMemo, useRef, useState } from "react";
-import { Marker, useMapEvent } from "react-leaflet";
-import { useStoreon } from "storeon/react";
-import { Events, State } from "../store";
-import ninja from "../assets/ninja.png";
-import useDebounce from "../hooks/debounce.hook";
+import { DivIcon, LatLng, Point } from "leaflet";
+import { Marker as M } from "react-leaflet";
+import { useMemo } from "react";
+import { createGlobalStyle } from "styled-components";
+import { opacify } from "polished";
+import { IconName } from "./icon.component";
 
-export const LocationMarker: React.FC = () => {
-  const [zoom, setZoom] = useState(10);
-  const { dispatch, map, place } = useStoreon<State, Events>("map", "place");
-  const markerRef = useRef<M | null>(null);
-  const eventHandlers = useMemo(() => ({ dragend }), [markerRef]);
-  const markerImage = useMemo(getIcon, [map.zoom]);
-  useMapEvent("zoom", (e) => {
-    setZoom(e.target._zoom);
-  });
-  useDebounce(handleZoom, zoom, 300);
+const Global = createGlobalStyle<{ name: IconName }>`
+    .${(p) => p.name}-marker {
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background-color: ${(p) => opacify(-0.8, p.theme.button_color)};
+        border: 1px solid ${(p) => opacify(-0.9, p.theme.button_color)};
+        color: ${(p) => p.theme.button_text_color};
+        backdrop-filter: blur(4px);
+        box-shadow: ${(p) => p.theme.box_shadow};
+        filter: drop-shadow(0.1rem 0.1rem 0.5rem hsla(0, 0%, 0%, 0.8));
+    }
+    .toxyton-marker {
+        & > svg > use {
+            stroke-width: 1.5px;
+        }
+    }
+`;
 
-  function getIcon(): DivIcon {
-    const img = document.createElement("img");
-    const size = (5 * map.zoom) / 1.7;
+interface Props {
+  size: number;
+  iconName: IconName;
+  iconSize: string;
+  position: LatLng;
+}
 
-    img.src = ninja;
-    img.style.width = "55%";
-    img.style.height = "55%";
+export const Marker: React.FC<Props> = ({
+  size = 50,
+  iconName,
+  iconSize = "50%",
+  position,
+}) => {
+  const markerImage = useMemo(getDiv, []);
+
+  function getDiv(): DivIcon {
+    const div = document.createElement("div");
+
+    div.classList.add(`${iconName}-marker`);
+    div.innerHTML += `<svg width="${iconSize}" height="${iconSize}"><use xlink:href="#svg-${iconName}" /></svg>`;
+    div.style.width = "100%";
+    div.style.height = "100%";
 
     return new DivIcon({
-      iconUrl: ninja,
-      iconRetinaUrl: ninja,
       iconSize: new Point(size, size),
-      className: `avatar`,
-      html: img,
+      className: `map-marker`,
+      html: div,
     });
   }
 
-  function handleZoom() {
-    if (map.zoom !== zoom) dispatch("map/zoom/set", { zoom });
-  }
-
-  function dragend() {
-    if (markerRef.current != null) {
-      const position = markerRef.current.getLatLng();
-
-      dispatch("place/get", { key: "from", position });
-    }
-  }
-
-  return place.from !== null && place.from.position !== null ? (
-    <Marker
-      draggable={true}
-      eventHandlers={eventHandlers}
-      ref={markerRef}
-      zIndexOffset={1005}
-      position={place.from.position}
-      icon={markerImage}
-    />
-  ) : null;
+  return (
+    <>
+      <Global name={iconName} />
+      <M position={position} icon={markerImage} />
+    </>
+  );
 };

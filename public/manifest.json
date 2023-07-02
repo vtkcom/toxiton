@@ -1,7 +1,8 @@
 {
   "name": "TOXYTON",
   "description": "Search for a traveling companion",
-  "start_url": "/toxiton/",
+  "id": "/toxiton?page=main",
+  "start_url": "/toxiton?page=main",
   "display": "standalone",
   "icons": [
     {

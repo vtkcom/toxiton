@@ -7,6 +7,8 @@ import { UA } from "./ua.icon";
 import { Back } from "./back.icon";
 import { GitHub } from "./github.icon";
 import { Power } from "./power.icon";
+import { Toxyton } from "./toxyton.icon";
+import { Bell } from "./bell.icon";
 
 export const Sprites: React.FC = () => {
   return createPortal(
@@ -19,6 +21,8 @@ export const Sprites: React.FC = () => {
       <Back />
       <GitHub />
       <Power />
+      <Toxyton />
+      <Bell />
     </svg>,
     document.body
   );

@@ -1,10 +1,11 @@
 import { MapContainer, TileLayer } from "react-leaflet";
-import { Map as M } from "leaflet";
+import { LatLng, Map as M } from "leaflet";
 import { Controll } from "./controll.component";
 import { useStoreon } from "storeon/react";
 import { Events, State } from "../store";
 import { useEffect, useRef } from "react";
-import { LocationMarker } from "./marker.component";
+import { LocationMarker } from "./locationmarker.component";
+import { Marker } from "./marker.component";
 
 interface Props {
   children?: React.ReactNode | React.ReactNode[];
@@ -29,7 +30,7 @@ export const Map: React.FC<Props> = () => {
 
   return (
     <MapContainer
-      center={[52.261802, 104.300412]}
+      center={[52.382172, 105.957225]}
       zoom={map.zoom}
       scrollWheelZoom={true}
       touchZoom={true}
@@ -42,6 +43,27 @@ export const Map: React.FC<Props> = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
       <LocationMarker />
+      {/* <GithubMarker /> */}
+      {/* <AboutMarker /> */}
+      {/* <BellMarker /> */}
+      <Marker
+        iconName="github"
+        iconSize="50%"
+        size={35}
+        position={new LatLng(52.726062, 103.663365)}
+      />
+      <Marker
+        iconName="toxyton"
+        iconSize="60%"
+        size={60}
+        position={new LatLng(52.275952, 104.359649)}
+      />
+      <Marker
+        iconName="bell"
+        iconSize="40%"
+        size={50}
+        position={new LatLng(51.888076, 107.515844)}
+      />
     </MapContainer>
   );
 };

@@ -131,7 +131,7 @@ const Global = createGlobalStyle`
         
     }
 
-    symbol {
+    svg {
         stroke: currentColor;
         stroke-width: 2;
         stroke-linejoin: round;
