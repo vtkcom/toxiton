@@ -48,11 +48,16 @@ export const Map: React.FC<Props> = () => {
         iconName="github"
         size={35}
         position={new LatLng(52.726062, 103.663365)}
+        url={{
+          href: "https://github.com/vtkcom/toxyton",
+          title: "GitHub",
+        }}
       />
       <Marker
         iconName="toxyton"
-        size={50}
+        size={40}
         position={new LatLng(51.544396, 104.056692)}
+        url={{ href: "?page=about", title: "About" }}
       />
       {/* <Marker
         iconName="bell"
