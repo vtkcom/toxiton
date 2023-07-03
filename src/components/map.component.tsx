@@ -51,7 +51,7 @@ export const Map: React.FC<Props> = () => {
       />
       <Marker
         iconName="toxyton"
-        size={60}
+        size={50}
         position={new LatLng(51.544396, 104.056692)}
       />
       {/* <Marker
