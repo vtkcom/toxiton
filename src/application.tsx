@@ -8,8 +8,8 @@ import { Map } from "./components/map.component";
 import { Sprites } from "./sprites";
 import { store } from "./store";
 import { Pages } from "./pages";
-import logo from "/logo.png";
-import car from "./assets/blackcar.png";
+// import logo from "/logo.png";
+// import car from "./assets/blackcar.png";
 import "leaflet/dist/leaflet.css";
 import "react-loading-skeleton/dist/skeleton.css";
 
@@ -50,21 +50,21 @@ function App() {
   function getFull() {
     window.Telegram.WebApp.expand();
     window.Telegram.WebApp.enableClosingConfirmation();
-    if (!("Notification" in window)) {
-      console.log("This browser does not support notifications.");
-    } else {
-      Notification.requestPermission((permission) => {
-        console.log(permission);
-      });
-    }
+    // if (!("Notification" in window)) {
+    //   console.log("This browser does not support notifications.");
+    // } else {
+    //   Notification.requestPermission((permission) => {
+    //     console.log(permission);
+    //   });
+    // }
 
-    const n = new Notification("Title", {
-      icon: car,
-      body: "Body",
-      image: logo,
-      // actions: [{ action: "open", title: "Open" }],
-    });
-    n.onclick = () => window.focus();
+    // const n = new Notification("Title", {
+    //   icon: car,
+    //   body: "Body",
+    //   image: logo,
+    //   // actions: [{ action: "open", title: "Open" }],
+    // });
+    // n.onclick = () => window.focus();
   }
 
   // useEffect(askNotificationPermission, []);
