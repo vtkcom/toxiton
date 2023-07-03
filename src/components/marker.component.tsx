@@ -10,39 +10,38 @@ const Global = createGlobalStyle<{ name: IconName }>`
         display: grid;
         place-items: center;
         border-radius: 50%;
-        background-color: ${(p) => opacify(-0.7, p.theme.button_color)};
-        color: ${(p) => p.theme.button_text_color};
-        backdrop-filter: blur(4px);
-        box-shadow: ${(p) => p.theme.box_shadow};
-        filter: drop-shadow(0.1rem 0.1rem 0.5rem hsla(0, 0%, 0%, 0.8));
+        /* background-color: ${(p) => opacify(-0.7, p.theme.button_color)}; */
+        color: hsl(0, 0%, 100%);
+        /* backdrop-filter: blur(4px); */
+        /* box-shadow: ${(p) => p.theme.box_shadow}; */
+        filter: drop-shadow(0.1rem 0.1rem 0.7rem hsla(0, 0%, 0%, 0.7)) drop-shadow(0.1rem 0.1rem 0.5rem hsla(0, 0%, 0%, 0.5));
     }
-    .toxyton-marker {
+    /* .toxyton-marker {
         & > svg > use {
-            stroke-width: 1.5px;
+            stroke-width: 2px;
         }
     }
+    .bell-marker {
+        & > svg > use {
+            stroke-width: 3.5px;
+        }
+    } */
 `;
 
 interface Props {
   size: number;
   iconName: IconName;
-  iconSize: string;
   position: LatLng;
 }
 
-export const Marker: React.FC<Props> = ({
-  size = 50,
-  iconName,
-  iconSize = "50%",
-  position,
-}) => {
+export const Marker: React.FC<Props> = ({ size = 50, iconName, position }) => {
   const markerImage = useMemo(getDiv, []);
 
   function getDiv(): DivIcon {
     const div = document.createElement("div");
 
     div.classList.add(`${iconName}-marker`);
-    div.innerHTML += `<svg width="${iconSize}" height="${iconSize}"><use xlink:href="#svg-${iconName}" /></svg>`;
+    div.innerHTML += `<svg width="${size}" height="${size}"><use xlink:href="#svg-${iconName}" /></svg>`;
     div.style.width = "100%";
     div.style.height = "100%";
 

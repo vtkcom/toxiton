@@ -43,27 +43,22 @@ export const Map: React.FC<Props> = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
       <LocationMarker />
-      {/* <GithubMarker /> */}
-      {/* <AboutMarker /> */}
-      {/* <BellMarker /> */}
+
       <Marker
         iconName="github"
-        iconSize="50%"
         size={35}
         position={new LatLng(52.726062, 103.663365)}
       />
       <Marker
         iconName="toxyton"
-        iconSize="60%"
         size={60}
-        position={new LatLng(52.275952, 104.359649)}
+        position={new LatLng(51.544396, 104.056692)}
       />
-      <Marker
+      {/* <Marker
         iconName="bell"
-        iconSize="40%"
-        size={50}
+        size={25}
         position={new LatLng(51.888076, 107.515844)}
-      />
+      /> */}
     </MapContainer>
   );
 };
