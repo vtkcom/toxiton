@@ -9,7 +9,7 @@ const Global = createGlobalStyle<{ name: IconName }>`
         display: grid;
         place-items: center;
         border-radius: 50%;
-        color: hsl(0, 0%, 100%);
+        color: hsla(0, 0%, 100%, 0.85);
         filter: drop-shadow(0.1rem 0.1rem 0.7rem hsla(0, 0%, 0%, 0.4)) drop-shadow(0.1rem 0.1rem 0.5rem hsla(0, 0%, 0%, 0.5));
     }
 `;
