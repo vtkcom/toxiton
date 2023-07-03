@@ -10,7 +10,7 @@ const Global = createGlobalStyle<{ name: IconName }>`
         display: grid;
         place-items: center;
         border-radius: 50%;
-        background-color: ${(p) => opacify(-0.9, p.theme.button_color)};
+        background-color: ${(p) => opacify(-0.7, p.theme.button_color)};
         color: ${(p) => p.theme.button_text_color};
         backdrop-filter: blur(4px);
         box-shadow: ${(p) => p.theme.box_shadow};
