@@ -12,7 +12,7 @@ const WrapOrder = styled.div<{ visible: number }>`
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   pointer-events: none;
   z-index: 999;
   overflow: hidden;

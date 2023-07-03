@@ -1,4 +1,5 @@
 import { createStoreon } from "storeon";
+import { persistState } from "@storeon/localstorage";
 import { MapEvents, MapState, mapStore } from "./map.store";
 import { ConnectEvents, ConnectState, connectStore } from "./connect.store";
 import { PlaceEvents, PlaceState, placeStore } from "./place.store";
@@ -13,6 +14,7 @@ export const store = createStoreon<State, Events>([
   connectStore,
   placeStore,
   profileStore,
+  persistState(["connect"]),
   storeonLogger,
   storeonDevtools,
 ]);
