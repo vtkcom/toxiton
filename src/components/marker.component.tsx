@@ -11,7 +11,6 @@ const Global = createGlobalStyle<{ name: IconName }>`
         place-items: center;
         border-radius: 50%;
         background-color: ${(p) => opacify(-0.8, p.theme.button_color)};
-        border: 1px solid ${(p) => opacify(-0.9, p.theme.button_color)};
         color: ${(p) => p.theme.button_text_color};
         backdrop-filter: blur(4px);
         box-shadow: ${(p) => p.theme.box_shadow};
