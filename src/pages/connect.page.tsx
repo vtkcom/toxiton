@@ -39,6 +39,12 @@ export const Connect: React.FC = () => {
   function init() {
     dispatch("map/visible/off");
     dispatch("connect/wallets");
+
+    window.Telegram.WebApp.MainButton.setParams({
+      is_active: false,
+      is_visible: true,
+      text: t("button.connect"),
+    });
   }
 
   function redirect() {

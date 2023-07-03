@@ -22,8 +22,8 @@ export const LocationMarker: React.FC = () => {
     const size = (5 * map.zoom) / 1.7;
 
     img.src = ninja;
-    img.style.width = "55%";
-    img.style.height = "55%";
+    img.style.width = "90%";
+    img.style.height = "90%";
 
     return new DivIcon({
       iconSize: new Point(size, size),

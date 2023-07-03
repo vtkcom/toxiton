@@ -23,7 +23,7 @@ const WrapWallet = styled.div`
     width: 4rem;
     height: 4rem;
     border-radius: 0.5rem;
-    background: ${(p) => p.theme.button_text_color};
+    /* background: ${(p) => p.theme.button_text_color}; */
   }
 `;
 

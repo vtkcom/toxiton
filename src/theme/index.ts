@@ -54,10 +54,12 @@ const Global = createGlobalStyle`
         -moz-osx-font-smoothing: grayscale;
         -webkit-text-size-adjust: 100%;
         -webkit-tap-highlight-color: rgba(0,0,0,0);
+        user-select: none;
     }
 
     * {
         box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
     }
 
     a, .leaflet-container a {
@@ -71,7 +73,7 @@ const Global = createGlobalStyle`
 
     html {
         width: 100vw;
-        height: ${() => window.Telegram.WebApp.viewportStableHeight}px;
+        /* height: ${() => window.Telegram.WebApp.viewportStableHeight}px; */
         overscroll-behavior: none;
     }
 
@@ -80,14 +82,14 @@ const Global = createGlobalStyle`
         display: flex;
         place-items: center;
         width: 100vw;
-        height: ${() => window.Telegram.WebApp.viewportStableHeight}px;
+        /* height: ${() => window.Telegram.WebApp.viewportStableHeight}px; */
         overscroll-behavior: none;
     }
 
     app {
         position: relative;
         width: 100vw;
-        height: 100%;
+        /* height: 100%; */
         overscroll-behavior: none;
     }
 
@@ -113,14 +115,15 @@ const Global = createGlobalStyle`
     }
 
     .avatar {
-        box-shadow: ${(p) => p.theme.box_shadow};
-        border-radius: 50%;
+        /* box-shadow: ${(p) => p.theme.box_shadow}; */
+        /* border-radius: 50%; */
         pointer-events: visiblePainted;
         user-select: none;
-        background: linear-gradient(#ffffff -125%, rgb(51 144 236));
+        /* background: linear-gradient(#ffffff -125%, rgb(51 144 236)); */
         display: grid;
         place-items: center;
         img {
+            filter: drop-shadow(0.1rem 0.1rem 0.7rem hsla(0, 0%, 0%, 0.8));
             border-radius: 0 0 50% 50%;
             transition: transform 0.3s ease;
             transform: scale(1);

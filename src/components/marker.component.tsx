@@ -69,7 +69,11 @@ export const Marker: React.FC<Props> = ({
   return (
     <>
       <Global name={iconName} />
-      <M position={position} icon={markerImage} />
+      <M
+        position={position}
+        eventHandlers={{ click: onClick }}
+        icon={markerImage}
+      />
     </>
   );
 };

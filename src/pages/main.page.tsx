@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { css, styled } from "styled-components";
 import { useStoreon } from "storeon/react";
 import { Events, State } from "../store";
@@ -8,7 +8,8 @@ import { Footer } from "../components/footer.component";
 import { Page } from "../components/page.component";
 import { opacify } from "polished";
 import { useTranslator } from "../hooks/translator.hook";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDetect } from "../hooks/detect.hook";
 
 const Order = styled.div`
   display: grid;
@@ -45,7 +46,7 @@ const eggCss = css`
 const Input = styled.input<{ stylebg: "car" | "egg" }>`
   width: 100%;
   height: 3rem;
-  border-radius: ${(p) => p.theme.border_radius};
+  border-radius: 1rem;
   border: 0.2rem solid ${(p) => opacify(-0.3, p.theme.button_color)};
   ${(p) => p.stylebg === "car" && carCss}
   ${(p) => p.stylebg === "egg" && eggCss}
@@ -78,7 +79,7 @@ const Content = styled.div<{ visible: number }>`
   grid-template-rows: auto max-content max-content;
   gap: 0.5rem;
   min-height: calc(98vh - 2rem);
-  padding: 0 1rem 1rem;
+  padding: 0 1rem 0.7rem;
   position: relative;
   overflow: ${(p) => (p.visible ? "hidden" : "auto")};
 `;
@@ -90,6 +91,48 @@ export const Main: React.FC = () => {
   );
   const realInput = useRef<HTMLInputElement>(null);
   const t = useTranslator();
+  const navigate = useNavigate();
+  const { twa } = useDetect();
+
+  useEffect(twaButton, [connect.wallet]);
+
+  function twaButton() {
+    if (connect.wallet === null) {
+      window.Telegram.WebApp.MainButton.setParams({
+        is_active: true,
+        is_visible: true,
+        text: t("button.connect"),
+      });
+      window.Telegram.WebApp.MainButton.onClick(connectWallet);
+
+      return () => {
+        window.Telegram.WebApp.MainButton.setParams({
+          is_active: false,
+          // is_visible: false,
+        });
+        window.Telegram.WebApp.MainButton.offClick(connectWallet);
+      };
+    } else {
+      window.Telegram.WebApp.MainButton.setParams({
+        is_active: false,
+        is_visible: true,
+        text: t("button.create"),
+      });
+      window.Telegram.WebApp.MainButton.onClick(connectWallet);
+
+      return () => {
+        window.Telegram.WebApp.MainButton.setParams({
+          is_active: false,
+          // is_visible: false,
+        });
+        window.Telegram.WebApp.MainButton.offClick(connectWallet);
+      };
+    }
+  }
+
+  function connectWallet() {
+    navigate("?page=connect&prevPage=main");
+  }
 
   return (
     <Page pan>
@@ -110,7 +153,7 @@ export const Main: React.FC = () => {
               placeholder={t("input.car")}
             />
           </div>
-          {connect.wallet == null && (
+          {!twa && connect.wallet == null ? (
             <Button
               to="?page=connect&prevPage=main"
               onClick={() =>
@@ -119,6 +162,8 @@ export const Main: React.FC = () => {
             >
               {t("button.connect")}
             </Button>
+          ) : (
+            <div />
           )}
         </FakeOrder>
       ) : (
@@ -134,7 +179,7 @@ export const Main: React.FC = () => {
             />
           </Order>
 
-          {connect.wallet == null && (
+          {!twa && connect.wallet == null ? (
             <ButtonSticky
               to="?page=connect&prevPage=main"
               onClick={() =>
@@ -143,6 +188,8 @@ export const Main: React.FC = () => {
             >
               {t("button.connect")}
             </ButtonSticky>
+          ) : (
+            <div />
           )}
 
           <Footer />

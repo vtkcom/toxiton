@@ -12,7 +12,8 @@
   "button": {
     "connect": "Connect wallet",
     "back": "Back",
-    "close": "Close"
+    "close": "Close",
+    "create": "Create contract"
   },
   "input": {
     "car": "Where?",
