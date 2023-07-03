@@ -16,7 +16,7 @@ const Global = createGlobalStyle<{ name: IconName }>`
         div {
             position: absolute;
             bottom: -0.8rem;
-            font-weight: 200;
+            font-weight: 300;
             font-size: 85%;
             filter: drop-shadow(0.1rem 0.1rem 0.7rem hsla(0, 0%, 0%, 0.4));
             line-height: 0.9;
