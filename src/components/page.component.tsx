@@ -21,7 +21,7 @@ const Pan = styled.div`
   display: grid;
   align-items: center;
   justify-content: center;
-  width: 100vw;
+  width: 100%;
   height: 2.5rem;
   pointer-events: auto;
   position: absolute;
@@ -47,7 +47,7 @@ const WrapPage = styled.div<{ visible: number }>`
   position: relative;
   background: ${(p) => p.theme.bg_color};
   transition: transform 0.3s ease;
-  height: 98vh;
+  height: calc(100% - 0.5rem);
   padding: 2rem 0 0 0;
   border-radius: ${(p) => p.theme.border_radius} ${(p) => p.theme.border_radius}
     0 0;

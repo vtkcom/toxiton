@@ -20,7 +20,7 @@ const Order = styled.div`
 const FakeOrder = styled.div`
   display: grid;
   grid-template-rows: auto max-content;
-  height: 27vh;
+  /* height: 27vh; */
   background-color: ${(p) => p.theme.bg_color};
   position: absolute;
   left: 0.9rem;
@@ -78,7 +78,7 @@ const Content = styled.div<{ visible: number }>`
   display: grid;
   grid-template-rows: auto max-content max-content;
   gap: 0.5rem;
-  min-height: calc(98vh - 2rem);
+  /* min-height: calc(100% - 0.5rem); */
   padding: 0 1rem 0.7rem;
   position: relative;
   overflow: ${(p) => (p.visible ? "hidden" : "auto")};

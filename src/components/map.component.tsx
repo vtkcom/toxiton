@@ -3,7 +3,7 @@ import { LatLng, Map as M } from "leaflet";
 import { Controll } from "./controll.component";
 import { useStoreon } from "storeon/react";
 import { Events, State } from "../store";
-import { useEffect, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 import { LocationMarker } from "./locationmarker.component";
 import { Marker } from "./marker.component";
 
@@ -11,7 +11,7 @@ interface Props {
   children?: React.ReactNode | React.ReactNode[];
 }
 
-export const Map: React.FC<Props> = () => {
+export const Map: React.FC<Props> = memo(() => {
   const { dispatch, map, place } = useStoreon<State, Events>("map", "place");
   const mapRef = useRef<M | null>(null);
 
@@ -70,4 +70,4 @@ export const Map: React.FC<Props> = () => {
       )}
     </MapContainer>
   );
-};
+});

@@ -78,7 +78,7 @@ export const Controll: React.FC = () => {
         {connect.wallet !== null && (
           <Button
             style={{
-              transform: `translate3d(0px, ${map.visible ? 0 : -20}rem, 0px)`,
+              transform: `translate3d(0px, ${map.visible ? 0 : -10}rem, 0px)`,
             }}
             onClick={quit}
           >
@@ -87,7 +87,7 @@ export const Controll: React.FC = () => {
         )}
         <Button
           style={{
-            transform: `translate3d(0px, ${map.visible ? 0 : -20}rem, 0px)`,
+            transform: `translate3d(0px, ${map.visible ? 0 : -10}rem, 0px)`,
           }}
           onClick={locate}
         >

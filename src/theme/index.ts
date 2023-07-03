@@ -72,23 +72,26 @@ const Global = createGlobalStyle`
     }
 
     html {
-        width: 100vw;
+        width: 100%;
+        height: 100%;
         /* height: ${() => window.Telegram.WebApp.viewportStableHeight}px; */
         overscroll-behavior: none;
+        display: grid;
     }
 
     body {
         margin: 0;
-        display: flex;
-        place-items: center;
-        width: 100vw;
+        display: grid;
+        /* place-items: center; */
+        /* width: 100vw; */
         /* height: ${() => window.Telegram.WebApp.viewportStableHeight}px; */
         overscroll-behavior: none;
     }
 
     app {
         position: relative;
-        width: 100vw;
+        display: grid;
+        /* width: 100vw; */
         /* height: 100%; */
         overscroll-behavior: none;
     }
@@ -110,8 +113,8 @@ const Global = createGlobalStyle`
     }
 
     .leaflet-container {
-        width: 100vw;
-        height: 72vh;
+        width: 100%;
+        height: 74vh;
     }
 
     .avatar {

@@ -44,7 +44,7 @@ const Profile = styled(Link)<{ visible: number }>`
   color: hsl(0, 0%, 100%) !important;
   line-height: 1;
   align-self: end;
-  transform: translate3d(0px, ${(p) => (p.visible ? 0 : -20)}rem, 0px);
+  transform: translate3d(0px, ${(p) => (p.visible ? 0 : -10)}rem, 0px);
   will-change: transform;
 `;
 
