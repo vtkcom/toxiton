@@ -49,7 +49,7 @@ export const Marker: React.FC<Props> = ({
 
     div.classList.add(`${iconName}-marker`);
     div.innerHTML += `<svg width="${size}" height="${size}"><use xlink:href="#svg-${iconName}" /></svg><div style="font-size:${
-      size / 3.3
+      size / 3.5
     }px">${url.title}</div>`;
     div.style.width = "100%";
     div.style.height = "100%";

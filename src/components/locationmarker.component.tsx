@@ -7,8 +7,8 @@ import ninja from "../assets/ninja.png";
 import useDebounce from "../hooks/debounce.hook";
 
 export const LocationMarker: React.FC = () => {
-  const [zoom, setZoom] = useState(10);
   const { dispatch, map, place } = useStoreon<State, Events>("map", "place");
+  const [zoom, setZoom] = useState(map.zoom);
   const markerRef = useRef<M | null>(null);
   const eventHandlers = useMemo(() => ({ dragend }), [markerRef]);
   const markerImage = useMemo(getIcon, [map.zoom]);
