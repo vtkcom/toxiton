@@ -1,11 +1,13 @@
+import { memo, useEffect, useRef } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import { LatLng, Map as M } from "leaflet";
-import { Controll } from "./controll.component";
 import { useStoreon } from "storeon/react";
+import { Controll } from "./controll.component";
 import { Events, State } from "../store";
-import { memo, useEffect, useRef } from "react";
 import { LocationMarker } from "./locationmarker.component";
 import { Marker } from "./marker.component";
+import github from "../assets/octocat.png";
+import about from "../assets/about-3.png";
 
 interface Props {
   children?: React.ReactNode | React.ReactNode[];
@@ -48,7 +50,8 @@ export const Map: React.FC<Props> = memo(() => {
         <>
           <Marker
             iconName="github"
-            size={35}
+            img={github}
+            size={45}
             position={new LatLng(52.726062, 103.663365)}
             url={{
               href: "https://github.com/vtkcom/toxyton",
@@ -57,7 +60,8 @@ export const Map: React.FC<Props> = memo(() => {
           />
           <Marker
             iconName="toxyton"
-            size={40}
+            img={about}
+            size={45}
             position={new LatLng(51.544396, 104.056692)}
             url={{ href: "?page=about", title: "About" }}
           />

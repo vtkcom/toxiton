@@ -66,6 +66,7 @@ const Global = createGlobalStyle`
         font-weight: 500;
         color: ${(p) => p.theme.link_color};
         text-decoration: inherit;
+        outline: none;
     }
     a:hover {
         color: ${(p) => p.theme.link_color};

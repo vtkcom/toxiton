@@ -1,16 +1,17 @@
+import { memo, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import { useStoreon } from "storeon/react";
 import styled from "styled-components";
 import { Events, State } from "../store";
 import { maskifyAddress } from "../utils/maskifyaddress";
-import { Link } from "react-router-dom";
-import { memo, useEffect } from "react";
+import avatar from "../assets/ninja.png";
 
 const Avatar = styled.img`
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  background: linear-gradient(#ffffff -325%, ${(p) => p.theme.button_color});
+  background: linear-gradient(hsl(0, 0%, 100%) -325%, hsla(0, 0%, 100%, 0.3));
   pointer-events: all;
 `;
 
@@ -71,7 +72,11 @@ export const MiniProfile: React.FC = memo(() => {
         </>
       ) : (
         <>
-          {profile.avatar !== null && <Avatar src={profile.avatar.url} />}
+          {profile.avatar !== null ? (
+            <Avatar src={profile.avatar.url} />
+          ) : (
+            <Avatar src={avatar} />
+          )}
           {connect.wallet && (
             <Information>{maskifyAddress(connect.wallet, 3, 6)}</Information>
           )}

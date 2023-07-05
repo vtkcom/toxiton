@@ -1,15 +1,15 @@
 import { useEffect, useRef } from "react";
 import { css, styled } from "styled-components";
 import { useStoreon } from "storeon/react";
+import { opacify } from "polished";
+import { Link, useNavigate } from "react-router-dom";
 import { Events, State } from "../store";
-import car from "../assets/blackcar.png";
-import egg from "../assets/egg.png";
 import { Footer } from "../components/footer.component";
 import { Page } from "../components/page.component";
-import { opacify } from "polished";
 import { useTranslator } from "../hooks/translator.hook";
-import { Link, useNavigate } from "react-router-dom";
 import { useDetect } from "../hooks/detect.hook";
+import car from "../assets/blackcar.png";
+import egg from "../assets/egg.png";
 
 const Order = styled.div`
   display: grid;
@@ -20,7 +20,7 @@ const Order = styled.div`
 const FakeOrder = styled.div`
   display: grid;
   grid-template-rows: auto max-content;
-  /* height: 27vh; */
+  height: 100%;
   background-color: ${(p) => p.theme.bg_color};
   position: absolute;
   left: 0.9rem;
@@ -60,7 +60,7 @@ const Input = styled.input<{ stylebg: "car" | "egg" }>`
 `;
 
 const Button = styled(Link)`
-  border-radius: ${(p) => p.theme.border_radius};
+  border-radius: 1rem;
   background-color: ${(p) => p.theme.button_color};
   color: ${(p) => p.theme.button_text_color};
   height: 3rem;

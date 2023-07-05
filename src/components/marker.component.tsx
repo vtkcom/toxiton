@@ -12,11 +12,11 @@ const Global = createGlobalStyle<{ name: IconName }>`
         place-items: center;
         border-radius: 50%;
         color: hsla(0, 0%, 100%, 0.85) !important;
-        filter: drop-shadow(0.1rem 0.1rem 0.7rem hsla(0, 0%, 0%, 0.4)) drop-shadow(0.1rem 0.1rem 0.5rem hsla(0, 0%, 0%, 0.5));
+        filter: drop-shadow(0.1rem 0.1rem 0.7rem hsla(0, 0%, 0%, 0.6)) drop-shadow(0.1rem 0.1rem 0.5rem hsla(0, 0%, 0%, 0.5));
         div {
             position: absolute;
             bottom: -0.8rem;
-            font-weight: 300;
+            font-weight: 600;
             font-size: 85%;
             filter: drop-shadow(0.1rem 0.1rem 0.7rem hsla(0, 0%, 0%, 0.4));
             line-height: 0.9;
@@ -29,6 +29,7 @@ interface Props {
   size: number;
   iconName: IconName;
   position: LatLng;
+  img: string;
   url: {
     href: string;
     title: string;
@@ -40,6 +41,7 @@ export const Marker: React.FC<Props> = ({
   iconName,
   position,
   url,
+  img
 }) => {
   const navigate = useNavigate();
   const markerImage = useMemo(getDiv, []);
@@ -48,7 +50,10 @@ export const Marker: React.FC<Props> = ({
     const div = document.createElement("div");
 
     div.classList.add(`${iconName}-marker`);
-    div.innerHTML += `<svg width="${size}" height="${size}"><use xlink:href="#svg-${iconName}" /></svg><div style="font-size:${
+    // div.innerHTML += `<svg width="${size}" height="${size}"><use xlink:href="#svg-${iconName}" /></svg><div style="font-size:${
+    //   size / 3.5
+    // }px">${url.title}</div>`;
+    div.innerHTML += `<img width="${size}" height="${size}" src="${img}" /><div style="font-size:${
       size / 3.5
     }px">${url.title}</div>`;
     div.style.width = "100%";

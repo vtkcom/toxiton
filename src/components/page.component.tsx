@@ -172,7 +172,7 @@ export const Page: React.FC<Props> = ({ children, pan = false }) => {
   }
 
   return (
-    <WrapPage visible={!pan ? 0 : map.visible ? 1 : 0}>
+    <WrapPage visible={map.visible ? 1 : 0}>
       {pan && <Pan onMouseDown={mouseHandler} onTouchStart={touchHandler} />}
       {!pan && (
         <Back>

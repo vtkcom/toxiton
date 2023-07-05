@@ -6,6 +6,8 @@ import { Connect } from "./connect.page";
 import { Events, State } from "../store";
 import { Main } from "./main.page";
 import { useEffect } from "react";
+import { About } from "./about.page";
+import { Profile } from "./profile.page";
 
 const WrapOrder = styled.div<{ visible: number }>`
   position: absolute;
@@ -43,6 +45,8 @@ export const Pages: React.FC = () => {
       <Header />
       {search.get("page") === "connect" && <Connect />}
       {search.get("page") === "main" && <Main />}
+      {search.get("page") === "about" && <About />}
+      {search.get("page") === "profile" && <Profile />}
     </WrapOrder>
   );
 };
