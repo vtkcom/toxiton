@@ -13,6 +13,7 @@ export default defineConfig({
     }),
     react(),
   ],
+  build: { assetsInlineLimit: 1024 * 30 },
   base: "/toxiton",
   css: {
     postcss: {
