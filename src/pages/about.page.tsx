@@ -4,6 +4,7 @@ import { Events, State } from "../store";
 import { useEffect } from "react";
 import { styled } from "styled-components";
 import { Footer } from "../components/footer.component";
+import { Link } from "react-router-dom";
 
 const Content = styled.div`
   display: grid;
@@ -31,6 +32,7 @@ export const About: React.FC = () => {
     <Page>
       <Content>
         About
+        <Link to="?page=profile">profile</Link>
         <Footer />
       </Content>
     </Page>

@@ -12,7 +12,7 @@ const Global = createGlobalStyle<{ name: IconName }>`
         place-items: center;
         border-radius: 50%;
         color: hsla(0, 0%, 100%, 0.85) !important;
-        filter: drop-shadow(0.1rem 0.1rem 0.7rem hsla(0, 0%, 0%, 0.6)) drop-shadow(0.1rem 0.1rem 0.5rem hsla(0, 0%, 0%, 0.5));
+        filter: drop-shadow(0.1rem 0.1rem 0.7rem hsla(0, 0%, 0%, 0.5)) drop-shadow(0.1rem 0.1rem 0.5rem hsla(0, 0%, 0%, 0.5));
         div {
             position: absolute;
             bottom: -0.8rem;
