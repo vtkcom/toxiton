@@ -115,7 +115,7 @@ const Global = createGlobalStyle`
 
     .leaflet-container {
         width: 100%;
-        height: 75%;
+        height: calc(100% - 13rem);
         position: absolute;
         top: 0;
     }
