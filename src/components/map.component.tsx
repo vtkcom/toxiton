@@ -22,7 +22,9 @@ export const Map: React.FC<Props> = memo(() => {
 
   function getAdress() {
     if (place.from !== null && place.from.position !== null) {
-      mapRef.current?.flyTo(place.from.position, 18, { duration: 0.4 });
+      mapRef.current?.flyTo(place.from.position, 18, { duration: 0.2 });
+
+      // mapRef.current?.panTo()
     }
   }
 
@@ -37,6 +39,7 @@ export const Map: React.FC<Props> = memo(() => {
       scrollWheelZoom={true}
       touchZoom={true}
       zoomControl={false}
+      style={{ position: "absolute" }}
       ref={mapRef}
     >
       <Controll />

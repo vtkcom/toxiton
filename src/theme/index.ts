@@ -115,7 +115,9 @@ const Global = createGlobalStyle`
 
     .leaflet-container {
         width: 100%;
-        height: 74vh;
+        height: 75%;
+        position: absolute;
+        top: 0;
     }
 
     .avatar {

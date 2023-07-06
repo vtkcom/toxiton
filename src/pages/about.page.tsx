@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const Content = styled.div`
   display: grid;
-  grid-template-rows: max-content max-content auto max-content;
+  grid-template-rows: max-content auto max-content;
   gap: 0.5rem;
   padding: 0 1rem 0.5rem;
   max-height: 100%;
@@ -32,7 +32,7 @@ export const About: React.FC = () => {
     <Page>
       <Content>
         About
-        <Link to="?page=profile">profile</Link>
+        <Link to="?page=profile&prevPage=about">profile</Link>
         <Footer />
       </Content>
     </Page>

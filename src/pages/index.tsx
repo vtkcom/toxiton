@@ -10,14 +10,6 @@ import { About } from "./about.page";
 import { Profile } from "./profile.page";
 
 const WrapOrder = styled.div<{ visible: number }>`
-  position: absolute;
-  top: 0;
-  /* left: 0; */
-  bottom: 0;
-  /* right: 0; */
-  width: 100%;
-  /* height: fit-content; */
-  /* height: 100%; */
   pointer-events: none;
   z-index: 999;
   overflow: hidden;

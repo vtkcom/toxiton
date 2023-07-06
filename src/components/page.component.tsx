@@ -47,14 +47,14 @@ const WrapPage = styled.div<{ visible: number }>`
   position: relative;
   background: ${(p) => p.theme.bg_color};
   transition: transform 0.3s ease;
-  height: calc(100% - 0.5rem);
+  height: calc(100% - 1rem);
   padding: 2rem 0 0 0;
   border-radius: ${(p) => p.theme.border_radius} ${(p) => p.theme.border_radius}
     0 0;
   box-shadow: 0 -0.5rem 1.5rem rgba(0, 0, 0, 0.3);
   pointer-events: all;
   z-index: 999;
-  transform: translate3d(0px, ${(p) => (p.visible ? 67 : 2.1)}vh, 0px);
+  transform: translate3d(0px, ${(p) => (p.visible ? "calc(100% - 14rem)" : "1rem")}, 0px);
   will-change: transform;
   ${Pan} {
     ${(p) => (p.visible ? top : bot)};
@@ -74,6 +74,7 @@ const Back = styled.div`
   grid-auto-flow: column;
   grid-auto-columns: max-content;
   justify-content: space-between;
+  color: ${p => p.theme.link_color};
   span {
     display: grid;
     grid-auto-flow: column;
