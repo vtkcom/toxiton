@@ -24,6 +24,9 @@ const WrapFooter = styled.footer`
     grid-auto-columns: max-content;
     gap: 0.2rem;
   }
+  @media (min-height: 400px) and (max-height: 500px) {
+    font-size: 0.8rem;
+  }
 `;
 
 export const Footer: React.FC = () => {

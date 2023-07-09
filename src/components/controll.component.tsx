@@ -21,6 +21,9 @@ const ControllDiv = styled.div`
   align-content: end;
   pointer-events: none;
   box-shadow: inset 0 0 5rem -0.5rem hsl(0deg 0% 0% / 40%);
+  @media (min-height: 400px) and (max-height: 500px) {
+    padding: 0 0.5rem 13.5rem;
+  }
 `;
 
 const Button = styled.div`

@@ -45,7 +45,7 @@ const Global = createGlobalStyle`
 
         color-scheme: light dark;
         color: ${(p) => p.theme.text_color};
-        background-color: #242424;
+        background-color: ${(p) => p.theme.bg_color};
         user-select: none;
 
         font-synthesis: none;
@@ -55,6 +55,10 @@ const Global = createGlobalStyle`
         -webkit-text-size-adjust: 100%;
         -webkit-tap-highlight-color: rgba(0,0,0,0);
         user-select: none;
+        
+        @media (min-height: 400px) and (max-height: 500px) {
+            font-size: 12px;
+        }
     }
 
     * {
@@ -73,40 +77,24 @@ const Global = createGlobalStyle`
     }
 
     html {
-        width: 100%;
-        height: 100%;
-        /* height: ${() => window.Telegram.WebApp.viewportStableHeight}px; */
         overscroll-behavior: none;
-        display: grid;
     }
 
     body {
         margin: 0;
         display: grid;
-        /* place-items: center; */
-        /* width: 100vw; */
-        /* height: ${() => window.Telegram.WebApp.viewportStableHeight}px; */
         overscroll-behavior: none;
     }
-
+    
     app {
         position: relative;
         display: grid;
-        /* width: 100vw; */
-        /* height: 100%; */
+        height: 100vh;
         overscroll-behavior: none;
+        overflow: hidden;
     }
 
     .leaflet-control-attribution {
-        padding: 0.4rem 1rem;
-        background-color: ${(p) => p.theme.secondary_bg_color} !important;
-        color: ${(p) => p.theme.hint_color} !important;
-        box-shadow: none !important;
-        left: 0;
-        right: 0;
-        bottom: -1px;
-        position: fixed;
-        z-index: 10000;
         display: none !important;
         a {
             color: ${(p) => p.theme.link_color} !important;
@@ -118,6 +106,9 @@ const Global = createGlobalStyle`
         height: calc(100% - 13rem);
         position: absolute;
         top: 0;
+        @media (min-height: 400px) and (max-height: 500px) {
+            height: calc(100% - 11rem);
+        }
     }
 
     .avatar {

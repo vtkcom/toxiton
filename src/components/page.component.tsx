@@ -47,14 +47,18 @@ const WrapPage = styled.div<{ visible: number }>`
   position: relative;
   background: ${(p) => p.theme.bg_color};
   transition: transform 0.3s ease;
-  height: calc(100% - 1rem);
   padding: 2rem 0 0 0;
+  height: calc(100% - 1rem);
   border-radius: ${(p) => p.theme.border_radius} ${(p) => p.theme.border_radius}
     0 0;
   box-shadow: 0 -0.5rem 1.5rem rgba(0, 0, 0, 0.3);
   pointer-events: all;
   z-index: 999;
-  transform: translate3d(0px, ${(p) => (p.visible ? "calc(100% - 14rem)" : "1rem")}, 0px);
+  transform: translate3d(
+    0px,
+    ${(p) => (p.visible ? "calc(100% - 14rem)" : "1rem")},
+    0px
+  );
   will-change: transform;
   ${Pan} {
     ${(p) => (p.visible ? top : bot)};
@@ -62,9 +66,16 @@ const WrapPage = styled.div<{ visible: number }>`
       filter: ${(p) => (p.visible ? "none" : "invert(1)")};
     }
   }
+  @media (min-height: 400px) and (max-height: 500px) {
+    transform: translate3d(
+      0px,
+      ${(p) => (p.visible ? "calc(100% - 12rem)" : "1rem")},
+      0px
+    );
+  }
 `;
 
-const Back = styled.div`
+const Header = styled.div`
   position: absolute;
   right: 0;
   left: 0;
@@ -74,8 +85,8 @@ const Back = styled.div`
   grid-auto-flow: column;
   grid-auto-columns: max-content;
   justify-content: space-between;
-  color: ${p => p.theme.link_color};
   span {
+    color: ${(p) => p.theme.link_color};
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: max-content;
@@ -176,7 +187,7 @@ export const Page: React.FC<Props> = ({ children, pan = false }) => {
     <WrapPage visible={map.visible ? 1 : 0}>
       {pan && <Pan onMouseDown={mouseHandler} onTouchStart={touchHandler} />}
       {!pan && (
-        <Back>
+        <Header>
           {search.get("prevPage") ? (
             <span onClick={back}>
               <Icon name="back" size={1.2} />
@@ -186,7 +197,7 @@ export const Page: React.FC<Props> = ({ children, pan = false }) => {
             <div />
           )}
           <span onClick={close}>{t("button.close")}</span>
-        </Back>
+        </Header>
       )}
       {children}
     </WrapPage>

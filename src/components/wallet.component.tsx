@@ -8,11 +8,12 @@ import { useDetect } from "../hooks/detect.hook";
 import { useStoreon } from "storeon/react";
 import { Events, State } from "../store";
 import { useNavigate } from "react-router-dom";
+import { opacify } from "polished";
 
 const WrapWallet = styled.div`
-  background: ${(p) => p.theme.button_color};
-  color: ${(p) => p.theme.button_text_color};
-  border: 1px solid ${(p) => p.theme.bg_color_10};
+  background: ${(p) => opacify(-0.82, p.theme.button_color)};
+  color: ${(p) => p.theme.button_color};
+  /* border: 1px solid ${(p) => p.theme.bg_color_10}; */
   border-radius: 1rem;
   display: grid;
   gap: 1rem;

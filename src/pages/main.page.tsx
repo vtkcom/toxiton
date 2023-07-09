@@ -60,6 +60,8 @@ const Input = styled.input<{ stylebg: "car" | "egg" }>`
 `;
 
 const Button = styled(Link)`
+  position: fixed;
+  bottom: 0.5rem;
   border-radius: 1rem;
   background-color: ${(p) => p.theme.button_color};
   color: ${(p) => p.theme.button_text_color};
@@ -71,7 +73,6 @@ const Button = styled(Link)`
 
 const ButtonSticky = styled(Button)`
   position: sticky;
-  bottom: 0.5rem;
 `;
 
 const Content = styled.div<{ visible: number }>`
@@ -80,7 +81,9 @@ const Content = styled.div<{ visible: number }>`
   gap: 0.5rem;
   /* min-height: calc(100% - 0.5rem); */
   padding: 0 1rem 0.7rem;
+  max-height: 100%;
   position: relative;
+  /* overflow: hidden; */
   overflow: ${(p) => (p.visible ? "hidden" : "auto")};
 `;
 
@@ -136,65 +139,41 @@ export const Main: React.FC = () => {
 
   return (
     <Page pan>
-      {map.visible ? (
-        <FakeOrder>
-          <div>
+      <Content visible={map.visible ? 1 : 0}>
+        <Order>
+          {!map.visible && (
             <Input
-              onClick={() => {
-                dispatch("map/visible/off");
-                setTimeout(() => {
-                  realInput.current?.click();
-                  realInput.current?.focus();
-                  document.body.scrollTo({ top: 0 });
-                }, 100);
-              }}
-              stylebg="car"
-              inputMode="decimal"
-              placeholder={t("input.car")}
+              placeholder={t("input.egg")}
+              stylebg="egg"
+              value={window.Telegram.WebApp.viewportHeight}
             />
-          </div>
-          {!twa && connect.wallet == null ? (
-            <Button
-              to="?page=connect&prevPage=main"
-              onClick={() =>
-                window.Telegram.WebApp.HapticFeedback.impactOccurred("medium")
-              }
-            >
-              {t("button.connect")}
-            </Button>
-          ) : (
-            <div />
           )}
-        </FakeOrder>
-      ) : (
-        <Content visible={map.visible ? 1 : 0}>
-          <Order>
-            <Input placeholder={t("input.egg")} stylebg="egg" />
-            <Input
-              ref={realInput}
-              stylebg="car"
-              placeholder={t("input.car")}
-              inputMode="text"
-              type="text"
-            />
-          </Order>
+          <Input
+            ref={realInput}
+            stylebg="car"
+            placeholder={t("input.car")}
+            inputMode="text"
+            type="text"
+            onClick={() => dispatch("map/visible/off")}
+            value={window.Telegram.WebApp.viewportStableHeight}
+          />
+        </Order>
 
-          {!twa && connect.wallet == null ? (
-            <ButtonSticky
-              to="?page=connect&prevPage=main"
-              onClick={() =>
-                window.Telegram.WebApp.HapticFeedback.impactOccurred("medium")
-              }
-            >
-              {t("button.connect")}
-            </ButtonSticky>
-          ) : (
-            <div />
-          )}
+        {!twa && connect.wallet == null ? (
+          <ButtonSticky
+            to="?page=connect&prevPage=main"
+            onClick={() =>
+              window.Telegram.WebApp.HapticFeedback.impactOccurred("medium")
+            }
+          >
+            {t("button.connect")}
+          </ButtonSticky>
+        ) : (
+          <div />
+        )}
 
-          <Footer />
-        </Content>
-      )}
+        {!map.visible && <Footer />}
+      </Content>
     </Page>
   );
 };
