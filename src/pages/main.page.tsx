@@ -17,18 +17,6 @@ const Order = styled.div`
   gap: 0.5rem;
 `;
 
-const FakeOrder = styled.div`
-  display: grid;
-  grid-template-rows: auto max-content;
-  height: 100%;
-  background-color: ${(p) => p.theme.bg_color};
-  position: absolute;
-  left: 0.9rem;
-  right: 0.9rem;
-  top: 2rem;
-  padding-bottom: 0.3rem;
-`;
-
 const carCss = css`
   background-color: ${(p) => p.theme.secondary_bg_color};
   background-image: url(${car});
