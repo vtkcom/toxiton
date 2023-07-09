@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { css, styled } from "styled-components";
 import { useStoreon } from "storeon/react";
 import { opacify } from "polished";
@@ -48,8 +48,6 @@ const Input = styled.input<{ stylebg: "car" | "egg" }>`
 `;
 
 const Button = styled(Link)`
-  position: fixed;
-  bottom: 0.5rem;
   border-radius: 1rem;
   background-color: ${(p) => p.theme.button_color};
   color: ${(p) => p.theme.button_text_color};
@@ -61,17 +59,22 @@ const Button = styled(Link)`
 
 const ButtonSticky = styled(Button)`
   position: sticky;
+  bottom: 0.5rem;
+`;
+
+const ButtonFixed = styled(Button)`
+  position: fixed;
+  top: 11rem;
+  left: 1rem;
+  right: 1rem;
 `;
 
 const Content = styled.div<{ visible: number }>`
   display: grid;
   grid-template-rows: auto max-content max-content;
   gap: 0.5rem;
-  /* min-height: calc(100% - 0.5rem); */
   padding: 0 1rem 0.7rem;
-  max-height: 100%;
-  position: relative;
-  /* overflow: hidden; */
+  min-height: calc(100% - 1.5rem);
   overflow: ${(p) => (p.visible ? "hidden" : "auto")};
 `;
 
@@ -80,7 +83,6 @@ export const Main: React.FC = () => {
     "map",
     "connect"
   );
-  const realInput = useRef<HTMLInputElement>(null);
   const t = useTranslator();
   const navigate = useNavigate();
   const { twa } = useDetect();
@@ -137,7 +139,6 @@ export const Main: React.FC = () => {
             />
           )}
           <Input
-            ref={realInput}
             stylebg="car"
             placeholder={t("input.car")}
             inputMode="text"
@@ -147,18 +148,32 @@ export const Main: React.FC = () => {
           />
         </Order>
 
-        {!twa && connect.wallet == null ? (
-          <ButtonSticky
-            to="?page=connect&prevPage=main"
-            onClick={() =>
-              window.Telegram.WebApp.HapticFeedback.impactOccurred("medium")
-            }
-          >
-            {t("button.connect")}
-          </ButtonSticky>
-        ) : (
-          <div />
-        )}
+        {!twa &&
+          connect.wallet == null &&
+          [
+            !map.visible && (
+              <ButtonSticky
+                key="sticky"
+                to="?page=connect&prevPage=main"
+                onClick={() =>
+                  window.Telegram.WebApp.HapticFeedback.impactOccurred("medium")
+                }
+              >
+                {t("button.connect")}
+              </ButtonSticky>
+            ),
+            map.visible && (
+              <ButtonFixed
+                key="fixed"
+                to="?page=connect&prevPage=main"
+                onClick={() =>
+                  window.Telegram.WebApp.HapticFeedback.impactOccurred("medium")
+                }
+              >
+                {t("button.connect")}
+              </ButtonFixed>
+            ),
+          ].filter(Boolean)}
 
         {!map.visible && <Footer />}
       </Content>

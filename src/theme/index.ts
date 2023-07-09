@@ -87,7 +87,6 @@ const Global = createGlobalStyle`
     }
     
     app {
-        position: relative;
         display: grid;
         height: 100vh;
         overscroll-behavior: none;
