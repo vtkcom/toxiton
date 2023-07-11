@@ -7,7 +7,7 @@ import { Global, theme } from "./theme";
 import { Map } from "./components/map.component";
 import { Sprites } from "./sprites";
 import { store } from "./store";
-import { Pages } from "./pages";
+import { AppRoutes } from "./routes";
 // import logo from "/logo.png";
 // import car from "./assets/blackcar.png";
 import "leaflet/dist/leaflet.css";
@@ -105,7 +105,7 @@ function App() {
               <Map />
 
               <Routes>
-                <Route path="*" element={<Pages />} />
+                <Route path="*" element={<AppRoutes />} />
               </Routes>
 
               <Sprites />

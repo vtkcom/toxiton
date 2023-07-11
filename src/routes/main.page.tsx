@@ -55,6 +55,9 @@ const Button = styled(Link)`
   display: grid;
   justify-content: center;
   align-items: center;
+  &:hover {
+    color: ${(p) => p.theme.button_text_color};
+  }
 `;
 
 const ButtonSticky = styled(Button)`
@@ -64,7 +67,7 @@ const ButtonSticky = styled(Button)`
 
 const ButtonFixed = styled(Button)`
   position: fixed;
-  top: 11rem;
+  top: 10rem;
   left: 1rem;
   right: 1rem;
 `;
@@ -73,8 +76,8 @@ const Content = styled.div<{ visible: number }>`
   display: grid;
   grid-template-rows: auto max-content max-content;
   gap: 0.5rem;
-  padding: 0 1rem 0.7rem;
-  min-height: calc(100% - 1.5rem);
+  padding: 0 1rem 0.5rem;
+  height: calc(100vh - 3rem);
   overflow: ${(p) => (p.visible ? "hidden" : "auto")};
 `;
 
@@ -87,9 +90,10 @@ export const Main: React.FC = () => {
   const navigate = useNavigate();
   const { twa } = useDetect();
 
-  useEffect(twaButton, [connect.wallet]);
+  useEffect(twaMainButton, [connect.wallet]);
+  useEffect(twaBackButton, []);
 
-  function twaButton() {
+  function twaMainButton() {
     if (connect.wallet === null) {
       window.Telegram.WebApp.MainButton.setParams({
         is_active: true,
@@ -123,6 +127,10 @@ export const Main: React.FC = () => {
     }
   }
 
+  function twaBackButton() {
+    window.Telegram.WebApp.BackButton.hide();
+  }
+
   function connectWallet() {
     navigate("?page=connect&prevPage=main");
   }
@@ -132,19 +140,14 @@ export const Main: React.FC = () => {
       <Content visible={map.visible ? 1 : 0}>
         <Order>
           {!map.visible && (
-            <Input
-              placeholder={t("input.egg")}
-              stylebg="egg"
-              value={window.Telegram.WebApp.viewportHeight}
-            />
+            <Input placeholder={t("input.egg")} stylebg="egg" type="address" />
           )}
           <Input
             stylebg="car"
             placeholder={t("input.car")}
             inputMode="text"
-            type="text"
+            type="address"
             onClick={() => dispatch("map/visible/off")}
-            value={window.Telegram.WebApp.viewportStableHeight}
           />
         </Order>
 

@@ -7,18 +7,15 @@ import { Footer } from "../components/footer.component";
 import { Wallet } from "../components/wallet.component";
 import { useTranslator } from "../hooks/translator.hook";
 import { useNavigate } from "react-router-dom";
-import {
-  WalletInfoInjectable,
-  WalletInfoRemote,
-} from "@tonconnect/sdk";
+import { WalletInfoInjectable, WalletInfoRemote } from "@tonconnect/sdk";
 
 const Content = styled.div`
   display: grid;
   grid-template-rows: max-content max-content auto max-content;
   gap: 0.5rem;
   padding: 0 1rem 0.5rem;
-  min-height: calc(100% - 1.5rem);
-  overflow: auto;
+  height: calc(100vh - 3rem);
+  overflow-y: auto;
   h3,
   p {
     margin: 0;
@@ -29,12 +26,12 @@ const Wallets = styled.div<{ count: number }>`
   display: grid;
   gap: 0.5rem;
   grid-auto-flow: dense;
-  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  grid-template-columns: 1fr;
   ${(p) => p.count === 4 && `grid-template-columns: repeat(2, 1fr)`};
 `;
 
 export const Connect: React.FC = () => {
-  const { dispatch, connect } = useStoreon<State, Events>("map", "connect");
+  const { dispatch, connect } = useStoreon<State, Events>("connect");
   const navigate = useNavigate();
   const t = useTranslator();
 
@@ -47,9 +44,20 @@ export const Connect: React.FC = () => {
 
     window.Telegram.WebApp.MainButton.setParams({
       is_active: false,
-      is_visible: true,
+      is_visible: false,
       text: t("button.connect"),
     });
+
+    window.Telegram.WebApp.BackButton.show();
+    window.Telegram.WebApp.BackButton.onClick(back);
+
+    return () => {
+      window.Telegram.WebApp.BackButton.offClick(back);
+    };
+  }
+
+  function back() {
+    navigate("?page=main");
   }
 
   function redirect() {
@@ -57,7 +65,7 @@ export const Connect: React.FC = () => {
   }
 
   return (
-    <Page>
+    <Page onClose={() => navigate("?page=main", { replace: true })}>
       <Content>
         <h3>{t("connect.title")}</h3>
         <p>{t("connect.information")}</p>

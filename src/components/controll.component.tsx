@@ -16,7 +16,7 @@ const ControllDiv = styled.div`
   grid-auto-rows: max-content;
   grid-auto-flow: column;
   gap: 0.5rem;
-  padding: 0 0.5rem 15.5rem;
+  padding: 0 0.5rem 14.5rem;
   justify-content: space-between;
   align-content: end;
   pointer-events: none;

@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { useStoreon } from "storeon/react";
-import { useSearchParams, useNavigate } from "react-router-dom";
 import { Events, State } from "../store";
 import useDebounce from "../hooks/debounce.hook";
-import { Icon } from "./icon.component";
-import { useTranslator } from "../hooks/translator.hook";
 
 const top = css`
   padding-bottom: 1.3rem;
@@ -48,7 +45,7 @@ const WrapPage = styled.div<{ visible: number }>`
   background: ${(p) => p.theme.bg_color};
   transition: transform 0.3s ease;
   padding: 2rem 0 0 0;
-  height: calc(100% - 1rem);
+  /* height: calc(100% - 1rem); */
   /* overflow: ${(p) => (p.visible ? "hidden" : "auto")}; */
   border-radius: ${(p) => p.theme.border_radius} ${(p) => p.theme.border_radius}
     0 0;
@@ -57,7 +54,7 @@ const WrapPage = styled.div<{ visible: number }>`
   z-index: 999;
   transform: translate3d(
     0px,
-    ${(p) => (p.visible ? "calc(100% - 14rem)" : "1rem")},
+    ${(p) => (p.visible ? "calc(100vh - 14rem)" : "1rem")},
     0px
   );
   will-change: transform;
@@ -76,39 +73,17 @@ const WrapPage = styled.div<{ visible: number }>`
   }
 `;
 
-const Header = styled.div`
-  position: absolute;
-  right: 0;
-  left: 0;
-  padding: 0.5rem 1.3rem;
-  font-size: 0.8rem;
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: max-content;
-  justify-content: space-between;
-  span {
-    color: ${(p) => p.theme.link_color};
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
-    align-items: center;
-    gap: 0.3rem;
-  }
-`;
-
 interface Props {
   children?: React.ReactNode | React.ReactNode[];
   pan?: boolean;
+  onClose?: (bool?: boolean) => void;
 }
 
-export const Page: React.FC<Props> = ({ children, pan = false }) => {
-  const { dispatch, map } = useStoreon<State, Events>("map", "connect");
+export const Page: React.FC<Props> = ({ children, pan = false, onClose }) => {
+  const { dispatch, map } = useStoreon<State, Events>("map");
   const [size, setSize] = useState({ y: 0 });
-  const [search] = useSearchParams();
-  const navigate = useNavigate();
-  const t = useTranslator();
 
-  useDebounce(() => toggleVisible(), size, 100);
+  useDebounce(toggleVisible, size, 100);
 
   function toggleVisible() {
     const max = 67;
@@ -120,6 +95,7 @@ export const Page: React.FC<Props> = ({ children, pan = false }) => {
       }
       if ((size.y >= max || size.y > 3) && !map.visible) {
         dispatch("map/visible/on");
+        if (onClose) onClose();
       }
     } else if (!map.visible && pan) {
       dispatch("map/visible/on");
@@ -175,31 +151,9 @@ export const Page: React.FC<Props> = ({ children, pan = false }) => {
     document.addEventListener("touchend", onTouchEnd, { once: true });
   }
 
-  function close() {
-    dispatch("map/visible/on");
-    navigate("?page=main");
-  }
-
-  function back() {
-    navigate(`?page=${search.get("prevPage")}`);
-  }
-
   return (
     <WrapPage visible={map.visible ? 1 : 0}>
-      {pan && <Pan onMouseDown={mouseHandler} onTouchStart={touchHandler} />}
-      {!pan && (
-        <Header>
-          {search.get("prevPage") ? (
-            <span onClick={back}>
-              <Icon name="back" size={1.2} />
-              {t("button.back")}
-            </span>
-          ) : (
-            <div />
-          )}
-          <span onClick={close}>{t("button.close")}</span>
-        </Header>
-      )}
+      <Pan onMouseDown={mouseHandler} onTouchStart={touchHandler} />
       {children}
     </WrapPage>
   );

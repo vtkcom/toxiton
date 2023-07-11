@@ -57,7 +57,7 @@ const Global = createGlobalStyle`
         user-select: none;
         
         @media (min-height: 400px) and (max-height: 500px) {
-            font-size: 12px;
+            font-size: 13px;
         }
     }
 
@@ -89,6 +89,7 @@ const Global = createGlobalStyle`
     app {
         display: grid;
         height: 100vh;
+        width: 100vw;
         overscroll-behavior: none;
         overflow: hidden;
     }
@@ -102,7 +103,7 @@ const Global = createGlobalStyle`
 
     .leaflet-container {
         width: 100%;
-        height: calc(100% - 13rem);
+        height: calc(100vh - 12rem);
         position: absolute;
         top: 0;
         @media (min-height: 400px) and (max-height: 500px) {

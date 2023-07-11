@@ -8,6 +8,7 @@ import { Main } from "./main.page";
 import { useEffect } from "react";
 import { About } from "./about.page";
 import { Profile } from "./profile.page";
+import { Wallet } from "./wallet.page";
 
 const WrapOrder = styled.div<{ visible: number }>`
   position: relative;
@@ -21,7 +22,7 @@ const WrapOrder = styled.div<{ visible: number }>`
   will-change: background, backdrop-filter;
 `;
 
-export const Pages: React.FC = () => {
+export const AppRoutes: React.FC = () => {
   const { map } = useStoreon<State, Events>("map");
   const [search] = useSearchParams();
   const navigate = useNavigate();
@@ -37,6 +38,7 @@ export const Pages: React.FC = () => {
   return (
     <WrapOrder visible={map.visible ? 1 : 0}>
       <Header />
+      {search.get("page") === "connect" && search.get("wallet") && <Wallet />}
       {search.get("page") === "connect" && <Connect />}
       {search.get("page") === "main" && <Main />}
       {search.get("page") === "about" && <About />}
