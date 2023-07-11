@@ -49,7 +49,7 @@ export const Wallet: React.FC<Props> = ({ wallet }) => {
       if ((wallet as WalletInfoRemote).universalLink) {
         dispatch("connect/on/link", { wallet, isOpen: mobile });
         if (!mobile)
-          navigate(`?page=connect&wallet=${wallet.name.toLowerCase()}`);
+          navigate(`?page=connect&wallet=${wallet.name.toLowerCase()}&prevPage=connect`);
       }
     }
   }
