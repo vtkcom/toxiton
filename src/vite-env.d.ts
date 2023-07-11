@@ -10,7 +10,7 @@ declare global {
 
 declare module "styled-components" {
   export interface DefaultTheme extends ThemeParams {
-    border_radius: `${number}rem`;
+    border_radius?: `${number}rem`;
     box_shadow?: string;
     bg_color_90?: string;
     bg_color_70?: string;

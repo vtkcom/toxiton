@@ -1,5 +1,4 @@
 import { DefaultTheme, createGlobalStyle } from "styled-components";
-import { ThemeParams } from "@twa-dev/types";
 import { opacify } from "polished";
 
 // const defaultTheme: ThemeParams = {
@@ -12,7 +11,7 @@ import { opacify } from "polished";
 //   text_color: "#ffffff",
 // };
 
-const lightTheme: ThemeParams = {
+const lightTheme: DefaultTheme = {
   bg_color: "#ffffff",
   button_color: "#3390ec",
   button_text_color: "#ffffff",
@@ -20,9 +19,14 @@ const lightTheme: ThemeParams = {
   link_color: "#3390ec",
   secondary_bg_color: "#f4f4f5",
   text_color: "#000000",
+  bg_color_90: opacify(-0.1, "#ffffff"),
+  bg_color_70: opacify(-0.3, "#ffffff"),
+  bg_color_50: opacify(-0.5, "#ffffff"),
+  bg_color_20: opacify(-0.8, "#ffffff"),
+  bg_color_10: opacify(-0.9, "#ffffff"),
 };
 
-export const tonkeeperTheme: ThemeParams = {
+export const tonkeeperTheme: DefaultTheme = {
   bg_color: "#10161F",
   button_color: "#3390ec",
   button_text_color: "#ffffff",
@@ -30,6 +34,11 @@ export const tonkeeperTheme: ThemeParams = {
   link_color: "#45AEF5",
   secondary_bg_color: "#1D2633",
   text_color: "#FFFFFF",
+  bg_color_90: opacify(-0.1, "#10161F"),
+  bg_color_70: opacify(-0.3, "#10161F"),
+  bg_color_50: opacify(-0.5, "#10161F"),
+  bg_color_20: opacify(-0.8, "#10161F"),
+  bg_color_10: opacify(-0.9, "#10161F"),
 };
 
 const theme: DefaultTheme = {
@@ -37,12 +46,6 @@ const theme: DefaultTheme = {
   ...lightTheme,
   ...window.Telegram.WebApp.themeParams,
 };
-
-theme.bg_color_90 = opacify(-0.1, theme.bg_color);
-theme.bg_color_70 = opacify(-0.3, theme.bg_color);
-theme.bg_color_50 = opacify(-0.5, theme.bg_color);
-theme.bg_color_20 = opacify(-0.8, theme.bg_color);
-theme.bg_color_10 = opacify(-0.9, theme.bg_color);
 theme.box_shadow = `0 0.5rem 1.5rem rgba(0, 0, 0, 0.5);`;
 
 const Global = createGlobalStyle`
