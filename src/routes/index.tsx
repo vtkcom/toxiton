@@ -1,14 +1,17 @@
-import styled from "styled-components";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import styled, { ThemeProvider } from "styled-components";
+import { Route, Routes, useNavigate, useSearchParams } from "react-router-dom";
 import { useStoreon } from "storeon/react";
 import { Header } from "../components/header.component";
 import { Connect } from "./connect.page";
 import { Events, State } from "../store";
 import { Main } from "./main.page";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { About } from "./about.page";
 import { Profile } from "./profile.page";
 import { Wallet } from "./wallet.page";
+import { Global, theme, tonkeeperTheme } from "../theme";
+import { Map } from "../components/map.component";
+import { Sprites } from "../sprites";
 
 const WrapOrder = styled.div<{ visible: number }>`
   position: relative;
@@ -22,18 +25,9 @@ const WrapOrder = styled.div<{ visible: number }>`
   will-change: background, backdrop-filter;
 `;
 
-export const AppRoutes: React.FC = () => {
-  const { map } = useStoreon<State, Events>("map");
+const List: React.FC = () => {
+  const { map } = useStoreon<State, Events>("map", "connect");
   const [search] = useSearchParams();
-  const navigate = useNavigate();
-
-  useEffect(redirect, []);
-
-  function redirect() {
-    if (search.get("page") === null) {
-      navigate("?page=main", { replace: true });
-    }
-  }
 
   return (
     <WrapOrder visible={map.visible ? 1 : 0}>
@@ -44,5 +38,43 @@ export const AppRoutes: React.FC = () => {
       {search.get("page") === "about" && <About />}
       {search.get("page") === "profile" && <Profile />}
     </WrapOrder>
+  );
+};
+
+export const AppRoutes: React.FC = () => {
+  const { connect } = useStoreon<State, Events>("map", "connect");
+  const themeParams = useMemo(
+    () =>
+      connect.embeddedWallet ? { ...theme, ...tonkeeperTheme } : { ...theme },
+    [connect.embeddedWallet]
+  );
+  const [search] = useSearchParams();
+  const navigate = useNavigate();
+
+  useEffect(redirect, []);
+  useEffect(init, []);
+
+  function init() {
+    if (connect.embeddedWallet !== null) {
+    }
+  }
+
+  function redirect() {
+    if (search.get("page") === null) {
+      navigate("?page=main", { replace: true });
+    }
+  }
+
+  return (
+    <ThemeProvider theme={themeParams}>
+      <Global />
+      <Map />
+
+      <Routes>
+        <Route path="*" element={<List />} />
+      </Routes>
+
+      <Sprites />
+    </ThemeProvider>
   );
 };

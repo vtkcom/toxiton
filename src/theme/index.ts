@@ -22,6 +22,16 @@ const lightTheme: ThemeParams = {
   text_color: "#000000",
 };
 
+export const tonkeeperTheme: ThemeParams = {
+  bg_color: "#10161F",
+  button_color: "#3390ec",
+  button_text_color: "#ffffff",
+  hint_color: "#556170",
+  link_color: "#45AEF5",
+  secondary_bg_color: "#1D2633",
+  text_color: "#FFFFFF",
+};
+
 const theme: DefaultTheme = {
   border_radius: "2rem",
   ...lightTheme,

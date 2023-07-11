@@ -1,15 +1,10 @@
 import { useEffect } from "react";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { SkeletonTheme } from "react-loading-skeleton";
-import { StyleSheetManager, ThemeProvider } from "styled-components";
+import { StyleSheetManager } from "styled-components";
 import { StoreContext } from "storeon/react";
-import { Global, theme } from "./theme";
-import { Map } from "./components/map.component";
-import { Sprites } from "./sprites";
 import { store } from "./store";
 import { AppRoutes } from "./routes";
-// import logo from "/logo.png";
-// import car from "./assets/blackcar.png";
 import "leaflet/dist/leaflet.css";
 import "react-loading-skeleton/dist/skeleton.css";
 
@@ -99,20 +94,11 @@ function App() {
   return (
     <BrowserRouter basename="/toxiton">
       <StyleSheetManager enableVendorPrefixes>
-        <ThemeProvider theme={theme}>
-          <StoreContext.Provider value={store}>
-            <SkeletonTheme borderRadius="0.3rem">
-              <Map />
-
-              <Routes>
-                <Route path="*" element={<AppRoutes />} />
-              </Routes>
-
-              <Sprites />
-            </SkeletonTheme>
-            <Global />
-          </StoreContext.Provider>
-        </ThemeProvider>
+        <StoreContext.Provider value={store}>
+          <SkeletonTheme borderRadius="0.3rem">
+            <AppRoutes />
+          </SkeletonTheme>
+        </StoreContext.Provider>
       </StyleSheetManager>
     </BrowserRouter>
   );

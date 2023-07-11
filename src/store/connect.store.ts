@@ -18,6 +18,7 @@ connector.restoreConnection();
 export interface ConnectState {
   connect: {
     wallet: string | null;
+    embeddedWallet: WalletInfoInjectable | null;
     url: string | null;
     wallets: {
       isLoading: boolean;
@@ -35,6 +36,7 @@ export interface ConnectEvents {
   "connect/wallets": undefined;
 
   "#connect/data/set": { wallet: string | null; url: string | null };
+  "#connect/embedded/set": { wallet: WalletInfoInjectable | null };
 
   "#connect/wallets/req": undefined;
   "#connect/wallets/res": { wallets: WalletInfo[] };
@@ -43,6 +45,7 @@ export interface ConnectEvents {
 const initState: ConnectState = {
   connect: {
     wallet: null,
+    embeddedWallet: null,
     url: null,
     wallets: {
       isLoading: false,
@@ -135,7 +138,20 @@ export const connectStore: StoreonModule<ConnectState, ConnectEvents> = (
     store.dispatch("#connect/wallets/req");
 
     const wallets = await connector.getWallets();
+    const embededWallet = (wallets as WalletInfoInjectable[]).find(
+      (a) => a.embedded
+    );
+
+    if (embededWallet)
+      store.dispatch("#connect/embedded/set", { wallet: embededWallet });
 
     store.dispatch("#connect/wallets/res", { wallets });
   });
+
+  store.on("#connect/embedded/set", (state, { wallet }) => ({
+    connect: {
+      ...state.connect,
+      embeddedWallet: wallet,
+    },
+  }));
 };
