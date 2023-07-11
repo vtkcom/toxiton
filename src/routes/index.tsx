@@ -45,7 +45,9 @@ export const AppRoutes: React.FC = () => {
   const { connect } = useStoreon<State, Events>("map", "connect");
   const themeParams = useMemo(
     () =>
-      connect.embeddedWallet ? { ...theme, ...tonkeeperTheme } : { ...theme },
+      connect.embeddedWallet && connect.embeddedWallet.name === "Tonkeeper"
+        ? { ...theme, ...tonkeeperTheme }
+        : { ...theme },
     [connect.embeddedWallet]
   );
   const [search] = useSearchParams();
