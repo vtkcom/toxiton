@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { styled } from "styled-components";
 import { Footer } from "../components/footer.component";
 import { useTranslator } from "../hooks/translator.hook";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { QRCode } from "../components/qr.component";
 import { opacify } from "polished";
 
@@ -41,10 +41,9 @@ const Connect = styled.div`
 
 export const Wallet: React.FC = () => {
   const {
-    connect: { wallet, wallets, url },
+    connect: { wallet, url },
     dispatch,
   } = useStoreon<State, Events>("profile", "connect");
-  const [search] = useSearchParams();
   const navigate = useNavigate();
   const t = useTranslator();
   // const memoWallet = useMemo(
