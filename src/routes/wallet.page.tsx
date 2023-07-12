@@ -29,7 +29,7 @@ const Connect = styled.div`
   gap: 1rem;
   padding: 1rem 2rem;
   border-radius: 1rem;
-  background: ${(p) => opacify(-0.82, p.theme.button_color)};
+  background: ${(p) => opacify(-0.82, p.theme.button_color!)};
   color: ${(p) => p.theme.button_color};
   padding: 0.5rem 1rem;
   & p {
