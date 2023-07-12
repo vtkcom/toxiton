@@ -1,17 +1,22 @@
 import { DefaultTheme, createGlobalStyle } from "styled-components";
 import { opacify } from "polished";
 
-// const defaultTheme: ThemeParams = {
-//   bg_color: "#212121",
-//   button_color: "#8774e1",
-//   button_text_color: "#ffffff",
-//   hint_color: "#aaaaaa",
-//   link_color: "#8774e1",
-//   secondary_bg_color: "#0f0f0f",
-//   text_color: "#ffffff",
-// };
+export const darkTheme: DefaultTheme = {
+  bg_color: "#212121",
+  button_color: "#8774e1",
+  button_text_color: "#ffffff",
+  hint_color: "#aaaaaa",
+  link_color: "#8774e1",
+  secondary_bg_color: "#0f0f0f",
+  text_color: "#ffffff",
+  bg_color_90: opacify(-0.1, "#212121"),
+  bg_color_70: opacify(-0.3, "#212121"),
+  bg_color_50: opacify(-0.5, "#212121"),
+  bg_color_20: opacify(-0.8, "#212121"),
+  bg_color_10: opacify(-0.9, "#212121"),
+};
 
-const lightTheme: DefaultTheme = {
+export const lightTheme: DefaultTheme = {
   bg_color: "#ffffff",
   button_color: "#3390ec",
   button_text_color: "#ffffff",
@@ -41,14 +46,13 @@ export const tonkeeperTheme: DefaultTheme = {
   bg_color_10: opacify(-0.9, "#10161F"),
 };
 
-const theme: DefaultTheme = {
+export const baseTheme: DefaultTheme = {
   border_radius: "2rem",
-  ...lightTheme,
+  box_shadow: "0 0.5rem 1.5rem rgba(0, 0, 0, 0.5)",
   ...window.Telegram.WebApp.themeParams,
 };
-theme.box_shadow = `0 0.5rem 1.5rem rgba(0, 0, 0, 0.5);`;
 
-const Global = createGlobalStyle`
+export const Global = createGlobalStyle`
     :root {
         font-family: 'Roboto', sans-serif;
         /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
@@ -153,4 +157,3 @@ const Global = createGlobalStyle`
     }
 `;
 
-export { theme, Global };

@@ -9,9 +9,17 @@ import { useEffect, useMemo } from "react";
 import { About } from "./about.page";
 import { Profile } from "./profile.page";
 import { Wallet } from "./wallet.page";
-import { Global, theme, tonkeeperTheme } from "../theme";
+import {
+  Global,
+  darkTheme,
+  lightTheme,
+  baseTheme,
+  tonkeeperTheme,
+} from "../theme";
 import { Map } from "../components/map.component";
 import { Sprites } from "../sprites";
+import { useSystemTheme } from "../hooks/systemtheme.hook";
+import { DefaultTheme } from "styled-components";
 
 const WrapOrder = styled.div<{ visible: number }>`
   position: relative;
@@ -42,14 +50,18 @@ const List: React.FC = () => {
 };
 
 export const AppRoutes: React.FC = () => {
+  const systemTheme = useSystemTheme();
   const { connect } = useStoreon<State, Events>("map", "connect");
-  const themeParams = useMemo(
-    () =>
-      connect.embeddedWallet && connect.embeddedWallet.name === "Tonkeeper"
-        ? { ...theme, ...tonkeeperTheme }
-        : { ...theme },
-    [connect.embeddedWallet]
-  );
+  const themeParams = useMemo(() => {
+    let theme: DefaultTheme = { ...baseTheme };
+
+    if (systemTheme === "dark") theme = { ...theme, ...darkTheme };
+    if (systemTheme === "light") theme = { ...theme, ...lightTheme };
+    if (connect.embeddedWallet && connect.embeddedWallet.name === "Tonkeeper")
+      theme = { ...theme, ...tonkeeperTheme };
+
+    return theme;
+  }, [connect.embeddedWallet, systemTheme]);
   const [search] = useSearchParams();
   const navigate = useNavigate();
 
