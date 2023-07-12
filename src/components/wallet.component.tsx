@@ -13,7 +13,7 @@ import { opacify } from "polished";
 // type WalletType = "universalLink" | "injected" | "embedded";
 
 const WrapWallet = styled.div`
-  background: ${(p) => opacify(-0.82, p.theme.button_color)};
+  background: ${(p) => opacify(-0.82, p.theme.button_color!)};
   color: ${(p) => p.theme.button_color};
   /* border: 1px solid ${(p) => p.theme.bg_color_10}; */
   border-radius: 1rem;
