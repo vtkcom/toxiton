@@ -60,7 +60,7 @@ export const AppRoutes: React.FC = () => {
     if (connect.embeddedWallet && connect.embeddedWallet.name === "Tonkeeper")
       theme = { ...theme, ...tonkeeperTheme };
 
-    return theme;
+    return { ...theme, ...window.Telegram.WebApp.themeParams };
   }, [connect.embeddedWallet, systemTheme]);
   const [search] = useSearchParams();
   const navigate = useNavigate();

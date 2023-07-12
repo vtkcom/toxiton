@@ -49,7 +49,6 @@ export const tonkeeperTheme: DefaultTheme = {
 export const baseTheme: DefaultTheme = {
   border_radius: "2rem",
   box_shadow: "0 0.5rem 1.5rem rgba(0, 0, 0, 0.5)",
-  ...window.Telegram.WebApp.themeParams,
 };
 
 export const Global = createGlobalStyle`
@@ -156,4 +155,3 @@ export const Global = createGlobalStyle`
         fill: none;
     }
 `;
-
