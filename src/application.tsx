@@ -43,7 +43,7 @@ function App() {
   useEffect(getFull, []);
 
   function getFull() {
-    window.Telegram.WebApp.expand();
+    // window.Telegram.WebApp.expand();
     window.Telegram.WebApp.enableClosingConfirmation();
     // if (!("Notification" in window)) {
     //   console.log("This browser does not support notifications.");
