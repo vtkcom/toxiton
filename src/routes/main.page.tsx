@@ -147,7 +147,7 @@ export const Main: React.FC = () => {
             placeholder={t("input.car")}
             inputMode="text"
             type="address"
-            onClick={() => dispatch("map/visible/off")}
+            onClick={() => map.visible && dispatch("map/visible/off")}
           />
         </Order>
 
