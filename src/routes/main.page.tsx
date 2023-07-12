@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import { css, styled } from "styled-components";
 import { useStoreon } from "storeon/react";
 import { opacify } from "polished";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Events, State } from "../store";
-import { Footer } from "../components/footer.component";
+import { Copyright } from "../components/copyright.component";
 import { Page } from "../components/page.component";
 import { useTranslator } from "../hooks/translator.hook";
-import { useDetect } from "../hooks/detect.hook";
 import car from "../assets/blackcar.png";
 import egg from "../assets/egg.png";
+import { Footer } from "../components/footer.component";
 
 const Order = styled.div`
   display: grid;
@@ -47,37 +47,13 @@ const Input = styled.input<{ stylebg: "car" | "egg" }>`
   }
 `;
 
-const Button = styled(Link)`
-  border-radius: 1rem;
-  background-color: ${(p) => p.theme.button_color};
-  color: ${(p) => p.theme.button_text_color};
-  height: 3rem;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  &:hover {
-    color: ${(p) => p.theme.button_text_color};
-  }
-`;
-
-const ButtonSticky = styled(Button)`
-  position: sticky;
-  bottom: 0.5rem;
-`;
-
-const ButtonFixed = styled(Button)`
-  position: fixed;
-  top: 10rem;
-  left: 1rem;
-  right: 1rem;
-`;
-
 const Content = styled.div<{ visible: number }>`
   display: grid;
   grid-template-rows: auto max-content max-content;
   gap: 0.5rem;
   padding: 0 1rem 0.5rem;
   height: calc(100vh - 3rem);
+  min-height: 30rem;
   overflow: ${(p) => (p.visible ? "hidden" : "auto")};
 `;
 
@@ -88,7 +64,6 @@ export const Main: React.FC = () => {
   );
   const t = useTranslator();
   const navigate = useNavigate();
-  const { twa } = useDetect();
 
   useEffect(twaMainButton, [connect.wallet]);
   useEffect(twaBackButton, []);
@@ -151,34 +126,9 @@ export const Main: React.FC = () => {
           />
         </Order>
 
-        {!twa &&
-          connect.wallet == null &&
-          [
-            !map.visible && (
-              <ButtonSticky
-                key="sticky"
-                to="?page=connect&prevPage=main"
-                onClick={() =>
-                  window.Telegram.WebApp.HapticFeedback.impactOccurred("medium")
-                }
-              >
-                {t("button.connect")}
-              </ButtonSticky>
-            ),
-            map.visible && (
-              <ButtonFixed
-                key="fixed"
-                to="?page=connect&prevPage=main"
-                onClick={() =>
-                  window.Telegram.WebApp.HapticFeedback.impactOccurred("medium")
-                }
-              >
-                {t("button.connect")}
-              </ButtonFixed>
-            ),
-          ].filter(Boolean)}
+        <Footer />
 
-        {!map.visible && <Footer />}
+        {!map.visible && <Copyright />}
       </Content>
     </Page>
   );

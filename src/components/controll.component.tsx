@@ -9,7 +9,7 @@ const ControllDiv = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  width: 100vw;
+  left: 0;
   height: 100vh;
   z-index: 999;
   display: grid;

@@ -3,7 +3,7 @@ import { Page } from "../components/page.component";
 import { Events, State } from "../store";
 import { useEffect } from "react";
 import { styled } from "styled-components";
-import { Footer } from "../components/footer.component";
+import { Copyright } from "../components/copyright.component";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Content = styled.div`
@@ -51,7 +51,7 @@ export const Profile: React.FC = () => {
     <Page onClose={() => navigate(`?page=main`)}>
       <Content>
         Profile
-        <Footer />
+        <Copyright />
       </Content>
     </Page>
   );

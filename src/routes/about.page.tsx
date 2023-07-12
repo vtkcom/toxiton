@@ -3,7 +3,7 @@ import { Page } from "../components/page.component";
 import { Events, State } from "../store";
 import { useEffect } from "react";
 import { styled } from "styled-components";
-import { Footer } from "../components/footer.component";
+import { Copyright } from "../components/copyright.component";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 const Content = styled.div`
@@ -47,7 +47,7 @@ export const About: React.FC = () => {
       <Content>
         About
         <Link to="?page=profile&prevPage=about">profile</Link>
-        <Footer />
+        <Copyright />
       </Content>
     </Page>
   );

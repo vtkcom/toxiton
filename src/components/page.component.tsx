@@ -18,12 +18,12 @@ const Pan = styled.div`
   display: grid;
   align-items: center;
   justify-content: center;
-  width: 100%;
   height: 2.5rem;
   pointer-events: auto;
   position: absolute;
   top: -1rem;
   left: 0;
+  right: 0;
   transition: all 0.2s ease;
   z-index: 1006;
   &::before {
@@ -45,8 +45,6 @@ const WrapPage = styled.div<{ visible: number }>`
   background: ${(p) => p.theme.bg_color};
   transition: transform 0.3s ease;
   padding: 2rem 0 0 0;
-  /* height: calc(100% - 1rem); */
-  /* overflow: ${(p) => (p.visible ? "hidden" : "auto")}; */
   border-radius: ${(p) => p.theme.border_radius} ${(p) => p.theme.border_radius}
     0 0;
   box-shadow: 0 -0.5rem 1.5rem rgba(0, 0, 0, 0.3);

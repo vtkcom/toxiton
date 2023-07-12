@@ -1,60 +1,69 @@
-import { styled } from "styled-components";
-import { Icon } from "./icon.component";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { useDetect } from "../hooks/detect.hook";
+import { useStoreon } from "storeon/react";
+import { Events, State } from "../store";
 import { useTranslator } from "../hooks/translator.hook";
 
-const WrapFooter = styled.footer`
+const Wrap = styled.div``;
+
+const Button = styled(Link)`
+  border-radius: 1rem;
+  background-color: ${(p) => p.theme.button_color};
+  color: ${(p) => p.theme.button_text_color};
+  height: 3rem;
   display: grid;
+  justify-content: center;
   align-items: center;
-  grid-auto-flow: column;
-  grid-auto-columns: max-content;
-  justify-content: space-between;
-  font-size: 0.6rem;
-  color: ${(p) => p.theme.hint_color};
-  & > div {
-    display: grid;
-    align-items: center;
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
-    gap: 0.2rem;
-  }
-  & > div a {
-    display: grid;
-    align-items: center;
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
-    gap: 0.2rem;
-  }
-  @media (min-height: 400px) and (max-height: 500px) {
-    font-size: 0.8rem;
+  &:hover {
+    color: ${(p) => p.theme.button_text_color};
   }
 `;
 
+const WrapSticky = styled(Wrap)`
+  position: sticky;
+  bottom: 0.5rem;
+`;
+
+const WrapFixed = styled(Wrap)`
+  position: fixed;
+  top: 10rem;
+  left: 1rem;
+  right: 1rem;
+`;
+
 export const Footer: React.FC = () => {
+  const { twa } = useDetect();
+  const { connect, map } = useStoreon<State, Events>("connect", "map");
   const t = useTranslator();
-  return (
-    <WrapFooter>
-      <div>
-        {t("footer.base")}
-        <a target="_blank" href="https://ton.org/">
-          <Icon name="ton" size={1.2} />
-          TON
-        </a>
-      </div>
-      <div>
-        <a
-          target="_blank"
-          href="https://leafletjs.com"
-          title="A JavaScript library for interactive maps"
-        >
-          <Icon name="ua" size={1} />
-          Leaflet
-        </a>
-        &copy;
-        <a target="_blank" href="https://www.openstreetmap.org/copyright">
-          OpenStreetMap
-        </a>
-        {t("footer.contributors")}
-      </div>
-    </WrapFooter>
-  );
+
+  if (!twa) {
+    if (connect.wallet == null) {
+      return !map.visible ? (
+        <WrapSticky key="sticky">
+          <Button
+            to="?page=connect&prevPage=main"
+            onClick={() =>
+              window.Telegram.WebApp.HapticFeedback.impactOccurred("medium")
+            }
+          >
+            {t("button.connect")}
+          </Button>
+        </WrapSticky>
+      ) : (
+        <WrapFixed key="fixed">
+          {<Button
+            to="?page=connect&prevPage=main"
+            onClick={() =>
+              window.Telegram.WebApp.HapticFeedback.impactOccurred("medium")
+            }
+          >
+            {t("button.connect")}
+          </Button>}
+        </WrapFixed>
+      );
+    }
+  }
+
+  return null;
 };

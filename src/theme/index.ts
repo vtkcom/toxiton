@@ -73,7 +73,7 @@ export const Global = createGlobalStyle`
         user-select: none;
         
         @media (min-height: 400px) and (max-height: 500px) {
-            font-size: 13px;
+            font-size: 14px;
         }
     }
 
@@ -104,7 +104,7 @@ export const Global = createGlobalStyle`
     
     app {
         display: grid;
-        height: 100vh;
+        height: 100%;
         width: 100vw;
         overscroll-behavior: none;
         overflow: hidden;

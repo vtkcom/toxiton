@@ -3,11 +3,12 @@ import { Page } from "../components/page.component";
 import { Events, State } from "../store";
 import { useEffect } from "react";
 import { styled } from "styled-components";
-import { Footer } from "../components/footer.component";
+import { Copyright } from "../components/copyright.component";
 import { Wallet } from "../components/wallet.component";
 import { useTranslator } from "../hooks/translator.hook";
 import { useNavigate } from "react-router-dom";
-import { WalletInfoInjectable, WalletInfoRemote } from "@tonconnect/sdk";
+import { WalletInfo, WalletInfoInjectable, WalletInfoRemote } from "@tonconnect/sdk";
+import { useDetect } from "../hooks/detect.hook";
 
 const Content = styled.div`
   display: grid;
@@ -34,6 +35,7 @@ export const Connect: React.FC = () => {
   const { dispatch, connect } = useStoreon<State, Events>("connect");
   const navigate = useNavigate();
   const t = useTranslator();
+  const { mobile } = useDetect();
 
   useEffect(redirect, [connect]);
   useEffect(init, []);
@@ -63,6 +65,24 @@ export const Connect: React.FC = () => {
   function redirect() {
     if (connect.wallet !== null) navigate("?page=main", { replace: true });
   }
+  
+
+  function onClick(wallet: WalletInfo) {
+    if (
+      (wallet as WalletInfoInjectable).injected ||
+      (wallet as WalletInfoInjectable).embedded
+    ) {
+      dispatch("connect/on/js", { wallet });
+    } else {
+      if ((wallet as WalletInfoRemote).universalLink) {
+        dispatch("connect/on/link", { wallet, isOpen: mobile });
+        if (!mobile)
+          navigate(
+            `?page=connect&wallet=${wallet.name.toLowerCase()}&prevPage=connect`
+          );
+      }
+    }
+  }
 
   return (
     <Page onClose={() => navigate("?page=main", { replace: true })}>
@@ -80,11 +100,11 @@ export const Connect: React.FC = () => {
           }
         >
           {connect.wallets.data.map((wallet) => (
-            <Wallet key={wallet.name} wallet={wallet} />
+            <Wallet key={wallet.name} wallet={wallet} onClick={() => onClick(wallet)} />
           ))}
         </Wallets>
 
-        <Footer />
+        <Copyright />
       </Content>
     </Page>
   );

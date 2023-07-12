@@ -3,7 +3,7 @@ import { Page } from "../components/page.component";
 import { Events, State } from "../store";
 import { useEffect } from "react";
 import { styled } from "styled-components";
-import { Footer } from "../components/footer.component";
+import { Copyright } from "../components/copyright.component";
 import { useTranslator } from "../hooks/translator.hook";
 import { useNavigate } from "react-router-dom";
 import { QRCode } from "../components/qr.component";
@@ -101,7 +101,7 @@ export const Wallet: React.FC = () => {
           <Connect>
             <QRCode url={url} />
           </Connect>
-          <Footer />
+          <Copyright />
         </Content>
       </Page>
     );

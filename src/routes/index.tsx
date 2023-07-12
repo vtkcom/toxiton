@@ -21,12 +21,11 @@ import { Sprites } from "../sprites";
 import { useSystemTheme } from "../hooks/systemtheme.hook";
 import { DefaultTheme } from "styled-components";
 
-const WrapOrder = styled.div<{ visible: number }>`
+const WrapList = styled.div<{ visible: number }>`
+  height: 100vh;
   position: relative;
   pointer-events: none;
   z-index: 999;
-  /* overflow: hidden; */
-  /* height: 100%; */
   transition: background 0.5s ease, backdrop-filter 0.2s ease;
   background: hsl(0deg 0% 0% / ${(p) => (p.visible ? 10 : 50)}%);
   backdrop-filter: blur(${(p) => (p.visible ? 0 : 5)}px);
@@ -38,21 +37,28 @@ const List: React.FC = () => {
   const [search] = useSearchParams();
 
   return (
-    <WrapOrder visible={map.visible ? 1 : 0}>
+    <WrapList visible={map.visible ? 1 : 0}>
       <Header />
       {search.get("page") === "connect" && search.get("wallet") && <Wallet />}
-      {search.get("page") === "connect" && <Connect />}
+      {search.get("page") === "connect" && !search.get("wallet") && <Connect />}
       {search.get("page") === "main" && <Main />}
       {search.get("page") === "about" && <About />}
       {search.get("page") === "profile" && <Profile />}
-    </WrapOrder>
+    </WrapList>
   );
 };
 
 export const AppRoutes: React.FC = () => {
   const systemTheme = useSystemTheme();
   const { connect } = useStoreon<State, Events>("map", "connect");
-  const themeParams = useMemo(() => {
+  const themeParams = useMemo(getTheme, [connect.embeddedWallet, systemTheme]);
+  const [search] = useSearchParams();
+  const navigate = useNavigate();
+
+  useEffect(redirect, []);
+  useEffect(init, []);
+
+  function getTheme() {
     let theme: DefaultTheme = { ...baseTheme };
 
     if (systemTheme === "dark") theme = { ...theme, ...darkTheme };
@@ -61,12 +67,7 @@ export const AppRoutes: React.FC = () => {
       theme = { ...theme, ...tonkeeperTheme };
 
     return { ...theme, ...window.Telegram.WebApp.themeParams };
-  }, [connect.embeddedWallet, systemTheme]);
-  const [search] = useSearchParams();
-  const navigate = useNavigate();
-
-  useEffect(redirect, []);
-  useEffect(init, []);
+  }
 
   function init() {
     if (connect.embeddedWallet !== null) {
