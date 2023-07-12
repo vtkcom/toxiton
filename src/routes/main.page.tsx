@@ -35,7 +35,7 @@ const Input = styled.input<{ stylebg: "car" | "egg" }>`
   width: 100%;
   height: 3rem;
   border-radius: 1rem;
-  border: 0.2rem solid ${(p) => opacify(-0.3, p.theme.button_color)};
+  border: 0.2rem solid ${(p) => opacify(-0.3, p.theme.button_color!)};
   ${(p) => p.stylebg === "car" && carCss}
   ${(p) => p.stylebg === "egg" && eggCss}
   background-repeat: no-repeat;
