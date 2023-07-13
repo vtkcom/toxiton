@@ -1,8 +1,7 @@
 import { useStoreon } from "storeon/react";
-import { CSSTransition } from "react-transition-group";
 import { Page } from "../components/page.component";
 import { Events, State } from "../store";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { styled } from "styled-components";
 import { Copyright } from "../components/copyright.component";
 import { Wallet } from "../components/wallet.component";
@@ -14,6 +13,7 @@ import {
   WalletInfoRemote,
 } from "@tonconnect/sdk";
 import { useDetect } from "../hooks/detect.hook";
+import { mounted } from "../theme";
 
 const Content = styled.div`
   display: grid;
@@ -22,26 +22,10 @@ const Content = styled.div`
   padding: 0 1rem 0.5rem;
   height: calc(100vh - 3rem);
   overflow-y: auto;
+  animation: ${mounted} 0.3s ease forwards;
   h3,
   p {
     margin: 0;
-  }
-  .fade-enter {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  .fade-enter-active {
-    opacity: 1;
-    transform: translateX(0);
-    transition: opacity 300ms, transform 300ms;
-  }
-  .fade-exit {
-    opacity: 1;
-  }
-  .fade-exit-active {
-    opacity: 0;
-    transform: scale(0.9);
-    transition: opacity 300ms, transform 300ms;
   }
 `;
 
@@ -58,7 +42,6 @@ export const Connect: React.FC = () => {
   const navigate = useNavigate();
   const t = useTranslator();
   const { mobile } = useDetect();
-  const nodeRef = useRef<HTMLDivElement>(null);
 
   useEffect(redirect, [connect]);
   useEffect(init, []);
@@ -108,14 +91,7 @@ export const Connect: React.FC = () => {
 
   return (
     <Page onClose={() => navigate("?page=main", { replace: true })}>
-      <CSSTransition
-        nodeRef={nodeRef}
-        addEndListener={(done) => {
-          nodeRef.current?.addEventListener("transitionend", done, false);
-        }}
-        classNames="fade"
-      >
-        <Content ref={nodeRef}>
+        <Content>
           <h3>{t("connect.title")}</h3>
           <p>{t("connect.information")}</p>
           <Wallets
@@ -139,7 +115,6 @@ export const Connect: React.FC = () => {
 
           <Copyright />
         </Content>
-      </CSSTransition>
     </Page>
   );
 };

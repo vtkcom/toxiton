@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { styled } from "styled-components";
 import { Copyright } from "../components/copyright.component";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { mounted } from "../theme";
 
 const Content = styled.div`
   display: grid;
@@ -13,6 +14,7 @@ const Content = styled.div`
   padding: 0 1rem 0.5rem;
   height: calc(100vh - 3rem);
   overflow: auto;
+  animation: ${mounted} 0.3s ease forwards;
   h3,
   p {
     margin: 0;

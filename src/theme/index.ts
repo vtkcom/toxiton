@@ -1,4 +1,4 @@
-import { DefaultTheme, createGlobalStyle } from "styled-components";
+import { DefaultTheme, createGlobalStyle, keyframes } from "styled-components";
 import { opacify } from "polished";
 
 export const darkTheme: DefaultTheme = {
@@ -153,5 +153,18 @@ export const Global = createGlobalStyle`
         stroke-linejoin: round;
         stroke-linecap: round;
         fill: none;
+    }
+`;
+
+export const mounted = keyframes`
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    60% {
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
     }
 `;

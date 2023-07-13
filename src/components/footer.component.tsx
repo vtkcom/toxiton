@@ -28,7 +28,7 @@ const sticky = css`
 
 const fixed = css`
   position: fixed;
-  top: 10rem;
+  top: 8rem;
   left: 1rem;
   right: 1rem;
 `;

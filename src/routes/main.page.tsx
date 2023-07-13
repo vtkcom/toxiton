@@ -10,6 +10,7 @@ import { useTranslator } from "../hooks/translator.hook";
 import car from "../assets/blackcar.png";
 import egg from "../assets/egg.png";
 import { Footer } from "../components/footer.component";
+import { mounted } from "../theme";
 
 const Order = styled.div`
   display: grid;
@@ -55,6 +56,7 @@ const Content = styled.div<{ visible: number }>`
   height: calc(100vh - 3rem);
   min-height: 30rem;
   overflow: ${(p) => (p.visible ? "hidden" : "auto")};
+  animation: ${mounted} 0.3s ease forwards;
 `;
 
 export const Main: React.FC = () => {
