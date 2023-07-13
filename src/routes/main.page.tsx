@@ -54,7 +54,7 @@ const Content = styled.div<{ visible: number }>`
   gap: 0.5rem;
   padding: 0 1rem 0.5rem;
   height: calc(100vh - 3rem);
-  min-height: 30rem;
+  min-height: 25rem;
   overflow: ${(p) => (p.visible ? "hidden" : "auto")};
   animation: ${mounted} 0.3s ease forwards;
 `;
