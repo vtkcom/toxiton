@@ -8,6 +8,7 @@ export type IconName =
   | "github"
   | "power"
   | "bell"
+  | "toncoin"
   | "toxyton";
 
 interface Props extends React.SVGProps<SVGSVGElement> {

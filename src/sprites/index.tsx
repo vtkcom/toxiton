@@ -9,6 +9,7 @@ import { GitHub } from "./github.icon";
 import { Power } from "./power.icon";
 import { Toxyton } from "./toxyton.icon";
 import { Bell } from "./bell.icon";
+import { Toncoin } from "./toncoin.icon";
 
 export const Sprites: React.FC = () => {
   return createPortal(
@@ -23,6 +24,7 @@ export const Sprites: React.FC = () => {
       <Power />
       <Toxyton />
       <Bell />
+      <Toncoin />
     </svg>,
     document.body
   );

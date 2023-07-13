@@ -4,6 +4,7 @@ import { useDetect } from "../hooks/detect.hook";
 import { useStoreon } from "storeon/react";
 import { Events, State } from "../store";
 import { useTranslator } from "../hooks/translator.hook";
+import { Icon } from "./icon.component";
 
 const Button = styled(Link)`
   border-radius: 1rem;
@@ -11,8 +12,10 @@ const Button = styled(Link)`
   color: ${(p) => p.theme.button_text_color};
   height: 3rem;
   display: grid;
+  grid-auto-flow: column;
   justify-content: center;
   align-items: center;
+  gap: 0.5rem;
   &:hover {
     color: ${(p) => p.theme.button_text_color};
   }
@@ -57,6 +60,7 @@ export const Footer: React.FC = () => {
               }
             }}
           >
+            <Icon name="toncoin" size={1.2} />
             {t("button.connect")}
           </Button>
         </Content>

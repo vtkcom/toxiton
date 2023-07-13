@@ -1,13 +1,18 @@
 import { useStoreon } from "storeon/react";
+import { CSSTransition } from "react-transition-group";
 import { Page } from "../components/page.component";
 import { Events, State } from "../store";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { styled } from "styled-components";
 import { Copyright } from "../components/copyright.component";
 import { Wallet } from "../components/wallet.component";
 import { useTranslator } from "../hooks/translator.hook";
 import { useNavigate } from "react-router-dom";
-import { WalletInfo, WalletInfoInjectable, WalletInfoRemote } from "@tonconnect/sdk";
+import {
+  WalletInfo,
+  WalletInfoInjectable,
+  WalletInfoRemote,
+} from "@tonconnect/sdk";
 import { useDetect } from "../hooks/detect.hook";
 
 const Content = styled.div`
@@ -20,6 +25,23 @@ const Content = styled.div`
   h3,
   p {
     margin: 0;
+  }
+  .fade-enter {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  .fade-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 300ms, transform 300ms;
+  }
+  .fade-exit {
+    opacity: 1;
+  }
+  .fade-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 300ms, transform 300ms;
   }
 `;
 
@@ -36,6 +58,7 @@ export const Connect: React.FC = () => {
   const navigate = useNavigate();
   const t = useTranslator();
   const { mobile } = useDetect();
+  const nodeRef = useRef<HTMLDivElement>(null);
 
   useEffect(redirect, [connect]);
   useEffect(init, []);
@@ -65,7 +88,6 @@ export const Connect: React.FC = () => {
   function redirect() {
     if (connect.wallet !== null) navigate("?page=main", { replace: true });
   }
-  
 
   function onClick(wallet: WalletInfo) {
     if (
@@ -86,26 +108,38 @@ export const Connect: React.FC = () => {
 
   return (
     <Page onClose={() => navigate("?page=main", { replace: true })}>
-      <Content>
-        <h3>{t("connect.title")}</h3>
-        <p>{t("connect.information")}</p>
-        <Wallets
-          count={
-            connect.wallets.data.filter(
-              (a) =>
-                (a as WalletInfoInjectable).injected ||
-                (a as WalletInfoInjectable).embedded ||
-                (a as WalletInfoRemote).universalLink
-            ).length
-          }
-        >
-          {connect.wallets.data.map((wallet) => (
-            <Wallet key={wallet.name} wallet={wallet} onClick={() => onClick(wallet)} />
-          ))}
-        </Wallets>
+      <CSSTransition
+        nodeRef={nodeRef}
+        addEndListener={(done) => {
+          nodeRef.current?.addEventListener("transitionend", done, false);
+        }}
+        classNames="fade"
+      >
+        <Content ref={nodeRef}>
+          <h3>{t("connect.title")}</h3>
+          <p>{t("connect.information")}</p>
+          <Wallets
+            count={
+              connect.wallets.data.filter(
+                (a) =>
+                  (a as WalletInfoInjectable).injected ||
+                  (a as WalletInfoInjectable).embedded ||
+                  (a as WalletInfoRemote).universalLink
+              ).length
+            }
+          >
+            {connect.wallets.data.map((wallet) => (
+              <Wallet
+                key={wallet.name}
+                wallet={wallet}
+                onClick={() => onClick(wallet)}
+              />
+            ))}
+          </Wallets>
 
-        <Copyright />
-      </Content>
+          <Copyright />
+        </Content>
+      </CSSTransition>
     </Page>
   );
 };
