@@ -70,8 +70,7 @@ export const AppRoutes: React.FC = () => {
   }
 
   function init() {
-    if (connect.embeddedWallet !== null) {
-    }
+    document.head.innerHTML += `<meta name="theme-color" content="${themeParams.bg_color}" />`;
   }
 
   function redirect() {

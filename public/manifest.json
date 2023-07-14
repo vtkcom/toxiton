@@ -3,7 +3,6 @@
   "description": "Search for a traveling companion",
   "id": "/toxiton?page=main",
   "start_url": "/toxiton?page=main",
-  "theme_coor": "#2A9EF1",
   "display": "standalone",
   "icons": [
     {
