@@ -56,7 +56,6 @@ export const AppRoutes: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(redirect, []);
-  useEffect(init, []);
 
   function getTheme() {
     let theme: DefaultTheme = { ...baseTheme };
@@ -67,10 +66,6 @@ export const AppRoutes: React.FC = () => {
       theme = { ...theme, ...tonkeeperTheme };
 
     return { ...theme, ...window.Telegram.WebApp.themeParams };
-  }
-
-  function init() {
-    document.head.innerHTML += `<meta name="theme-color" content="${themeParams.bg_color}" />`;
   }
 
   function redirect() {
