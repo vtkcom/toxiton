@@ -62,15 +62,12 @@ export const Marker: React.FC<Props> = ({
     const div = document.createElement("div");
 
     div.classList.add(`${iconName}-marker`);
-    // div.innerHTML += `<svg width="${size}" height="${size}"><use xlink:href="#svg-${iconName}" /></svg><div style="font-size:${
-    //   size / 3.5
-    // }px">${url.title}</div>`;
-    div.innerHTML += `<div style="background-image: url(${img});width: ${size}px; height: ${size}px;" /><span style="font-size:${
-      size / 3.5
-    }px">${url.title}</span>`;
+    div.innerHTML += `
+      <div style="background-image: url(${img});width: ${size}px; height: ${size}px;" />
+      <span style="font-size:${size / 3.5}px">${url.title}</span>
+    `;
     div.style.width = "100%";
     div.style.height = "100%";
-    div.addEventListener("click", onClick);
 
     return new DivIcon({
       iconSize: new Point(size, size),

@@ -28,7 +28,7 @@ const sticky = css`
 
 const fixed = css`
   position: fixed;
-  top: 8rem;
+  top: 10rem;
   left: 1rem;
   right: 1rem;
 `;
@@ -60,7 +60,7 @@ export const Footer: React.FC = () => {
               }
             }}
           >
-            <Icon name="toncoin" size={1.2} />
+            <Icon name="toncoin" size={1.1} />
             {t("button.connect")}
           </Button>
         </Content>

@@ -56,7 +56,6 @@ const Content = styled.div<{ visible: number }>`
   height: calc(100vh - 3rem);
   min-height: 25rem;
   overflow: ${(p) => (p.visible ? "hidden" : "auto")};
-  animation: ${mounted} 0.3s ease forwards;
 `;
 
 export const Main: React.FC = () => {

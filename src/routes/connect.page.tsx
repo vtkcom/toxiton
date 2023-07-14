@@ -22,7 +22,7 @@ const Content = styled.div`
   padding: 0 1rem 0.5rem;
   height: calc(100vh - 3rem);
   overflow-y: auto;
-  animation: ${mounted} 0.3s ease forwards;
+  animation: ${mounted} 0.3s ease 0.1s forwards;
   h3,
   p {
     margin: 0;
